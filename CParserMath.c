@@ -1,8 +1,5 @@
 #include <math.h>
 
-#define PI 3.141592653589793238462643383279
-#define E  2.718281828459045235360287471352
-
 int factorial(int value);			//	!
 double radToDeg(double rad);	//	radToDeg()
 double dadToRad(double deg);	//	degToRad()
@@ -18,10 +15,10 @@ int factorial(int value)
 
 double radToDeg(double rad)
 {
-	return (rad * (180.0/PI));
+	return (rad * (180.0/M_PI));
 }
 
 double degToRad(double deg)
 {
-	return (deg * (PI/180.0));
+	return (deg * (M_PI/180.0));
 }
