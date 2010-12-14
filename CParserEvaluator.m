@@ -9,7 +9,14 @@
 #import "CParserEvaluator.h"
 
 #include "CParserMath.c"
+#import "NSArray+reverse.h"
 
+@interface CParserEvaluator ()
+
+- (int) operatorArgumentCount:(NSString *)string;
+- (BOOL) operatorAssociativity:(NSString *)string;
+
+@end
 
 @implementation CParserEvaluator
 
