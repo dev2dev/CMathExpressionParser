@@ -33,16 +33,16 @@
 //- (NSString *) convertExpressionFromInfixStringToPostfixString:(NSString *)expression;
 - (NSArray *) convertExpressionFromInfixStringToPostfixArray:(NSString *)expression;
 
-- (void) setOperatorSet:(NSCharacterSet *)set;
-- (void) setFunctionSet:(NSCharacterSet *)set;
-- (void) setVariableSet:(NSCharacterSet *)set;
-- (void) setMacroSet:(NSCharacterSet *)set;
-- (void) setBlockSet:(NSCharacterSet *)set;
 
-- (void) setMacroIdentifier:(unichar)character;
-- (unichar) macroIdentifier;
+@property (readwrite, copy, nonatomic) NSCharacterSet *operatorSet;
+@property (readwrite, copy, nonatomic) NSCharacterSet *functionSet;
+@property (readwrite, copy, nonatomic) NSCharacterSet *variableSet;
+@property (readwrite, copy, nonatomic) NSCharacterSet *macroSet;
+@property (readwrite, copy, nonatomic) NSCharacterSet *blockSet;
 
-- (void) setFunctionArgumentSeperator:(unichar)comma;
+@property (readwrite, assign, nonatomic) unichar macroIdentifier;
+@property (readwrite, assign, nonatomic) unichar functionArgumentSeperator;
+
 
 //private
 - (int) operatorArgumentCount:(NSString *)string;

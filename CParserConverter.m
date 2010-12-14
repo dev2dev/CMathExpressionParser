@@ -234,60 +234,14 @@
 #pragma mark -
 #pragma mark Seter / Geter
 
-- (void) setOperatorSet:(NSCharacterSet *)set
-{
-	if (operatorSet != set) {
-		[operatorSet release];
-		operatorSet = [set retain];
-	}
-}
+@synthesize operatorSet;
+@synthesize functionSet;
+@synthesize macroSet;
+@synthesize variableSet;
+@synthesize blockSet;
 
-- (void) setFunctionSet:(NSCharacterSet *)set
-{
-	if (functionSet != set) {
-		[functionSet release];
-		functionSet = [set retain];
-	}
-}
-
-- (void) setVariableSet:(NSCharacterSet *)set
-{
-	if (variableSet != set) {
-		[variableSet release];
-		variableSet = [set retain];
-	}
-}
-
-- (void) setMacroSet:(NSCharacterSet *)set
-{
-	if (macroSet != set) {
-		[macroSet release];
-		macroSet = [set retain];
-	}
-}
-
-- (void) setBlockSet:(NSCharacterSet *)set
-{
-	if (blockSet != set) {
-		[blockSet release];
-		blockSet = [set retain];
-	}
-}
-
-- (void) setMacroIdentifier:(unichar)character
-{
-	macroIdentifier = character;
-}
-
-- (unichar) macroIdentifier
-{
-	return macroIdentifier;
-}
-
-- (void) setFunctionArgumentSeperator:(unichar)comma
-{
-	functionArgumentSeperator = comma;
-}
+@synthesize macroIdentifier;
+@synthesize functionArgumentSeperator;
 
 #pragma mark -
 #pragma mark Private
