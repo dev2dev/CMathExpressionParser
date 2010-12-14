@@ -79,7 +79,7 @@
 					CParserToken *token1 = [stack lastObject];
 					
 					if ([operator isEqualToString:@"!"]) {
-						result = (double)fakulty((int)[token1 numberValue]);
+						result = (double)factorial((int)[token1 numberValue]);
 					}
 					
 					[stack removeObject:token1];

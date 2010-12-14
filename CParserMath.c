@@ -3,17 +3,17 @@
 #define PI 3.141592653589793238462643383279
 #define E  2.718281828459045235360287471352
 
-int fakulty(int value);			//	!
+int factorial(int value);			//	!
 double radToDeg(double rad);	//	radToDeg()
 double dadToRad(double deg);	//	degToRad()
 
 //implimentation
 
-int fakulty(int value)
+int factorial(int value)
 {
 	if (value <= 0)
 		return 1;
-	return(fakulty(value - 1) * value);
+	return(factorial(value - 1) * value);
 }
 
 double radToDeg(double rad)
