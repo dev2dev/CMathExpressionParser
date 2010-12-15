@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		262B2FC912B8B68D009802CA /* CParserFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 262B2FC812B8B68D009802CA /* CParserFunction.m */; };
 		8DD76F9A0486AA7600D96B5E /* CMathParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* CMathParser.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
 		8DD76F9F0486AA7600D96B5E /* CMathParser.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* CMathParser.1 */; };
 		8F8B98FA1247B2B700DC43FD /* CParserEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B98F91247B2B700DC43FD /* CParserEvaluator.m */; };
-		8F8B990B1247B6C400DC43FD /* CParserMacro.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B990A1247B6C400DC43FD /* CParserMacro.m */; };
-		8F8B990E1247B6D000DC43FD /* CParserFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B990D1247B6D000DC43FD /* CParserFunction.m */; };
+		8F8B990B1247B6C400DC43FD /* CParserMacroFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B990A1247B6C400DC43FD /* CParserMacroFunction.m */; };
+		8F8B990E1247B6D000DC43FD /* CParserCFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B990D1247B6D000DC43FD /* CParserCFunction.m */; };
 		8F8B99111247B6D900DC43FD /* CParserVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B99101247B6D900DC43FD /* CParserVariable.m */; };
 		8FB5FC19124241D8000DBD9B /* CParserStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5FC18124241D8000DBD9B /* CParserStack.m */; };
 		8FB5FC2112424599000DBD9B /* CParserToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5FC2012424599000DBD9B /* CParserToken.m */; };
@@ -36,14 +37,16 @@
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* CMathParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMathParser.m; sourceTree = "<group>"; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		262B2FC712B8B68D009802CA /* CParserFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserFunction.h; sourceTree = "<group>"; };
+		262B2FC812B8B68D009802CA /* CParserFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserFunction.m; sourceTree = "<group>"; };
 		32A70AAB03705E1F00C91783 /* CMathParser_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMathParser_Prefix.pch; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* CMathParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMathParser; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F8B98F81247B2B700DC43FD /* CParserEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserEvaluator.h; sourceTree = "<group>"; };
 		8F8B98F91247B2B700DC43FD /* CParserEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserEvaluator.m; sourceTree = "<group>"; };
-		8F8B99091247B6C400DC43FD /* CParserMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserMacro.h; sourceTree = "<group>"; };
-		8F8B990A1247B6C400DC43FD /* CParserMacro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserMacro.m; sourceTree = "<group>"; };
-		8F8B990C1247B6D000DC43FD /* CParserFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserFunction.h; sourceTree = "<group>"; };
-		8F8B990D1247B6D000DC43FD /* CParserFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserFunction.m; sourceTree = "<group>"; };
+		8F8B99091247B6C400DC43FD /* CParserMacroFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserMacroFunction.h; sourceTree = "<group>"; };
+		8F8B990A1247B6C400DC43FD /* CParserMacroFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserMacroFunction.m; sourceTree = "<group>"; };
+		8F8B990C1247B6D000DC43FD /* CParserCFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserCFunction.h; sourceTree = "<group>"; };
+		8F8B990D1247B6D000DC43FD /* CParserCFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserCFunction.m; sourceTree = "<group>"; };
 		8F8B990F1247B6D900DC43FD /* CParserVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserVariable.h; sourceTree = "<group>"; };
 		8F8B99101247B6D900DC43FD /* CParserVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserVariable.m; sourceTree = "<group>"; };
 		8F8B99A91247D50700DC43FD /* CParserMath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CParserMath.c; sourceTree = "<group>"; };
@@ -123,7 +126,6 @@
 			children = (
 				8F8B98FD1247B30900DC43FD /* Variable */,
 				8F8B98FC1247B30300DC43FD /* Function */,
-				8F8B98FB1247B2FE00DC43FD /* Macro */,
 				8F8B98F71247B2A200DC43FD /* Evaluator */,
 			);
 			name = Evaluator;
@@ -138,20 +140,15 @@
 			name = Evaluator;
 			sourceTree = "<group>";
 		};
-		8F8B98FB1247B2FE00DC43FD /* Macro */ = {
-			isa = PBXGroup;
-			children = (
-				8F8B99091247B6C400DC43FD /* CParserMacro.h */,
-				8F8B990A1247B6C400DC43FD /* CParserMacro.m */,
-			);
-			name = Macro;
-			sourceTree = "<group>";
-		};
 		8F8B98FC1247B30300DC43FD /* Function */ = {
 			isa = PBXGroup;
 			children = (
-				8F8B990C1247B6D000DC43FD /* CParserFunction.h */,
-				8F8B990D1247B6D000DC43FD /* CParserFunction.m */,
+				262B2FC712B8B68D009802CA /* CParserFunction.h */,
+				262B2FC812B8B68D009802CA /* CParserFunction.m */,
+				8F8B99091247B6C400DC43FD /* CParserMacroFunction.h */,
+				8F8B990A1247B6C400DC43FD /* CParserMacroFunction.m */,
+				8F8B990C1247B6D000DC43FD /* CParserCFunction.h */,
+				8F8B990D1247B6D000DC43FD /* CParserCFunction.m */,
 			);
 			name = Function;
 			sourceTree = "<group>";
@@ -285,10 +282,11 @@
 				8FB5FC2112424599000DBD9B /* CParserToken.m in Sources */,
 				8FB5FC3A12424CCB000DBD9B /* CParserConverter.m in Sources */,
 				8F8B98FA1247B2B700DC43FD /* CParserEvaluator.m in Sources */,
-				8F8B990B1247B6C400DC43FD /* CParserMacro.m in Sources */,
-				8F8B990E1247B6D000DC43FD /* CParserFunction.m in Sources */,
+				8F8B990B1247B6C400DC43FD /* CParserMacroFunction.m in Sources */,
+				8F8B990E1247B6D000DC43FD /* CParserCFunction.m in Sources */,
 				8F8B99111247B6D900DC43FD /* CParserVariable.m in Sources */,
 				8FF514E11250FDB4003B257C /* NSArray+reverse.m in Sources */,
+				262B2FC912B8B68D009802CA /* CParserFunction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

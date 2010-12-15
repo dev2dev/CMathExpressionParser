@@ -12,20 +12,19 @@
 #import <Cocoa/Cocoa.h>
 #endif
 
+#import "CParserFunction.h"
+
 #define CParserMacroMaxArguments 32
 
-@interface CParserMacro : NSObject {
+@interface CParserMacroFunction : CParserFunction {
 	
 	NSString * macroExpression;
 	NSArray * macroPostfixExpression;
 	
-	int maxArguments;
-	int minArguments;
-
 }
 
-+ (CParserMacro *) macro;
-+ (CParserMacro *) macroWithExpression:(NSString *)expression;
++ (CParserMacroFunction *) macro;
++ (CParserMacroFunction *) macroWithExpression:(NSString *)expression;
 
 - (id) initWithExpression:(NSString *)expression;
 
@@ -33,10 +32,6 @@
 - (NSString *) expression;
 - (void) setPostfixExpression:(NSArray *)expression;
 - (NSArray *) postfixExpression;
-
-- (void) setMinArguments:(int)args;
-- (int) maxArguments;
-- (int) minArguments;
 
 - (void) updatePostfixExpression;
 - (double) evaluateWithArguments:(NSArray *)arguments;

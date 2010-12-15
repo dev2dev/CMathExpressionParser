@@ -6,12 +6,12 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "CParserMacro.h"
+#import "CParserMacroFunction.h"
 #import "CParserEvaluator.h"
 #import "CParserConverter.h"
 #import "CParserVariable.h"
 
-@implementation CParserMacro
+@implementation CParserMacroFunction
 
 #pragma mark -
 #pragma mark Init / Dealloc
@@ -37,14 +37,14 @@
 	[super dealloc];
 }
 
-+ (CParserMacro *) macro
++ (CParserMacroFunction *) macro
 {
-	return [[[CParserMacro alloc] init] autorelease];
+	return [[[CParserMacroFunction alloc] init] autorelease];
 }
 
-+ (CParserMacro *) macroWithExpression:(NSString *)expression
++ (CParserMacroFunction *) macroWithExpression:(NSString *)expression
 {
-	return [[[CParserMacro alloc] initWithExpression:expression] autorelease];
+	return [[[CParserMacroFunction alloc] initWithExpression:expression] autorelease];
 }
 
 - (id) initWithExpression:(NSString *)expression
@@ -86,22 +86,6 @@
 - (NSArray *) postfixExpression
 {
 	return macroPostfixExpression;
-}
-
-- (void) setMinArguments:(int)args
-{
-	maxArguments = args;
-	minArguments = args;
-}
-
-- (int) maxArguments
-{
-	return maxArguments;
-}
-
-- (int) minArguments
-{
-	return minArguments;
 }
 
 #pragma mark -
