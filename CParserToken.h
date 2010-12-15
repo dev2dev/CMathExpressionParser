@@ -27,10 +27,7 @@ typedef enum {
 	CParserTokenType tokenType;
 	
 	double numberValue;
-	NSString * operatorValue;
-	NSString * functionValue;
-	NSString * variableValue;
-	NSString * macroValue;
+	NSString * name;
 	
 }
 
@@ -47,19 +44,12 @@ typedef enum {
 - (id) initWithVariable:(NSString *)value;
 - (id) initWithMacro:(NSString *)value;
 
-- (double) numberValue;
-- (NSString *) operatorValue;
-- (NSString *) functionValue;
-- (NSString *) variableValue;
-- (NSString *) macroValue;
+@property (readwrite, assign, nonatomic) double numberValue;
+@property (readwrite, copy,   nonatomic) NSString *operatorValue;
+@property (readwrite, copy,   nonatomic) NSString *functionValue;
+@property (readwrite, copy,   nonatomic) NSString *variableValue;
+@property (readwrite, copy,   nonatomic) NSString *macroValue;
 
-- (void) setNumberValue:(double)value;
-- (void) setOperatorvalue:(NSString *)value;
-- (void) setFunctionValue:(NSString *)value;
-- (void) setVariableValue:(NSString *)value;
-- (void) setMacroValue:(NSString *)value;
-
-- (CParserTokenType) type;
-- (void) setType:(CParserTokenType)value;
+@property (readwrite, assign, nonatomic) CParserTokenType type;
 
 @end

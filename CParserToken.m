@@ -8,34 +8,22 @@
 
 #import "CParserToken.h"
 
+@interface CParserToken ()
+
+@property (readwrite, copy, nonatomic) NSString *name;
+
+@end
+
 
 @implementation CParserToken
 
 #pragma mark -
 #pragma mark Init / Dealloc
 
-- (id) init
-{
-	self = [super init];
-	if (self != nil) {
-		tokenType = CParserTokenNull;
-		numberValue = 0.0;
-		operatorValue = 0;
-		functionValue = [NSString string];
-		variableValue = [NSString string];
-		macroValue = [NSString string];
-	}
-	return self;
-}
-
 - (void) dealloc
 {
-	tokenType = CParserTokenNull;
-	numberValue = 0;
-	operatorValue = 0;
-	[functionValue release];
-	[variableValue release];
-	[macroValue release];
+	[name release]; name = nil;
+	
 	[super dealloc];
 }
 
@@ -73,12 +61,7 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self setType:CParserTokenNumber];
 		[self setNumberValue:value];
-		[self setOperatorvalue:[NSString string]];
-		[self setFunctionValue:[NSString string]];
-		[self setVariableValue:[NSString string]];
-		[self setMacroValue:[NSString string]];
 	}
 	return self;
 }
@@ -87,12 +70,7 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self setType:CParserTokenOperator];
-		[self setNumberValue:0.0];
-		[self setOperatorvalue:value];
-		[self setFunctionValue:[NSString string]];
-		[self setVariableValue:[NSString string]];
-		[self setMacroValue:[NSString string]];
+		[self setOperatorValue:value];
 	}
 	return self;
 }
@@ -101,12 +79,7 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self setType:CParserTokenFunction];
-		[self setNumberValue:0.0];
-		[self setOperatorvalue:[NSString string]];
 		[self setFunctionValue:value];
-		[self setVariableValue:[NSString string]];
-		[self setMacroValue:[NSString string]];
 	}
 	return self;
 }
@@ -114,12 +87,7 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self setType:CParserTokenVariable];
-		[self setNumberValue:0.0];
-		[self setOperatorvalue:[NSString string]];
-		[self setFunctionValue:[NSString string]];
 		[self setVariableValue:value];
-		[self setMacroValue:[NSString string]];
 	}
 	return self;
 }
@@ -127,95 +95,75 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self setType:CParserTokenMacro];
-		[self setNumberValue:0.0];
-		[self setOperatorvalue:[NSString string]];
-		[self setFunctionValue:[NSString string]];
-		[self setVariableValue:[NSString string]];
 		[self setMacroValue:value];
 	}
 	return self;
 }
 
-#pragma mark -
-#pragma mark Get Value
+@synthesize type = tokenType;
+@synthesize name;
 
-- (double) numberValue
+- (double) numberValue;
 {
+	NSParameterAssert( CParserTokenNumber == tokenType || CParserTokenVariable == tokenType );
 	return numberValue;
 }
 
-- (NSString *) operatorValue
+- (void) setNumberValue: (double)newNumber;
 {
-	return operatorValue;
-}
-
-- (NSString *) functionValue
-{
-	return functionValue;
-}
-
-- (NSString *) variableValue
-{
-	return variableValue;
-}
-
-- (NSString *) macroValue
-{
-	return macroValue;
-}
-
-#pragma mark -
-#pragma mark Set Value
-
-- (void) setNumberValue:(double)value
-{
-	numberValue = value;
-}
-
-- (void) setOperatorvalue:(NSString *)value
-{
-	if (operatorValue != value) {
-		[operatorValue release];
-		operatorValue = [value retain];
+	numberValue = newNumber;
+	if (CParserTokenNumber != tokenType && CParserTokenVariable != tokenType) {
+		tokenType = CParserTokenNumber;
+		[self setName: nil];
 	}
 }
 
-- (void) setFunctionValue:(NSString *)value
+- (NSString *) operatorValue;
 {
-	if (functionValue != value) {
-		[functionValue release];
-		functionValue = [value retain];
-	}
+	NSParameterAssert( CParserTokenOperator == tokenType );
+	return [self name];
 }
 
-- (void) setVariableValue:(NSString *)value
+- (void) setOperatorValue: (NSString *)value;
 {
-	if (variableValue != value) {
-		[variableValue release];
-		variableValue = [value retain];
-	}
+	[self setName: value];
+	tokenType = CParserTokenOperator;
 }
 
-- (void) setMacroValue:(NSString *)value
+- (NSString *) functionValue;
 {
-	if (macroValue != value) {
-		[macroValue release];
-		macroValue = [value retain];
-	}
+	NSParameterAssert( CParserTokenFunction == tokenType );
+	return [self name];
 }
 
-#pragma mark -
-#pragma mark Type
-
-- (CParserTokenType) type
+- (void) setFunctionValue: (NSString *)value;
 {
-	return tokenType;
+	[self setName: value];
+	tokenType = CParserTokenFunction;
 }
 
-- (void) setType:(CParserTokenType)value
+- (NSString *) variableValue;
 {
-	tokenType = value;
+	NSParameterAssert( CParserTokenVariable == tokenType );
+	return [self name];
+}
+
+- (void) setVariableValue: (NSString *)value;
+{
+	[self setName: value];
+	tokenType = CParserTokenVariable;
+}
+
+- (NSString *) macroValue;
+{
+	NSParameterAssert( CParserTokenMacro == tokenType );
+	return [self name];
+}
+
+- (void) setMacroValue: (NSString *)value;
+{
+	[self setName: value];
+	tokenType = CParserTokenMacro;
 }
 
 #pragma mark -
@@ -231,21 +179,22 @@
 			return [NSString stringWithFormat:@"Number: %f", numberValue];
 			break;
 		case CParserTokenOperator:
-			return [NSString stringWithFormat:@"Operator: %@", operatorValue];
+			return [NSString stringWithFormat:@"Operator: %@", [self name]];
 			break;
 		case CParserTokenFunction:
-			return [NSString stringWithFormat:@"Function: %@", functionValue];
+			return [NSString stringWithFormat:@"Function: %@", [self name]];
 			break;
 		case CParserTokenVariable:
-			return [NSString stringWithFormat:@"Variable: %@", variableValue];
+			return [NSString stringWithFormat:@"Variable: %@", [self name]];
 			break;
 		case CParserTokenMacro:
-			return [NSString stringWithFormat:@"Macro: %@", macroValue];
+			return [NSString stringWithFormat:@"Macro: %@", [self name]];
 			break;
 		default:
 			break;
 	}
 	return @"NULL";
 }
+
 
 @end
