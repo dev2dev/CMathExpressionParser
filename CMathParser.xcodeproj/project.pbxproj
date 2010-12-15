@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		262B2FC912B8B68D009802CA /* CParserFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 262B2FC812B8B68D009802CA /* CParserFunction.m */; };
+		262B309312B8D32A009802CA /* CParserMath.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B99A91247D50700DC43FD /* CParserMath.c */; };
 		8DD76F9A0486AA7600D96B5E /* CMathParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* CMathParser.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
 		8DD76F9F0486AA7600D96B5E /* CMathParser.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* CMathParser.1 */; };
@@ -39,6 +40,7 @@
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		262B2FC712B8B68D009802CA /* CParserFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserFunction.h; sourceTree = "<group>"; };
 		262B2FC812B8B68D009802CA /* CParserFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserFunction.m; sourceTree = "<group>"; };
+		262B308C12B8D224009802CA /* CParserMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserMath.h; sourceTree = "<group>"; };
 		32A70AAB03705E1F00C91783 /* CMathParser_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMathParser_Prefix.pch; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* CMathParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMathParser; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F8B98F81247B2B700DC43FD /* CParserEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserEvaluator.h; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		8F8B99A81247D4F600DC43FD /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				262B308C12B8D224009802CA /* CParserMath.h */,
 				8F8B99A91247D50700DC43FD /* CParserMath.c */,
 				8FC43AAC124AA0870068E64F /* CParserGlobal.h */,
 			);
@@ -287,6 +290,7 @@
 				8F8B99111247B6D900DC43FD /* CParserVariable.m in Sources */,
 				8FF514E11250FDB4003B257C /* NSArray+reverse.m in Sources */,
 				262B2FC912B8B68D009802CA /* CParserFunction.m in Sources */,
+				262B309312B8D32A009802CA /* CParserMath.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

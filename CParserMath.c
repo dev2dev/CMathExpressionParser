@@ -1,10 +1,6 @@
+#include "CParserMath.h"
+
 #include <math.h>
-
-int factorial(int value);			//	!
-double radToDeg(double rad);	//	radToDeg()
-double dadToRad(double deg);	//	degToRad()
-
-//implimentation
 
 int factorial(int value)
 {

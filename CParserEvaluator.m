@@ -8,7 +8,7 @@
 
 #import "CParserEvaluator.h"
 
-#include "CParserMath.c"
+#import "CParserMath.h"
 #import "NSArray+reverse.h"
 
 @interface CParserEvaluator ()
