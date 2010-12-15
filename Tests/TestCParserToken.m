@@ -84,4 +84,16 @@ static NSString * const TestMacro = @"#macro";
 	STAssertThrows( [token variableValue], @"No variable" );
 }
 
+- (void) testNullToken;
+{
+	CParserToken *token = [CParserToken token];
+	STAssertEquals( [token type], CParserTokenNull, @"Wrong type" );
+	
+	STAssertThrows( [token numberValue], @"No number" );
+	STAssertThrows( [token operatorValue], @"No operator" );
+	STAssertThrows( [token functionValue], @"No function" );
+	STAssertThrows( [token variableValue], @"No variable" );
+	STAssertThrows( [token macroValue], @"No macro" );
+}
+
 @end
