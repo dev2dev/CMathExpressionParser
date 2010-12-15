@@ -8,9 +8,11 @@ double dadToRad(double deg);	//	degToRad()
 
 int factorial(int value)
 {
-	if (value <= 0)
-		return 1;
-	return(factorial(value - 1) * value);
+	int result = 1;
+	for (int i = 1; i <= value; i++) {
+		result *= i;
+	}
+	return result;
 }
 
 double radToDeg(double rad)
