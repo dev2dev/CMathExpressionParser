@@ -9,6 +9,16 @@
 /* Begin PBXBuildFile section */
 		262B2FC912B8B68D009802CA /* CParserFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 262B2FC812B8B68D009802CA /* CParserFunction.m */; };
 		262B309312B8D32A009802CA /* CParserMath.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B99A91247D50700DC43FD /* CParserMath.c */; };
+		262B30C512B8D428009802CA /* NSArray+reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF514E01250FDB4003B257C /* NSArray+reverse.m */; };
+		262B30C612B8D42C009802CA /* CParserVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B99101247B6D900DC43FD /* CParserVariable.m */; };
+		262B30C712B8D42D009802CA /* CParserToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5FC2012424599000DBD9B /* CParserToken.m */; };
+		262B30C812B8D432009802CA /* CParserStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5FC18124241D8000DBD9B /* CParserStack.m */; };
+		262B30C912B8D437009802CA /* CParserMath.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B99A91247D50700DC43FD /* CParserMath.c */; };
+		262B30CA12B8D43C009802CA /* CParserMacroFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B990A1247B6C400DC43FD /* CParserMacroFunction.m */; };
+		262B30CB12B8D440009802CA /* CParserFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 262B2FC812B8B68D009802CA /* CParserFunction.m */; };
+		262B30CC12B8D444009802CA /* CParserEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B98F91247B2B700DC43FD /* CParserEvaluator.m */; };
+		262B30CD12B8D446009802CA /* CParserConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5FC3912424CCB000DBD9B /* CParserConverter.m */; };
+		262B30CE12B8D44B009802CA /* CParserCFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B990D1247B6D000DC43FD /* CParserCFunction.m */; };
 		8DD76F9A0486AA7600D96B5E /* CMathParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* CMathParser.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
 		8DD76F9F0486AA7600D96B5E /* CMathParser.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* CMathParser.1 */; };
@@ -21,6 +31,16 @@
 		8FB5FC3A12424CCB000DBD9B /* CParserConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FB5FC3912424CCB000DBD9B /* CParserConverter.m */; };
 		8FF514E11250FDB4003B257C /* NSArray+reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF514E01250FDB4003B257C /* NSArray+reverse.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		262B30BF12B8D408009802CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 262B30B912B8D3FA009802CA /* Tests */;
+			remoteInfo = Tests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		8DD76F9E0486AA7600D96B5E /* CopyFiles */ = {
@@ -41,6 +61,8 @@
 		262B2FC712B8B68D009802CA /* CParserFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserFunction.h; sourceTree = "<group>"; };
 		262B2FC812B8B68D009802CA /* CParserFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserFunction.m; sourceTree = "<group>"; };
 		262B308C12B8D224009802CA /* CParserMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserMath.h; sourceTree = "<group>"; };
+		262B30BA12B8D3FA009802CA /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		262B30BB12B8D3FA009802CA /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		32A70AAB03705E1F00C91783 /* CMathParser_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMathParser_Prefix.pch; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* CMathParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMathParser; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F8B98F81247B2B700DC43FD /* CParserEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserEvaluator.h; sourceTree = "<group>"; };
@@ -65,6 +87,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		262B30B712B8D3FA009802CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76F9B0486AA7600D96B5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -80,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				08FB7795FE84155DC02AAC07 /* Source */,
+				262B30AD12B8D3B6009802CA /* Tests */,
 				C6859EA2029092E104C91782 /* Documentation */,
 				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -109,8 +139,17 @@
 			isa = PBXGroup;
 			children = (
 				8DD76FA10486AA7600D96B5E /* CMathParser */,
+				262B30BA12B8D3FA009802CA /* Tests.octest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		262B30AD12B8D3B6009802CA /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				262B30BB12B8D3FA009802CA /* Tests-Info.plist */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		8F8B98F51247B26600DC43FD /* Tokenizer */ = {
@@ -240,6 +279,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		262B30B912B8D3FA009802CA /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 262B30BE12B8D3FA009802CA /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				262B30B512B8D3FA009802CA /* Resources */,
+				262B30B612B8D3FA009802CA /* Sources */,
+				262B30B712B8D3FA009802CA /* Frameworks */,
+				262B30B812B8D3FA009802CA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = 262B30BA12B8D3FA009802CA /* Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		8DD76F960486AA7600D96B5E /* CMathParser */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "CMathParser" */;
@@ -251,6 +308,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				262B30C012B8D408009802CA /* PBXTargetDependency */,
 			);
 			name = CMathParser;
 			productInstallPath = "$(HOME)/bin";
@@ -271,11 +329,55 @@
 			projectRoot = "";
 			targets = (
 				8DD76F960486AA7600D96B5E /* CMathParser */,
+				262B30B912B8D3FA009802CA /* Tests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		262B30B512B8D3FA009802CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		262B30B812B8D3FA009802CA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		262B30B612B8D3FA009802CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				262B30C512B8D428009802CA /* NSArray+reverse.m in Sources */,
+				262B30C612B8D42C009802CA /* CParserVariable.m in Sources */,
+				262B30C712B8D42D009802CA /* CParserToken.m in Sources */,
+				262B30C812B8D432009802CA /* CParserStack.m in Sources */,
+				262B30C912B8D437009802CA /* CParserMath.c in Sources */,
+				262B30CA12B8D43C009802CA /* CParserMacroFunction.m in Sources */,
+				262B30CB12B8D440009802CA /* CParserFunction.m in Sources */,
+				262B30CC12B8D444009802CA /* CParserEvaluator.m in Sources */,
+				262B30CD12B8D446009802CA /* CParserConverter.m in Sources */,
+				262B30CE12B8D44B009802CA /* CParserCFunction.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8DD76F990486AA7600D96B5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -295,6 +397,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		262B30C012B8D408009802CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 262B30B912B8D3FA009802CA /* Tests */;
+			targetProxy = 262B30BF12B8D408009802CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB927508733DD40010E9CD /* Debug */ = {
@@ -352,6 +462,60 @@
 			};
 			name = Release;
 		};
+		262B30BC12B8D3FA009802CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CMathParser_Prefix.pch;
+				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Tests;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		262B30BD12B8D3FA009802CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CMathParser_Prefix.pch;
+				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Tests;
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -369,6 +533,15 @@
 			buildConfigurations = (
 				1DEB927908733DD40010E9CD /* Debug */,
 				1DEB927A08733DD40010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		262B30BE12B8D3FA009802CA /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				262B30BC12B8D3FA009802CA /* Debug */,
+				262B30BD12B8D3FA009802CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
