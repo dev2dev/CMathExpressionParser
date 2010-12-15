@@ -38,7 +38,6 @@ int main (int argc, const char * argv[]) {
 	
 	CParserMacroFunction * myMacro = [CParserMacroFunction macroWithExpression:@"(ARG_1 + ARG_2 + ARG_3 + ARG_4 + ARG_5 + ARG_6 + ARG_7 + ARG_8 + ARG_9)/ARG_COUNT"];
 	[myMacro setMinArguments:3];
-	[myMacro updatePostfixExpression];
 	
 	//functions
 	

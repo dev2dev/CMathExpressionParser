@@ -11,29 +11,22 @@
 #import "CParserConverter.h"
 #import "CParserVariable.h"
 
+@interface CParserMacroFunction ()
+
+- (void) updatePostfixExpression;
+
+@end
+
 @implementation CParserMacroFunction
 
 #pragma mark -
 #pragma mark Init / Dealloc
 
-- (id) init
-{
-	self = [super init];
-	if (self != nil) {
-		[self setExpression:[NSString string]];
-		[self setPostfixExpression:[NSArray array]];
-		maxArguments = 0;
-		minArguments = 0;
-	}
-	return self;
-}
-
 - (void) dealloc
 {
 	[macroExpression release];
 	[macroPostfixExpression release];
-	maxArguments = 0;
-	minArguments = 0;
+
 	[super dealloc];
 }
 
@@ -52,9 +45,6 @@
 	self = [super init];
 	if (self != nil) {
 		[self setExpression:expression];
-		[self setPostfixExpression:[NSArray array]];
-		maxArguments = 0;
-		minArguments = 0;
 	}
 	return self;
 }
@@ -64,6 +54,24 @@
 
 @synthesize expression = macroExpression;
 @synthesize postfixExpression = macroPostfixExpression;
+
+- (NSArray *) postfixExpression;
+{
+	if (nil == macroPostfixExpression) {
+		[self updatePostfixExpression];
+	}
+	return macroPostfixExpression;
+}
+
+- (void) setExpression: (NSString *)newExpr;
+{
+	if (macroExpression != newExpr) {
+		[macroExpression release];
+		macroExpression = [newExpr copy];
+		
+		[self setPostfixExpression: nil];
+	}
+}
 
 #pragma mark -
 #pragma mark Update Postfix
@@ -96,7 +104,7 @@
 	[evaluator setVariable:[CParserVariable variableWithValue:count] forKey:[NSString stringWithString:@"ARG_COUNT"]];
 	
 	@try {
-		result = [evaluator evaluatePostfixArray:macroPostfixExpression];
+		result = [evaluator evaluatePostfixArray: [self postfixExpression]];
 	}
 	@catch (NSException * e) {
 		NSLog(@"ERROR: %@", [e reason]);

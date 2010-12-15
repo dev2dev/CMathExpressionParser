@@ -31,6 +31,4 @@
 @property (readwrite, copy, nonatomic) NSString *expression;
 @property (readwrite, copy, nonatomic) NSArray *postfixExpression;
 
-- (void) updatePostfixExpression;
-
 @end
