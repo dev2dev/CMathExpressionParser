@@ -19,7 +19,8 @@
 
 #import "CParserConverter.h"
 #import "CParserEvaluator.h"
-
+#import "CParserCFunction.h"
+#import "CParserMacroFunction.h"
 
 int main (int argc, const char * argv[]) {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -35,13 +36,13 @@ int main (int argc, const char * argv[]) {
 	
 	//macros
 	
-	CParserMacro * myMacro = [CParserMacro macroWithExpression:@"(ARG_1 + ARG_2 + ARG_3 + ARG_4 + ARG_5 + ARG_6 + ARG_7 + ARG_8 + ARG_9)/ARG_COUNT"];
+	CParserMacroFunction * myMacro = [CParserMacroFunction macroWithExpression:@"(ARG_1 + ARG_2 + ARG_3 + ARG_4 + ARG_5 + ARG_6 + ARG_7 + ARG_8 + ARG_9)/ARG_COUNT"];
 	[myMacro setMinArguments:3];
 	[myMacro updatePostfixExpression];
 	
 	//functions
 	
-	CParserFunction * myFunction = [CParserFunction functionWithMinArguments:1];
+	CParserCFunction * myFunction = [CParserCFunction functionWithMinArguments:1];
 	[myFunction setFunction1:&sin];
 	
 	//add
