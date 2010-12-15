@@ -30,9 +30,7 @@
 
 + (CParserConverter *) converter;
 
-//- (NSString *) convertExpressionFromInfixStringToPostfixString:(NSString *)expression;
 - (NSArray *) convertExpressionFromInfixStringToPostfixArray:(NSString *)expression;
-
 
 @property (readwrite, copy, nonatomic) NSCharacterSet *operatorSet;
 @property (readwrite, copy, nonatomic) NSCharacterSet *functionSet;
@@ -42,12 +40,5 @@
 
 @property (readwrite, assign, nonatomic) unichar macroIdentifier;
 @property (readwrite, assign, nonatomic) unichar functionArgumentSeperator;
-
-
-//private
-- (int) operatorArgumentCount:(NSString *)string;
-- (int) operatorPrecedence:(NSString *)string;
-- (BOOL) operatorAssociativity:(NSString *)string;
-- (BOOL) isOperator:(NSString *)string;
 
 @end

@@ -8,6 +8,12 @@
 
 #import "CParserConverter.h"
 
+@interface CParserConverter ()
+- (int) operatorArgumentCount:(NSString *)string;
+- (int) operatorPrecedence:(NSString *)string;
+- (BOOL) operatorAssociativity:(NSString *)string;
+- (BOOL) isOperator:(NSString *)string;
+@end
 
 @implementation CParserConverter
 
