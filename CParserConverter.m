@@ -49,6 +49,17 @@
 #pragma mark -
 #pragma mark Convert
 
+- (void) moveFrom: (CParserStack *) stack upToOperator: (NSString *) op to: (NSMutableArray *) output  
+{
+	CParserToken * temp = [stack pop];
+	
+	while (!([temp type] == CParserTokenOperator && [[temp operatorValue] isEqualToString: op])) {
+		[output addObject:temp];
+		temp = [stack pop];
+	}
+	
+}
+
 - (NSArray *) convertExpressionFromInfixStringToPostfixArray:(NSString *)expression
 {	
 	CParserStack * stack = [CParserStack stack];
@@ -145,12 +156,8 @@
 						@throw exception;
 					}
 						
-					NSString * temp = [[stack pop] operatorValue];
-						
-					while (![temp isEqualToString:@"("]) {
-						[output addObject:[CParserToken tokenWithOperator:temp]];
-						temp = [[stack pop] operatorValue];
-					}
+					[self moveFrom: stack upToOperator: @"(" to: output];
+
 						
 					if ([stack position] != 0) {
 						CParserToken * token = [stack pop];
@@ -198,13 +205,8 @@
 																	   userInfo:nil];
 						@throw exception;
 					}
-						
-					NSString * temp = [[stack pop] operatorValue];
-						
-					while (![temp isEqualToString:@"("]) {
-						[output addObject:[CParserToken tokenWithOperator:temp]];
-						temp = [[stack pop] operatorValue];
-					}
+					
+					[self moveFrom: stack upToOperator: @"(" to: output];
 						
 					if ([stack position] != 0) {
 						CParserToken * token = [stack pop];
