@@ -22,45 +22,73 @@
 #import "CParserCFunction.h"
 #import "CParserMacroFunction.h"
 
+static void installMacro(CParserEvaluator *eval) 
+{
+	CParserMacroFunction * myMacro = [CParserMacroFunction macroWithExpression:@"(ARG_1 + ARG_2 + ARG_3 + ARG_4 + ARG_5 + ARG_6 + ARG_7 + ARG_8 + ARG_9)/ARG_COUNT"];
+	[myMacro setMinArguments:3];
+	[eval setMacro:myMacro forKey:@"durchschnitt"];
+	
+}
+
+static void installFunction(CParserEvaluator *eval) 
+{
+	CParserCFunction * myFunction = [CParserCFunction functionWithMinArguments:1];
+	[myFunction setFunction1:&sin];
+	[eval setFunction:myFunction forKey:@"sin"];
+	
+}
+
+static const int BufferSize = 1024;
+
+static NSString *readLine()
+{
+	char buffer[BufferSize];
+	char *result = fgets( buffer, BufferSize - 1, stdin );
+	if (NULL == result) {
+		return nil;
+	}
+	
+	return [[NSString stringWithUTF8String: buffer] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
+void evaluateExpressionString( NSString *expression, CParserConverter *conv, CParserEvaluator *eval ) 
+{
+	NSArray *postfixArray = [conv convertExpressionFromInfixStringToPostfixArray: expression];
+	NSLog( @"postfix: %@", postfixArray );
+	
+	double result = [eval evaluatePostfixArray: postfixArray];
+	NSLog( @"%@ --> %f", expression, result );
+}
+
 int main (int argc, const char * argv[]) {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 
 	CParserConverter * conv = [[CParserConverter alloc] init];
 	CParserEvaluator * eval = [[CParserEvaluator alloc] init];
 	
-	//convert
+	installMacro(eval);
+	installFunction(eval);
 	
-	NSArray * postfixArray = [conv convertExpressionFromInfixStringToPostfixArray:@"A=1;B=3;C=A+B*10;C*2"];
+	for (int i = 1; i < argc; i++) {
+		NSString *expression = [[NSString stringWithUTF8String: argv[i]] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		evaluateExpressionString( expression, conv, eval );
+	}
 	
-	NSLog(@"Converted Array: %@", postfixArray);
-	
-	//macros
-	
-	CParserMacroFunction * myMacro = [CParserMacroFunction macroWithExpression:@"(ARG_1 + ARG_2 + ARG_3 + ARG_4 + ARG_5 + ARG_6 + ARG_7 + ARG_8 + ARG_9)/ARG_COUNT"];
-	[myMacro setMinArguments:3];
-	
-	//functions
-	
-	CParserCFunction * myFunction = [CParserCFunction functionWithMinArguments:1];
-	[myFunction setFunction1:&sin];
-	
-	//add
-	
-	[eval setMacro:myMacro forKey:@"durchschnitt"];
-	[eval setFunction:myFunction forKey:@"sin"];
-	
-	//evaluate
-	
-	//double result = [eval evaluatePostfixArray:postfixArray];
-	double result = [eval evaluatePostfixArray:postfixArray];
+	NSLog( @"Type expressions to evaluate and 'quit' to exit the program" );
+	while (true) {
+		NSAutoreleasePool *loopPool = [[NSAutoreleasePool alloc] init];
+		
+		NSString *line = readLine();
+		if (nil == line || [line caseInsensitiveCompare: @"quit"] == NSOrderedSame) {
+			break;
+		}
+		
+		evaluateExpressionString(line,conv,eval);
+		
+		[loopPool release];
+	}
 
-	//print
-	
-	printf("Result = %.12f\n", result);
-	
-	//eval vars
-	
-	NSLog(@"Evaluator Variables: %@", [eval variableDictionary]);
+	NSLog( @"Defined variables: %@", [eval variableDictionary] );
 	
 	[eval release];
 	[conv release];
