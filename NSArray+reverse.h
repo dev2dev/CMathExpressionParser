@@ -3,10 +3,17 @@
 //  CMathParser
 //
 //  Created by Johannes Wolf on 27.09.10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 beanage. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
+
+
+@interface NSArray (reverse)
+
+- (NSArray *) reversedArray;
+
+@end
 
 
 @interface NSMutableArray (reverse)
