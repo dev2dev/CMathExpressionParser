@@ -9,17 +9,13 @@
 	return 0.0;
 }
 
-- (int) minArguments
-{
-	return minArguments;
-}
-- (int) maxArguments
-{
-	return maxArguments;
-}
 - (void) setMinArguments:(int)args
 {
 	minArguments = args;
 	maxArguments = args;
 }
+
+@synthesize minArguments;
+@synthesize maxArguments;
+
 @end

@@ -62,31 +62,8 @@
 #pragma mark -
 #pragma mark Seter / Geter
 
-- (void) setExpression:(NSString *)expression
-{
-	if (macroExpression != expression) {
-		[macroExpression release];
-		macroExpression = [expression retain];
-	}
-}
-
-- (NSString *) expression
-{
-	return macroExpression;
-}
-
-- (void) setPostfixExpression:(NSArray *)expression
-{
-	if (macroPostfixExpression != expression) {
-		[macroPostfixExpression release];
-		macroPostfixExpression = [expression retain];
-	}
-}
-
-- (NSArray *) postfixExpression
-{
-	return macroPostfixExpression;
-}
+@synthesize expression = macroExpression;
+@synthesize postfixExpression = macroPostfixExpression;
 
 #pragma mark -
 #pragma mark Update Postfix

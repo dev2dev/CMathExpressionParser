@@ -4,13 +4,8 @@
   int maxArguments;
 }
 
-
-// methods for instance variable 'minArguments'
-- (int) minArguments;
-
-// methods for instance variable 'maxArguments'
-- (int) maxArguments;
-- (void) setMinArguments:(int)args;
+@property (readwrite, assign, nonatomic) int minArguments;
+@property (readwrite, assign, nonatomic) int maxArguments;
 
 - (double) evaluateWithArguments:(NSArray *)arguments;
 

@@ -16,41 +16,6 @@
 #pragma mark -
 #pragma mark Init / Dealloc
 
-- (id) init
-{
-	self = [super init];
-	if (self != nil) {
-		functionPtr1 = 0;
-		functionPtr2 = 0;
-		functionPtr3 = 0;
-		functionPtr4 = 0;
-		functionPtr5 = 0;
-		functionPtr6 = 0;
-		functionPtr7 = 0;
-		functionPtr8 = 0;
-		functionPtr9 = 0;
-		minArguments = 0;
-		maxArguments = 0;
-	}
-	return self;
-}
-
-- (void) dealloc
-{
-	functionPtr1 = 0;
-	functionPtr2 = 0;
-	functionPtr3 = 0;
-	functionPtr4 = 0;
-	functionPtr5 = 0;
-	functionPtr6 = 0;
-	functionPtr7 = 0;
-	functionPtr8 = 0;
-	functionPtr9 = 0;
-	minArguments = 0;
-	maxArguments = 0;
-	[super dealloc];
-}
-
 + (CParserCFunction *) function
 {
 	return [[[CParserCFunction alloc] init] autorelease];
@@ -65,81 +30,24 @@
 {
 	self = [super init];
 	if (self != nil) {
-		functionPtr1 = 0;
-		functionPtr2 = 0;
-		functionPtr3 = 0;
-		functionPtr4 = 0;
-		functionPtr5 = 0;
-		functionPtr6 = 0;
-		functionPtr7 = 0;
-		functionPtr8 = 0;
-		functionPtr9 = 0;
 		[self setMinArguments:args];
 	}
 	return self;
 }
 
 #pragma mark -
-#pragma mark Seter / Geter
-
-
-
-
-
-
-
-#pragma mark -
 #pragma mark Function Seter
 
-- (void) setFunction0:(function_0)func
-{
-	functionPtr0 = func;
-}
-
-- (void) setFunction1:(function_1)func
-{
-	functionPtr1 = func;
-}
-
-- (void) setFunction2:(function_2)func
-{
-	functionPtr2 = func;
-}
-
-- (void) setFunction3:(function_3)func
-{
-	functionPtr3 = func;
-}
-
-- (void) setFunction4:(function_4)func
-{
-	functionPtr4 = func;
-}
-
-- (void) setFunction5:(function_5)func
-{
-	functionPtr5 = func;
-}
-
-- (void) setFunction6:(function_6)func
-{
-	functionPtr6 = func;
-}
-
-- (void) setFunction7:(function_7)func
-{
-	functionPtr7 = func;
-}
-
-- (void) setFunction8:(function_8)func
-{
-	functionPtr8 = func;
-}
-
-- (void) setFunction9:(function_9)func
-{
-	functionPtr9 = func;
-}
+@synthesize function0 = functionPtr0;
+@synthesize function1 = functionPtr1;
+@synthesize function2 = functionPtr2;
+@synthesize function3 = functionPtr3;
+@synthesize function4 = functionPtr4;
+@synthesize function5 = functionPtr5;
+@synthesize function6 = functionPtr6;
+@synthesize function7 = functionPtr7;
+@synthesize function8 = functionPtr8;
+@synthesize function9 = functionPtr9;
 
 #pragma mark -
 #pragma mark Evaluate

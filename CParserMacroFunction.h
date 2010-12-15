@@ -28,10 +28,8 @@
 
 - (id) initWithExpression:(NSString *)expression;
 
-- (void) setExpression:(NSString *)expression;
-- (NSString *) expression;
-- (void) setPostfixExpression:(NSArray *)expression;
-- (NSArray *) postfixExpression;
+@property (readwrite, copy, nonatomic) NSString *expression;
+@property (readwrite, copy, nonatomic) NSArray *postfixExpression;
 
 - (void) updatePostfixExpression;
 - (double) evaluateWithArguments:(NSArray *)arguments;

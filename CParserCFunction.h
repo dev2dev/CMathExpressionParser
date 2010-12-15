@@ -37,17 +37,17 @@
 
 - (id) initWithMinArguments:(int)args;
 
+@property (readwrite, assign, nonatomic) function_0 function0;
+@property (readwrite, assign, nonatomic) function_1 function1;
+@property (readwrite, assign, nonatomic) function_2 function2;
+@property (readwrite, assign, nonatomic) function_3 function3;
+@property (readwrite, assign, nonatomic) function_4 function4;
+@property (readwrite, assign, nonatomic) function_5 function5;
+@property (readwrite, assign, nonatomic) function_6 function6;
+@property (readwrite, assign, nonatomic) function_7 function7;
+@property (readwrite, assign, nonatomic) function_8 function8;
+@property (readwrite, assign, nonatomic) function_9 function9;
 
-- (void) setFunction0:(function_0)func;
-- (void) setFunction1:(function_1)func;
-- (void) setFunction2:(function_2)func;
-- (void) setFunction3:(function_3)func;
-- (void) setFunction4:(function_4)func;
-- (void) setFunction5:(function_5)func;
-- (void) setFunction6:(function_6)func;
-- (void) setFunction7:(function_7)func;
-- (void) setFunction8:(function_8)func;
-- (void) setFunction9:(function_9)func;
 
 - (double) evaluateWithArguments:(NSArray *)arguments;
 
