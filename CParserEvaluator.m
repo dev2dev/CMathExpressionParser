@@ -212,7 +212,7 @@
 		}
 		if (type == CParserTokenMacro) { // -=MACRO=-
 			
-			CParserMacro * macro = [self macroForKey:[token macroValue]];
+			CParserFunction * macro = [self macroForKey:[token macroValue]];
 			
 			double result = 0.0;
 			
@@ -318,12 +318,12 @@
 }
 
 
-- (void) setMacro:(CParserMacro *)macro forKey:(NSString *)key
+- (void) setMacro:(CParserFunction *)macro forKey:(NSString *)key
 {
 	[macroDictionary setObject:macro forKey:key];
 }
 
-- (CParserMacro *) macroForKey:(NSString *)key
+- (CParserFunction *) macroForKey:(NSString *)key
 {
 	if (macroDictionary) 
 	{

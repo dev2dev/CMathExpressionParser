@@ -16,7 +16,6 @@
 #import "CParserStack.h"
 #import "CParserVariable.h"
 #import "CParserFunction.h"
-#import "CParserMacro.h"
 
 
 @interface CParserEvaluator : NSObject {
@@ -44,7 +43,7 @@
 - (void) setFunction:(CParserFunction *)func forKey:(NSString *)key;
 - (CParserFunction *) functionForKey:(NSString *)key;
 
-- (void) setMacro:(CParserMacro *)macro forKey:(NSString *)key;
-- (CParserMacro *) macroForKey:(NSString *)key;
+- (void) setMacro:(CParserFunction *)macro forKey:(NSString *)key;
+- (CParserFunction *) macroForKey:(NSString *)key;
 
 @end
