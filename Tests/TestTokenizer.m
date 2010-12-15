@@ -111,7 +111,7 @@
 	CheckOperator( @"/" );
 	CheckOperator( @"=" );
 	CheckOperator( @"^" );
-//	CheckOperator( @"%" );	// TODO: Fix
+	CheckOperator( @"%" );
 	CheckOperator( @"<" );
 	CheckOperator( @">" );
 	CheckOperator( @"==" );

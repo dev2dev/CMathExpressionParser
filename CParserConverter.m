@@ -18,7 +18,7 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self setOperatorSet:[NSCharacterSet characterSetWithCharactersInString:@"+-*/^!<>=&|(),;"]];
+		[self setOperatorSet:[NSCharacterSet characterSetWithCharactersInString:@"%+-*/^!<>=&|(),;"]];
 		[self setFunctionSet:[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890@"]];
 		[self setVariableSet:[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890@"]];
 		[self setMacroSet:[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890#@"]];
