@@ -7,17 +7,20 @@
 //
 
 #import "NSArray+reverse.h"
+@implementation NSArray (reverse)
+
+- (NSArray *) reversedArray;
+{
+	return [[self reverseObjectEnumerator] allObjects];
+}
+
+@end
 
 
 @implementation NSMutableArray (reverse)
 
 - (void) reverse {
-	NSUInteger i, count = [self count];
-	for (i = 0; i < count; i++) {
-		NSObject * obj = [self objectAtIndex:i];
-		[self removeObject:obj];
-		[self insertObject:obj atIndex:0];
-	}
+	[self setArray: [self reversedArray]];
 }
 
 @end

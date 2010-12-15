@@ -8,6 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
+@interface NSArray (reverse)
+
+- (NSArray *) reversedArray;
+
+@end
+
 
 @interface NSMutableArray (reverse)
 
