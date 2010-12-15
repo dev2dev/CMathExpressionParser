@@ -32,6 +32,5 @@
 @property (readwrite, copy, nonatomic) NSArray *postfixExpression;
 
 - (void) updatePostfixExpression;
-- (double) evaluateWithArguments:(NSArray *)arguments;
 
 @end

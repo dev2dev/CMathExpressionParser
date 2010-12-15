@@ -49,6 +49,5 @@
 @property (readwrite, assign, nonatomic) function_9 function9;
 
 
-- (double) evaluateWithArguments:(NSArray *)arguments;
 
 @end
