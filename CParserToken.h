@@ -12,17 +12,19 @@
 #import <Cocoa/Cocoa.h>
 #endif
 
-#define CParserTokenNull		0
-#define CParserTokenNumber		1
-#define CParserTokenOperator	2
-#define CParserTokenFunction	3
-#define CParserTokenVariable	4
-#define CParserTokenMacro		5
-#define CParserTokenMatrix		6 //not implimented yet!
+typedef enum {
+	CParserTokenNull = 0,
+	CParserTokenNumber,
+	CParserTokenOperator,
+	CParserTokenFunction,
+	CParserTokenVariable,
+	CParserTokenMacro,
+	CParserTokenMatrix,
+} CParserTokenType;
 
 @interface CParserToken : NSObject {
 	
-	int tokenType;
+	CParserTokenType tokenType;
 	
 	double numberValue;
 	NSString * operatorValue;
@@ -57,7 +59,7 @@
 - (void) setVariableValue:(NSString *)value;
 - (void) setMacroValue:(NSString *)value;
 
-- (int) type;
-- (void) setType:(int)value;
+- (CParserTokenType) type;
+- (void) setType:(CParserTokenType)value;
 
 @end

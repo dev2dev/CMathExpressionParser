@@ -208,12 +208,12 @@
 #pragma mark -
 #pragma mark Type
 
-- (int) type
+- (CParserTokenType) type
 {
 	return tokenType;
 }
 
-- (void) setType:(int)value
+- (void) setType:(CParserTokenType)value
 {
 	tokenType = value;
 }
@@ -224,22 +224,22 @@
 - (NSString *) description
 {
 	switch (tokenType) {
-		case 0:
+		case CParserTokenNull:
 			return @"NULL";
 			break;
-		case 1:
+		case CParserTokenNumber:
 			return [NSString stringWithFormat:@"Number: %f", numberValue];
 			break;
-		case 2:
+		case CParserTokenOperator:
 			return [NSString stringWithFormat:@"Operator: %@", operatorValue];
 			break;
-		case 3:
+		case CParserTokenFunction:
 			return [NSString stringWithFormat:@"Function: %@", functionValue];
 			break;
-		case 4:
+		case CParserTokenVariable:
 			return [NSString stringWithFormat:@"Variable: %@", variableValue];
 			break;
-		case 5:
+		case CParserTokenMacro:
 			return [NSString stringWithFormat:@"Macro: %@", macroValue];
 			break;
 		default:
