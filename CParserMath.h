@@ -7,7 +7,7 @@ extern "C" {
 	
 int factorial(int value);			//	!
 double radToDeg(double rad);	//	radToDeg()
-double dadToRad(double deg);	//	degToRad()
+double degToRad(double deg);	//	degToRad()
 
 #ifdef __cplusplus
 }
