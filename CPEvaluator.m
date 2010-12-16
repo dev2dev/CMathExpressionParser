@@ -105,7 +105,13 @@
 								[newToken setNumberValue:operants[0] * operants[1]];
 								break;
 							case CPOperatorDiv:
-								[newToken setNumberValue:operants[0] / operants[1]];
+								if (operants[1] == 0.0) {
+									NSException *exception = [NSException exceptionWithName:@"Divide by 0 Error"
+																					 reason:@"Divide by Zero" 
+																				   userInfo:nil];
+									@throw exception;
+								} else
+									[newToken setNumberValue:operants[0] / operants[1]];
 								break;
 							case CPOperatorModulo:
 								[newToken setNumberValue:fmod(operants[0], operants[1])];
