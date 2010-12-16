@@ -6,11 +6,7 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#if (TARGET_IPHONE_SIMULATOR) || (TARGET_OS_IPHONE) || (TARGET_IPHONE)
-#import <Foundation/Foundation.h>
-#else
 #import <Cocoa/Cocoa.h>
-#endif
 
 #include "CParserGlobal.h"
 
