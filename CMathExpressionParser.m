@@ -11,7 +11,7 @@
  /____/ /        |___| | |___| |
  \____\/         \____\| \____\| 
  
- CMathParser (C) Johannes Wolf
+ CMathExpressionParser (C) Johannes Wolf
  
  **************************************/
 

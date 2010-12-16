@@ -5,7 +5,8 @@
 extern "C" {
 #endif
 	
-int factorial(int value);			//	!
+int factorial(int value);		//	!
+double nsqrt(int n, double x);	//	x^(1/n)
 double radToDeg(double rad);	//	radToDeg()
 double degToRad(double deg);	//	degToRad()
 

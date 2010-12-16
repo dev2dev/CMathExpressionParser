@@ -11,6 +11,11 @@ int factorial(int value)
 	return result;
 }
 
+double nsqrt(int n, double x) 
+{
+	return ((n % 2) && (x < 0.0)) ? INFINITY : pow(x, 1.0/n); 
+}
+
 double radToDeg(double rad)
 {
 	return (rad * (180.0/M_PI));

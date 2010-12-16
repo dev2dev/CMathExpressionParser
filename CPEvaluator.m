@@ -14,6 +14,7 @@
 #import "CPTokenizer.h"
 
 #import "CParserVariable.h"
+#import "CParserFunction.h"
 
 
 @implementation CPEvaluator
@@ -111,7 +112,7 @@
 								break;
 							case CPOperatorAssign:
 								if ([(CPToken *)[stack objectAtIndex:[stack count]-2] type] == CPTokenVariable) {
-									[variables setObject:[CParserVariable variableWithValue:operants[1]] forKey:[[stack objectAtIndex:[stack count]-2] stringValue]];
+									[self setVariable:[CParserVariable variableWithValue:operants[1]] forKey:[[stack objectAtIndex:[stack count]-2] stringValue]];
 								} else {
 									//Assign Error!
 								}
@@ -198,6 +199,29 @@
 - (NSDictionary *) functions
 {
 	return functions;
+}
+
+#pragma mark -
+#pragma mark add/get variable/functions
+
+- (void) setVariable:(CParserVariable *)var forKey:(NSString *)key
+{
+	[variables setObject:var forKey:key];
+}
+
+- (CParserVariable *) variableForKey:(NSString *)key
+{
+	return (CParserVariable *)[variables objectForKey:key];
+}
+
+- (void) setFunction:(CParserFunction *)var forKey:(NSString *)key
+{
+	[functions setObject:var forKey:key];
+}
+
+- (CParserFunction *) functionForKey:(NSString *)key
+{
+	return (CParserFunction *)[functions objectForKey:key];
 }
 
 @end

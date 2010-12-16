@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class CParserVariable;
+@class CParserFunction;
 
 @interface CPEvaluator : NSObject {
 	
@@ -24,5 +26,12 @@
 - (NSDictionary *) functions;
 
 - (double) evaluatePostfixExpressionArray:(NSArray *)array;
+
+//var + func
+
+- (void) setVariable:(CParserVariable *)var forKey:(NSString *)key;
+- (CParserVariable *) variableForKey:(NSString *)key;
+- (void) setFunction:(CParserFunction *)func forKey:(NSString *)key;
+- (CParserFunction *) functionForKey:(NSString *)key;
 
 @end
