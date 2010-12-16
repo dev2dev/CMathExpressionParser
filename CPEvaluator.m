@@ -6,10 +6,14 @@
 //  Copyright 2010 beanage. All rights reserved.
 //
 
+#include "CParserMath.h"
+
 #import "CPEvaluator.h"
 
 #import "CPToken.h"
 #import "CPTokenizer.h"
+
+#import "CParserVariable.h"
 
 
 @implementation CPEvaluator
@@ -21,8 +25,8 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self setVariables:nil];
-		[self setFunctions:nil];
+		[self setVariables:[NSMutableDictionary dictionary]];
+		[self setFunctions:[NSMutableDictionary dictionary]];
 	}
 	return self;
 }
@@ -54,15 +58,15 @@
 	for (i = 0; i < count; i++) {
 		CPToken *token = [array objectAtIndex:i];
 		
+		CPToken *newToken = [CPToken token];
 		CPOperator operator = [token operatorValue];
-		double result = 0.0;
 		
 		switch ([token type]) {
 			case CPTokenNull:
 				//
 				break;
 			case CPTokenNumber:
-				result = [token numberValue];
+				[newToken setNumberValue:[token numberValue]];
 				break;
 			case CPTokenOperator:
 				if ([stack count] >= [CPTokenizer operatorArgumentCount:operator])
@@ -74,10 +78,10 @@
 						
 						switch (operator) {
 							case CPOperatorFactorial:
-								result = 0.0;
+								[newToken setNumberValue:factorial(operants[0])];
 								break;
 							case CPOperatorNeg:
-								//...
+								[newToken setNumberValue:0.0]; // ?
 								break;
 							default:
 								break;
@@ -91,53 +95,58 @@
 						
 						switch (operator) {
 							case CPOperatorPlus:
-								result = operants[0] + operants[1];
+								[newToken setNumberValue:operants[0] + operants[1]];
 								break;
 							case CPOperatorMinus:
-								result = operants[0] - operants[1];
+								[newToken setNumberValue:operants[0] - operants[1]];
 								break;
 							case CPOperatorTimes:
-								result = operants[0] * operants[1];
+								[newToken setNumberValue:operants[0] * operants[1]];
 								break;
 							case CPOperatorDiv:
-								result = operants[0] / operants[1];
+								[newToken setNumberValue:operants[0] / operants[1]];
 								break;
 							case CPOperatorModulo:
-								result = fmod(operants[0], operants[1]);
+								[newToken setNumberValue:fmod(operants[0], operants[1])];
 								break;
 							case CPOperatorAssign:
-								//assignment here... later
-								result = operants[1];
+								if ([(CPToken *)[stack objectAtIndex:[stack count]-2] type] == CPTokenVariable) {
+									[variables setObject:[CParserVariable variableWithValue:operants[1]] forKey:[[stack objectAtIndex:[stack count]-2] stringValue]];
+								} else {
+									//Assign Error!
+								}
+
+								[newToken setNumberValue:operants[1]];
 								break;
 							case CPOperatorPower:
-								result = pow(operants[0], operants[1]);
+								[newToken setNumberValue:pow(operants[0], operants[1])];
 								break;
 							case CPOperatorLT:
-								result = operants[0] < operants[1];
+								[newToken setNumberValue:operants[0] < operants[1]];
 								break;
 							case CPOperatorLE:
-								result = operants[0] <= operants[1];
+								[newToken setNumberValue:operants[0] <= operants[1]];
 								break;
 							case CPOperatorGT:
-								result = operants[0] > operants[1];
+								[newToken setNumberValue:operants[0] > operants[1]];
 								break;
 							case CPOperatorGE:
-								result = operants[0] >= operants[1];
+								[newToken setNumberValue:operants[0] >= operants[1]];
 								break;
 							case CPOperatorNEqual:
-								result = operants[0] != operants[1];
+								[newToken setNumberValue:operants[0] != operants[1]];
 								break;
 							case CPOperatorEqual:
-								result = operants[0] == operants[1];
+								[newToken setNumberValue:operants[0] == operants[1]];
 								break;
 							case CPOperatorAND:
-								result = operants[0] && operants[1];
+								[newToken setNumberValue:operants[0] && operants[1]];
 								break;
 							case CPOperatorOR:
-								result = operants[0] || operants[1];
+								[newToken setNumberValue:operants[0] || operants[1]];
 								break;
 							default:
-								result = 0.0;
+								[newToken setNumberValue:0.0];
 								break;
 						}
 						
@@ -147,11 +156,16 @@
 				}
 				
 				break;
+			case CPTokenVariable:
+				[newToken setStringValue:[token stringValue]]; //set var name
+				[newToken setType:CPTokenVariable]; //set type to var (for assignment)
+				[newToken setNumberValue:([variables objectForKey:[token stringValue]] != nil) ? ([(CParserVariable *)[variables objectForKey:[token stringValue]] value]) : 0.0];
+
 			default:
 				break;
 		}
 		
-		[stack addObject:[CPToken tokenWithNumber:result]];
+		[stack addObject:newToken];
 	}
 	
 	return [[stack lastObject] numberValue];

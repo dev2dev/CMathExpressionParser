@@ -82,7 +82,7 @@
 			if(firstChar >= 'a' && firstChar <= 'z')
 				[stack push:[CPToken tokenWithFunction:stringValue]];
 			else
-				[stack push:[CPToken tokenWithVariable:stringValue]];
+				[output addObject:[CPToken tokenWithVariable:stringValue]];
 			
 			stringScanned = YES;
 		}
@@ -108,8 +108,6 @@
 			} else {
 				multipleOperators = NO;
 			}
-			
-			NSLog(@"-> operator: %@ m: %d", _operator, multipleOperators);
 			
 			CPOperator operator = [self operatorForString:_operator];
 			
