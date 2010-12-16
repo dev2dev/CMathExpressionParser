@@ -114,7 +114,10 @@
 								if ([(CPToken *)[stack objectAtIndex:[stack count]-2] type] == CPTokenVariable) {
 									[self setVariable:[CParserVariable variableWithValue:operants[1]] forKey:[[stack objectAtIndex:[stack count]-2] stringValue]];
 								} else {
-									//Assign Error!
+									NSException *exception = [NSException exceptionWithName:@"Assignment Error"
+																					 reason:@"Left token is not a variable" 
+																				   userInfo:nil];
+									@throw exception;
 								}
 
 								[newToken setNumberValue:operants[1]];
