@@ -26,8 +26,8 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self setVariables:[NSMutableDictionary dictionary]];
-		[self setFunctions:[NSMutableDictionary dictionary]];
+		[self setVariables:nil];
+		[self setFunctions:nil];
 	}
 	return self;
 }
@@ -206,22 +206,30 @@
 
 - (void) setVariable:(CParserVariable *)var forKey:(NSString *)key
 {
+	if (variables == nil) {
+		[self setVariables:[NSMutableDictionary dictionary]];
+	}
+	
 	[variables setObject:var forKey:key];
 }
 
 - (CParserVariable *) variableForKey:(NSString *)key
 {
-	return (CParserVariable *)[variables objectForKey:key];
+	return [variables objectForKey:key];
 }
 
 - (void) setFunction:(CParserFunction *)var forKey:(NSString *)key
 {
+	if (variables == nil) {
+		[self setFunctions:[NSMutableDictionary dictionary]];
+	}
+	
 	[functions setObject:var forKey:key];
 }
 
 - (CParserFunction *) functionForKey:(NSString *)key
 {
-	return (CParserFunction *)[functions objectForKey:key];
+	return [functions objectForKey:key];
 }
 
 @end
