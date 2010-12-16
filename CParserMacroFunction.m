@@ -7,8 +7,8 @@
 //
 
 #import "CParserMacroFunction.h"
-#import "CParserEvaluator.h"
-#import "CParserConverter.h"
+#import "CPEvaluator.h"
+#import "CPTokenizer.h"
 #import "CParserVariable.h"
 
 @interface CParserMacroFunction ()
@@ -79,7 +79,7 @@
 - (void) updatePostfixExpression
 {
 	@try {
-		CParserConverter * converter = [CParserConverter converter];
+		CPTokenizer * converter = [CPTokenizer tokenizer];
 		[self setPostfixExpression:[converter convertExpressionFromInfixStringToPostfixArray:macroExpression]];
 	}
 	@catch (NSException * e) {
@@ -93,18 +93,18 @@
 - (double) evaluateWithArguments:(NSArray *)arguments
 {
 	double result = 0.0;
-	CParserEvaluator * evaluator = [CParserEvaluator evaluator];
+	CPEvaluator * evaluator = [CPEvaluator evaluator];
 	
 	NSUInteger i, count = [arguments count];
 	for (i = 0; i < count; i++) {
-		CParserToken * token = [arguments objectAtIndex:i];
+		CPToken * token = [arguments objectAtIndex:i];
 		[evaluator setVariable:[CParserVariable variableWithValue:[token numberValue]] forKey:[NSString stringWithFormat:@"ARG_%i", i+1]];
 	}
 	
 	[evaluator setVariable:[CParserVariable variableWithValue:count] forKey:[NSString stringWithString:@"ARG_COUNT"]];
 	
 	@try {
-		result = [evaluator evaluatePostfixArray: [self postfixExpression]];
+		result = [evaluator evaluatePostfixExpressionArray: [self postfixExpression]];
 	}
 	@catch (NSException * e) {
 		NSLog(@"ERROR: %@", [e reason]);

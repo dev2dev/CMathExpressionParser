@@ -1,9 +1,9 @@
 #import <SenTestingKit/SenTestingKit.h>
 
-#import "CParserConverter.h"
+#import "CPTokenizer.h"
 
 @interface TestTokenizer : SenTestCase {
-	CParserConverter *tokenizer;
+	CPTokenizer *tokenizer;
 }
 
 @end
@@ -12,7 +12,7 @@
 
 - (void) setUp;
 {
-	tokenizer = [[CParserConverter alloc] init];
+	tokenizer = [[CPTokenizer alloc] init];
 }
 
 - (void) tearDown;
@@ -20,7 +20,7 @@
 	[tokenizer release]; tokenizer = nil;
 }
 
-- (void) runTokenizer: (NSString *)expr expectedResults: (CParserTokenType) type, ...;
+- (void) runTokenizer: (NSString *)expr expectedResults: (CPTokenType) type, ...;
 {
 	NSLog( @"Testing %@", expr );
 	
@@ -31,99 +31,89 @@
 	va_list args;
 	va_start( args, type );
 	
-	while (type != CParserTokenNull) {
+	while (type != CPTokenNull) {
 		STAssertTrue( index <= count, @"Too many results" );
 		
-		CParserToken *token = [result objectAtIndex: index];
+		CPToken *token = [result objectAtIndex: index];
 
 		STAssertTrue( [token type] == type, @"Invalid token type" );
 
 		double number = 0.0;
 		NSString *string = nil;
+		CPOperator operator = CPOperatorNull;
 		switch (type) {
-			case CParserTokenNumber:
+			case CPTokenNumber:
 				number = va_arg( args, double );
 				STAssertTrue( [token numberValue] == number, @"Wrong number, expected %f got %f", number, [token numberValue] );
 				break;
 				
-			case CParserTokenOperator:
+			case CPTokenFunction:
+			case CPTokenVariable:
 				string = va_arg( args, NSString * );
-				STAssertEqualObjects( [token operatorValue], string, @"Wrong operator, expected %@ got %@", string, [token operatorValue] );
+				STAssertEqualObjects( [token stringValue], string, @"Wrong string, expected %@ got %@", string, [token stringValue] );
 				break;
-				
-			case CParserTokenVariable:
-				string = va_arg( args, NSString * );
-				STAssertEqualObjects( [token variableValue], string, @"Wrong variable, expected %@ got %@", string, [token variableValue] );
-				break;
-				
-			case CParserTokenFunction:
-				string = va_arg( args, NSString * );
-				STAssertEqualObjects( [token functionValue], string, @"Wrong function, expected %@ got %@", string, [token functionValue] );
-				break;
-				
-			case CParserTokenMacro:
-				string = va_arg( args, NSString * );
-				STAssertEqualObjects( [token macroValue], string, @"Wrong macro, expected %@ got %@", string, [token macroValue] );
+
+			case CPTokenOperator:
+				operator = va_arg( args, CPOperator );
+				STAssertTrue( [token operatorValue] == operator, @"Wrong operator, expected %d got %d", operator, [token operatorValue] );
 				break;
 				
 			default:
 				STFail( @"Unexpected token type %d", type );
 		}
 		
-		type = va_arg( args, CParserTokenType );
+		type = va_arg( args, CPTokenType );
 		++index;
 	}
 	va_end( args );
 	
 }
 
-#define Check( expr, args... ) [self runTokenizer: expr expectedResults: args, CParserTokenNull]
+#define Check( expr, args... ) [self runTokenizer: expr expectedResults: args, CPTokenNull]
 
-#define VAR(x) CParserTokenVariable, x
-#define OP(x) CParserTokenOperator, x
-#define NUM( x ) CParserTokenNumber, ((double)x)
-#define FUNC( x ) CParserTokenFunction, x
-#define MACRO( x ) CParserTokenMacro, x
+#define VAR(x) CPTokenVariable, x
+#define OP(x) CPTokenOperator, x
+#define NUM( x ) CPTokenNumber, ((double)x)
+#define FUNC( x ) CPTokenFunction, x
 
 #define A VAR( @"A" )
 #define B VAR( @"B" )
 #define C VAR( @"C" )
-#define ADD OP( @"+" )
-#define SUB OP( @"-" )
-#define MUL OP( @"*" )
-#define DIV OP( @"/" )
+#define ADD OP( CPOperatorPlus )
+#define SUB OP( CPOperatorMinus )
+#define MUL OP( CPOperatorTimes )
+#define DIV OP( CPOperatorDiv )
 
 - (void) testValues;
 {
 	Check( @"1", NUM( 1 ) );
 	Check( @"A", A );
 	Check( @"a", FUNC( @"a" ) );
-	Check( @"#a", MACRO( @"#a" ) );
 }
 
-#define CheckOperator( op ) Check( op, OP( op ) )
+#define CheckOperator( str, op ) Check( str, OP( op ) )
 
 - (void) testSingleOperators;
 {
-	CheckOperator( @"+" );
-	CheckOperator( @"-" );
-	CheckOperator( @"*" );
-	CheckOperator( @"/" );
-	CheckOperator( @"=" );
-	CheckOperator( @"^" );
-	CheckOperator( @"%" );
-	CheckOperator( @"<" );
-	CheckOperator( @">" );
-	CheckOperator( @"==" );
-	CheckOperator( @"<=" );
-	CheckOperator( @">=" );
-	CheckOperator( @"!=" );
-	CheckOperator( @"&&" );
-	CheckOperator( @"||" );
-
-	CheckOperator( @"!" );
+	CheckOperator( @"+", CPOperatorPlus );
+	CheckOperator( @"-", CPOperatorMinus );
+	CheckOperator( @"*", CPOperatorTimes );
+	CheckOperator( @"/", CPOperatorDiv );
+	CheckOperator( @"%", CPOperatorModulo );
+	CheckOperator( @"=", CPOperatorAssign );
+	CheckOperator( @"^", CPOperatorPower );
+	CheckOperator( @"<", CPOperatorLT );
+	CheckOperator( @"<=", CPOperatorLE );
+	CheckOperator( @">", CPOperatorGT );
+	CheckOperator( @">=", CPOperatorGE );
+	CheckOperator( @"!=", CPOperatorNEqual );
+	CheckOperator( @"==", CPOperatorEqual );
+	CheckOperator( @"!", CPOperatorFactorial );
+	CheckOperator( @"&&", CPOperatorAND );
+	CheckOperator( @"||", CPOperatorOR );
 }
 
+/* TODO: new tests
 - (void) testOrdering;
 {
 	Check( @"A*B+C", A, B, MUL, C, ADD );
@@ -138,13 +128,6 @@
 	Check( @"f(A,B,C)", A, B, C, FUNC( @"f" ) );
 }
 
-- (void) testMacros;
-{
-	Check( @"#m(A)", A, MACRO( @"#m" ) );
-	Check( @"#m(A,B)", A, B, MACRO( @"#m" ) );
-	Check( @"#m(A,B,C)", A, B, C, MACRO( @"#m" ) );
-}
-
 - (void) testWhitespaceVariants;
 {
 	Check( @"A*B", A, B, MUL );
@@ -153,5 +136,5 @@
 	Check( @"A*B ", A, B, MUL );
 	Check( @" A *\tB ", A, B, MUL );
 }
-
+*/
 @end

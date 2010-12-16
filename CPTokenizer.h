@@ -1,5 +1,5 @@
 //
-//  CParserConverter.h
+//  CPTokenizer.h
 //  CMathParser
 //
 //  Created by Johannes Wolf on 16.09.10.

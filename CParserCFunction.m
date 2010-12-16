@@ -8,7 +8,7 @@
 
 #import "CParserCFunction.h"
 
-#import "CParserToken.h"
+#import "CPToken.h"
 
 
 @implementation CParserCFunction
@@ -59,7 +59,7 @@
 	
 	NSUInteger i, count = [arguments count];
 	for (i = 0; i < count; i++) {
-		CParserToken * token = [arguments objectAtIndex:i];
+		CPToken * token = [arguments objectAtIndex:i];
 		args[i] = [token numberValue];
 	}
 	
