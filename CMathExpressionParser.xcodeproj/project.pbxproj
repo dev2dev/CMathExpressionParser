@@ -13,7 +13,6 @@
 		262A8E9912BB7CD100CFC561 /* CParserFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655A612B9F4CE00BB5F08 /* CParserFunction.m */; };
 		262A8E9A12BB7CD100CFC561 /* CParserMacroFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655AA12B9F4CE00BB5F08 /* CParserMacroFunction.m */; };
 		262A8E9B12BB7CD100CFC561 /* CParserMath.c in Sources */ = {isa = PBXBuildFile; fileRef = 266655AB12B9F4CE00BB5F08 /* CParserMath.c */; };
-		262A8E9C12BB7CD100CFC561 /* CParserVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655B212B9F4CE00BB5F08 /* CParserVariable.m */; };
 		262A8E9D12BB7CD100CFC561 /* CPEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5169AD12B7CC4D00891978 /* CPEvaluator.m */; };
 		262A8E9E12BB7CD100CFC561 /* CPStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD132C512B590CD009A2559 /* CPStack.m */; };
 		262A8E9F12BB7CD100CFC561 /* CPToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD132C212B590BC009A2559 /* CPToken.m */; };
@@ -29,7 +28,6 @@
 		262A8F2A12BB80BB00CFC561 /* Operators.h in Headers */ = {isa = PBXBuildFile; fileRef = 262A8D7912BB569800CFC561 /* Operators.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		262A8F2B12BB80BB00CFC561 /* CParserMacroFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655A912B9F4CE00BB5F08 /* CParserMacroFunction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		262A8F2C12BB80BB00CFC561 /* CPToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FD132C112B590BC009A2559 /* CPToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		262A8F2D12BB80BB00CFC561 /* CParserVariable.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655B112B9F4CE00BB5F08 /* CParserVariable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		262A8F2E12BB80BB00CFC561 /* CParserGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655A712B9F4CE00BB5F08 /* CParserGlobal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		262A8F2F12BB80BB00CFC561 /* CParserFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655A512B9F4CE00BB5F08 /* CParserFunction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		266655E012B9F58800BB5F08 /* TestNSArray+reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655C112B9F4EE00BB5F08 /* TestNSArray+reverse.m */; };
@@ -92,8 +90,6 @@
 		266655AA12B9F4CE00BB5F08 /* CParserMacroFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserMacroFunction.m; sourceTree = "<group>"; };
 		266655AB12B9F4CE00BB5F08 /* CParserMath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CParserMath.c; sourceTree = "<group>"; };
 		266655AC12B9F4CE00BB5F08 /* CParserMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserMath.h; sourceTree = "<group>"; };
-		266655B112B9F4CE00BB5F08 /* CParserVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserVariable.h; sourceTree = "<group>"; };
-		266655B212B9F4CE00BB5F08 /* CParserVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserVariable.m; sourceTree = "<group>"; };
 		266655C112B9F4EE00BB5F08 /* TestNSArray+reverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TestNSArray+reverse.m"; sourceTree = "<group>"; };
 		266655C212B9F4EE00BB5F08 /* Tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		266655C312B9F4EE00BB5F08 /* TestTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTokenizer.m; sourceTree = "<group>"; };
@@ -236,8 +232,6 @@
 				266655A712B9F4CE00BB5F08 /* CParserGlobal.h */,
 				266655AB12B9F4CE00BB5F08 /* CParserMath.c */,
 				266655AC12B9F4CE00BB5F08 /* CParserMath.h */,
-				266655B112B9F4CE00BB5F08 /* CParserVariable.h */,
-				266655B212B9F4CE00BB5F08 /* CParserVariable.m */,
 				8F5169AC12B7CC4D00891978 /* CPEvaluator.h */,
 				8F5169AD12B7CC4D00891978 /* CPEvaluator.m */,
 			);
@@ -294,7 +288,6 @@
 				262A8F2A12BB80BB00CFC561 /* Operators.h in Headers */,
 				262A8F2B12BB80BB00CFC561 /* CParserMacroFunction.h in Headers */,
 				262A8F2C12BB80BB00CFC561 /* CPToken.h in Headers */,
-				262A8F2D12BB80BB00CFC561 /* CParserVariable.h in Headers */,
 				262A8F2E12BB80BB00CFC561 /* CParserGlobal.h in Headers */,
 				262A8F2F12BB80BB00CFC561 /* CParserFunction.h in Headers */,
 			);
@@ -413,7 +406,6 @@
 				262A8E9912BB7CD100CFC561 /* CParserFunction.m in Sources */,
 				262A8E9A12BB7CD100CFC561 /* CParserMacroFunction.m in Sources */,
 				262A8E9B12BB7CD100CFC561 /* CParserMath.c in Sources */,
-				262A8E9C12BB7CD100CFC561 /* CParserVariable.m in Sources */,
 				262A8E9D12BB7CD100CFC561 /* CPEvaluator.m in Sources */,
 				262A8E9E12BB7CD100CFC561 /* CPStack.m in Sources */,
 				262A8E9F12BB7CD100CFC561 /* CPToken.m in Sources */,

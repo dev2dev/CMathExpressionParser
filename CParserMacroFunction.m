@@ -9,7 +9,6 @@
 #import "CParserMacroFunction.h"
 #import "CPEvaluator.h"
 #import "CPTokenizer.h"
-#import "CParserVariable.h"
 
 @interface CParserMacroFunction ()
 
@@ -98,10 +97,10 @@
 	NSUInteger i, count = [arguments count];
 	for (i = 0; i < count; i++) {
 		CPToken * token = [arguments objectAtIndex:i];
-		[evaluator setVariable:[CParserVariable variableWithValue:[token numberValue]] forKey:[NSString stringWithFormat:@"ARG_%i", i+1]];
+		[evaluator setVariable:[NSNumber numberWithDouble:[token numberValue]] forKey:[NSString stringWithFormat:@"ARG_%i", i+1]];
 	}
 	
-	[evaluator setVariable:[CParserVariable variableWithValue:count] forKey:[NSString stringWithString:@"ARG_COUNT"]];
+	[evaluator setVariable:[NSNumber numberWithUnsignedInteger:count] forKey:[NSString stringWithString:@"ARG_COUNT"]];
 	
 	@try {
 		result = [evaluator evaluatePostfixExpressionArray: [self postfixExpression]];

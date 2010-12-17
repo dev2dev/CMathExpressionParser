@@ -13,7 +13,6 @@
 #import "CPToken.h"
 #import "CPTokenizer.h"
 
-#import "CParserVariable.h"
 #import "CParserFunction.h"
 
 
@@ -118,7 +117,7 @@
 								break;
 							case CPOperatorAssign:
 								if ([(CPToken *)[stack objectAtIndex:[stack count]-2] type] == CPTokenVariable) {
-									[self setVariable:[CParserVariable variableWithValue:operants[1]] forKey:[[stack objectAtIndex:[stack count]-2] stringValue]];
+									[self setVariable:[NSNumber numberWithDouble:operants[1]] forKey:[[stack objectAtIndex:[stack count]-2] stringValue]];
 								} else {
 									NSException *exception = [NSException exceptionWithName:@"Assignment Error"
 																					 reason:@"Left token is not a variable" 
@@ -169,7 +168,7 @@
 			case CPTokenVariable:
 				[newToken setStringValue:[token stringValue]]; //set var name
 				[newToken setType:CPTokenVariable]; //set type to var (for assignment)
-				[newToken setNumberValue:([variables objectForKey:[token stringValue]] != nil) ? ([(CParserVariable *)[variables objectForKey:[token stringValue]] value]) : 0.0];
+				[newToken setNumberValue:([variables objectForKey:[token stringValue]] != nil) ? ([[variables objectForKey:[token stringValue]] doubleValue]) : 0.0];
 
 			default:
 				break;
@@ -213,7 +212,7 @@
 #pragma mark -
 #pragma mark add/get variable/functions
 
-- (void) setVariable:(CParserVariable *)var forKey:(NSString *)key
+- (void) setVariable:(NSNumber *)var forKey:(NSString *)key
 {
 	if (variables == nil) {
 		[self setVariables:[NSMutableDictionary dictionary]];
@@ -222,7 +221,7 @@
 	[variables setObject:var forKey:key];
 }
 
-- (CParserVariable *) variableForKey:(NSString *)key
+- (NSNumber *) variableForKey:(NSString *)key
 {
 	return [variables objectForKey:key];
 }
