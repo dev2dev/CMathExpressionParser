@@ -19,16 +19,14 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self setFunctionSet:[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890"]];
-		[self setVariableSet:[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890"]];
+		[self setIdentifierSet:[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890"]];
 	}
 	return self;
 }
 
 - (void) dealloc
 {
-	[functionSet release];
-	[variableSet release];
+	[identifierSet release];
 	
 	[super dealloc];
 }
@@ -75,7 +73,7 @@
 		
 		//string
 		NSString * stringValue;
-		if (!multipleOperators && [scanner scanCharactersFromSet:functionSet intoString:&stringValue]) {
+		if (!multipleOperators && [scanner scanCharactersFromSet:identifierSet intoString:&stringValue]) {
 			unichar firstChar = [stringValue characterAtIndex:0];
 			if(firstChar >= 'a' && firstChar <= 'z')
 				[stack push:[CPToken tokenWithFunction:stringValue]];
@@ -214,19 +212,11 @@
 #pragma mark -
 #pragma mark set characterset's
 
-- (void) setFunctionSet:(NSCharacterSet *)set
+- (void) setIdentifierSet:(NSCharacterSet *)set
 {
-	if (functionSet != set) {
-		[functionSet release];
-		functionSet = [set retain];
-	}
-}
-
-- (void) setVariableSet:(NSCharacterSet *)set
-{
-	if (variableSet != set) {
-		[variableSet release];
-		variableSet = [set retain];
+	if (identifierSet != set) {
+		[identifierSet release];
+		identifierSet = [set retain];
 	}
 }
 

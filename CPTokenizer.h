@@ -12,17 +12,14 @@
 
 @interface CPTokenizer : NSObject {
 	
-	NSCharacterSet * functionSet;
-	NSCharacterSet * variableSet;
-	NSCharacterSet * blockSet;
+	NSCharacterSet * identifierSet;
 }
 
 + (CPTokenizer *) tokenizer;
 
 - (NSArray *) convertExpressionFromInfixStringToPostfixArray:(NSString *)expression;
 
-- (void) setFunctionSet:(NSCharacterSet *)set;
-- (void) setVariableSet:(NSCharacterSet *)set;
+- (void) setIdentifierSet:(NSCharacterSet *)set;
 
 + (int) operatorArgumentCount:(CPOperator)op;
 + (int) operatorPrecedence:(CPOperator)op;
