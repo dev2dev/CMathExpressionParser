@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		262A8D7B12BB569800CFC561 /* Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A8D7A12BB569800CFC561 /* Operators.m */; };
+		262A8D7C12BB569800CFC561 /* Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A8D7A12BB569800CFC561 /* Operators.m */; };
 		266655B312B9F4CE00BB5F08 /* CParserCFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655A012B9F4CE00BB5F08 /* CParserCFunction.m */; };
 		266655B612B9F4CE00BB5F08 /* CParserFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655A612B9F4CE00BB5F08 /* CParserFunction.m */; };
 		266655B812B9F4CE00BB5F08 /* CParserMacroFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655AA12B9F4CE00BB5F08 /* CParserMacroFunction.m */; };
@@ -60,6 +62,8 @@
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* CMathExpressionParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMathExpressionParser.m; sourceTree = "<group>"; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		262A8D7912BB569800CFC561 /* Operators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Operators.h; sourceTree = "<group>"; };
+		262A8D7A12BB569800CFC561 /* Operators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Operators.m; sourceTree = "<group>"; };
 		2666559F12B9F4CE00BB5F08 /* CParserCFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserCFunction.h; sourceTree = "<group>"; };
 		266655A012B9F4CE00BB5F08 /* CParserCFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserCFunction.m; sourceTree = "<group>"; };
 		266655A512B9F4CE00BB5F08 /* CParserFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserFunction.h; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 			children = (
 				8F51685C12B7376500891978 /* CPTokenizer.h */,
 				8F51685D12B7376500891978 /* CPTokenizer.m */,
+				262A8D7912BB569800CFC561 /* Operators.h */,
+				262A8D7A12BB569800CFC561 /* Operators.m */,
 			);
 			name = Tokenizer;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 				266655EF12B9F5A900BB5F08 /* CPToken.m in Sources */,
 				266655F012B9F5AC00BB5F08 /* CPTokenizer.m in Sources */,
 				266655F112B9F5AD00BB5F08 /* NSArray+reverse.m in Sources */,
+				262A8D7C12BB569800CFC561 /* Operators.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +360,7 @@
 				266655B812B9F4CE00BB5F08 /* CParserMacroFunction.m in Sources */,
 				266655B912B9F4CE00BB5F08 /* CParserMath.c in Sources */,
 				266655BC12B9F4CE00BB5F08 /* CParserVariable.m in Sources */,
+				262A8D7B12BB569800CFC561 /* Operators.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
