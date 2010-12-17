@@ -175,7 +175,7 @@
 			return [NSString stringWithFormat:@"number: %.4f", numberValue];
 			break;
 		case CPTokenOperator:
-			return [NSString stringWithFormat:@"operator: %d", operatorValue];
+			return [NSString stringWithFormat:@"operator: %@", [Operators stringForOperator: operatorValue]];
 			break;
 		case CPTokenVariable:
 		case CPTokenFunction:

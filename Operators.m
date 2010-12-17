@@ -55,4 +55,10 @@ static const OperatorInfo allOperators[CPOperatorCount] = {
 	return CPOperatorNull;
 }
 
++ (NSString *) stringForOperator: (CPOperator) op;
+{
+	NSParameterAssert( CPOperatorNull < op && op < CPOperatorCount );
+	return allOperators[op].token;
+}
+
 @end

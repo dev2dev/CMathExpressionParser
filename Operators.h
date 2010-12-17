@@ -38,6 +38,7 @@ typedef enum CPOperatorAssoc {
 + (int)	priority: (CPOperator) op;
 + (unsigned) argumentCount: (CPOperator) op;
 + (CPOperator) scan: (NSScanner *) scanner;
++ (NSString *) stringForOperator: (CPOperator) op;
 
 @end
 
