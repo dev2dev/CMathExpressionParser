@@ -93,8 +93,8 @@
 					[stack push:[CPToken tokenWithOperator:operator]];
 				} else {
 					while ([stack position] > 0) {
-						if (([CPTokenizer operatorAssociativity:operator] && [CPTokenizer operatorPrecedence:operator] <= [CPTokenizer operatorPrecedence:[[stack lastToken] operatorValue]]) ||
-						(![CPTokenizer operatorAssociativity:operator] && [CPTokenizer operatorPrecedence:operator] < [CPTokenizer operatorPrecedence:[[stack lastToken] operatorValue]])) {
+						if (([Operators associativity: operator] && [Operators priority: operator] <= [Operators priority: [[stack lastToken] operatorValue]]) ||
+						(![Operators associativity: operator] && [Operators priority: operator] < [Operators priority: [[stack lastToken] operatorValue]])) {
 							
 							CPOperator temp = [[stack pop] operatorValue];
 							[output addObject:[CPToken tokenWithOperator:temp]];
@@ -218,38 +218,6 @@
 		[identifierSet release];
 		identifierSet = [set retain];
 	}
-}
-
-#pragma mark -
-#pragma mark public (+)
-
-+ (int) operatorPrecedence:(CPOperator)op
-{
-	return [Operators priority: op];
-}
-
-+ (BOOL) operatorAssociativity:(CPOperator)op
-{
-	return [Operators associativity: op] == CPOperatorAssocLeft;
-}
-
-+ (int) operatorArgumentCount:(CPOperator)op
-{
-	return [Operators argumentCount: op];
-}
-
-#pragma mark -
-#pragma mark private
-
-- (CPOperator) operatorForString:(NSString *)string
-{
-	NSScanner *scanner = [NSScanner scannerWithString: string];
-	return [Operators scan: scanner];
-}
-
-- (BOOL) isOperator:(NSString *)string
-{
-	return [self operatorForString: string] != CPOperatorNull;
 }
 
 @end

@@ -21,12 +21,4 @@
 
 - (void) setIdentifierSet:(NSCharacterSet *)set;
 
-+ (int) operatorArgumentCount:(CPOperator)op;
-+ (int) operatorPrecedence:(CPOperator)op;
-+ (BOOL) operatorAssociativity:(CPOperator)op;
-
-//private
-- (CPOperator) operatorForString:(NSString *)string;
-- (BOOL) isOperator:(NSString *)string;
-
 @end

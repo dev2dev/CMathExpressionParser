@@ -70,11 +70,11 @@
 				[newToken setNumberValue:[token numberValue]];
 				break;
 			case CPTokenOperator:
-				if ([stack count] >= [CPTokenizer operatorArgumentCount:operator])
+				if ([stack count] >= [Operators argumentCount: operator])
 				{
 					double operants[2];
 					
-					if ([CPTokenizer operatorArgumentCount:operator] == 1) {
+					if ([Operators argumentCount:operator] == 1) {
 						operants[0] = [[stack lastObject] numberValue];
 						
 						switch (operator) {
@@ -90,7 +90,7 @@
 						
 						[stack removeLastObject];
 						
-					} else if ([CPTokenizer operatorArgumentCount:operator] == 2) {
+					} else if ([Operators argumentCount:operator] == 2) {
 						operants[1] = [[stack lastObject] numberValue];
 						operants[0] = [[stack objectAtIndex:[stack count]-2] numberValue];
 						
