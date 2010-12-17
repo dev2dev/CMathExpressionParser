@@ -7,42 +7,58 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		262A8D7B12BB569800CFC561 /* Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A8D7A12BB569800CFC561 /* Operators.m */; };
-		262A8D7C12BB569800CFC561 /* Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A8D7A12BB569800CFC561 /* Operators.m */; };
 		262A8DBF12BB5F1300CFC561 /* TestOperators.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A8DBE12BB5F1300CFC561 /* TestOperators.m */; };
-		266655B312B9F4CE00BB5F08 /* CParserCFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655A012B9F4CE00BB5F08 /* CParserCFunction.m */; };
-		266655B612B9F4CE00BB5F08 /* CParserFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655A612B9F4CE00BB5F08 /* CParserFunction.m */; };
-		266655B812B9F4CE00BB5F08 /* CParserMacroFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655AA12B9F4CE00BB5F08 /* CParserMacroFunction.m */; };
-		266655B912B9F4CE00BB5F08 /* CParserMath.c in Sources */ = {isa = PBXBuildFile; fileRef = 266655AB12B9F4CE00BB5F08 /* CParserMath.c */; };
-		266655BC12B9F4CE00BB5F08 /* CParserVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655B212B9F4CE00BB5F08 /* CParserVariable.m */; };
+		262A8E9512BB7CB500CFC561 /* libCMathExpressionParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 262A8E9012BB7C9F00CFC561 /* libCMathExpressionParser.a */; };
+		262A8E9812BB7CD100CFC561 /* CParserCFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655A012B9F4CE00BB5F08 /* CParserCFunction.m */; };
+		262A8E9912BB7CD100CFC561 /* CParserFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655A612B9F4CE00BB5F08 /* CParserFunction.m */; };
+		262A8E9A12BB7CD100CFC561 /* CParserMacroFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655AA12B9F4CE00BB5F08 /* CParserMacroFunction.m */; };
+		262A8E9B12BB7CD100CFC561 /* CParserMath.c in Sources */ = {isa = PBXBuildFile; fileRef = 266655AB12B9F4CE00BB5F08 /* CParserMath.c */; };
+		262A8E9C12BB7CD100CFC561 /* CParserVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655B212B9F4CE00BB5F08 /* CParserVariable.m */; };
+		262A8E9D12BB7CD100CFC561 /* CPEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5169AD12B7CC4D00891978 /* CPEvaluator.m */; };
+		262A8E9E12BB7CD100CFC561 /* CPStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD132C512B590CD009A2559 /* CPStack.m */; };
+		262A8E9F12BB7CD100CFC561 /* CPToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD132C212B590BC009A2559 /* CPToken.m */; };
+		262A8EA012BB7CD100CFC561 /* CPTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F51685D12B7376500891978 /* CPTokenizer.m */; };
+		262A8EA112BB7CD100CFC561 /* NSArray+reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F51699812B7CB2A00891978 /* NSArray+reverse.m */; };
+		262A8EA212BB7CD100CFC561 /* Operators.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A8D7A12BB569800CFC561 /* Operators.m */; };
+		262A8EBA12BB7D4D00CFC561 /* libCMathExpressionParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 262A8E9012BB7C9F00CFC561 /* libCMathExpressionParser.a */; };
+		262A8F2412BB80BB00CFC561 /* CPEvaluator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F5169AC12B7CC4D00891978 /* CPEvaluator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		262A8F2512BB80BB00CFC561 /* CParserCFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 2666559F12B9F4CE00BB5F08 /* CParserCFunction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		262A8F2612BB80BB00CFC561 /* CParserMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655AC12B9F4CE00BB5F08 /* CParserMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		262A8F2812BB80BB00CFC561 /* CPTokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F51685C12B7376500891978 /* CPTokenizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		262A8F2912BB80BB00CFC561 /* CPStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FD132C412B590CD009A2559 /* CPStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		262A8F2A12BB80BB00CFC561 /* Operators.h in Headers */ = {isa = PBXBuildFile; fileRef = 262A8D7912BB569800CFC561 /* Operators.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		262A8F2B12BB80BB00CFC561 /* CParserMacroFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655A912B9F4CE00BB5F08 /* CParserMacroFunction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		262A8F2C12BB80BB00CFC561 /* CPToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FD132C112B590BC009A2559 /* CPToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		262A8F2D12BB80BB00CFC561 /* CParserVariable.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655B112B9F4CE00BB5F08 /* CParserVariable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		262A8F2E12BB80BB00CFC561 /* CParserGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655A712B9F4CE00BB5F08 /* CParserGlobal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		262A8F2F12BB80BB00CFC561 /* CParserFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655A512B9F4CE00BB5F08 /* CParserFunction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		266655E012B9F58800BB5F08 /* TestNSArray+reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655C112B9F4EE00BB5F08 /* TestNSArray+reverse.m */; };
 		266655E112B9F58900BB5F08 /* TestTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655C312B9F4EE00BB5F08 /* TestTokenizer.m */; };
-		266655E312B9F59700BB5F08 /* CParserCFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655A012B9F4CE00BB5F08 /* CParserCFunction.m */; };
-		266655E612B9F59D00BB5F08 /* CParserFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655A612B9F4CE00BB5F08 /* CParserFunction.m */; };
-		266655E812B9F59F00BB5F08 /* CParserMacroFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655AA12B9F4CE00BB5F08 /* CParserMacroFunction.m */; };
-		266655E912B9F5A200BB5F08 /* CParserMath.c in Sources */ = {isa = PBXBuildFile; fileRef = 266655AB12B9F4CE00BB5F08 /* CParserMath.c */; };
-		266655EC12B9F5A700BB5F08 /* CParserVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655B212B9F4CE00BB5F08 /* CParserVariable.m */; };
-		266655ED12B9F5A800BB5F08 /* CPEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5169AD12B7CC4D00891978 /* CPEvaluator.m */; };
-		266655EE12B9F5A800BB5F08 /* CPStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD132C512B590CD009A2559 /* CPStack.m */; };
-		266655EF12B9F5A900BB5F08 /* CPToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD132C212B590BC009A2559 /* CPToken.m */; };
-		266655F012B9F5AC00BB5F08 /* CPTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F51685D12B7376500891978 /* CPTokenizer.m */; };
-		266655F112B9F5AD00BB5F08 /* NSArray+reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F51699812B7CB2A00891978 /* NSArray+reverse.m */; };
-		8DD76F9A0486AA7600D96B5E /* CMathExpressionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* CMathExpressionParser.m */; settings = {ATTRIBUTES = (); }; };
+		8DD76F9A0486AA7600D96B5E /* TestParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* TestParser.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
-		8DD76F9F0486AA7600D96B5E /* CMathExpressionParser.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* CMathExpressionParser.1 */; };
-		8F51685E12B7376500891978 /* CPTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F51685D12B7376500891978 /* CPTokenizer.m */; };
-		8F51699912B7CB2A00891978 /* NSArray+reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F51699812B7CB2A00891978 /* NSArray+reverse.m */; };
-		8F5169AE12B7CC4D00891978 /* CPEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5169AD12B7CC4D00891978 /* CPEvaluator.m */; };
-		8FD132C312B590BC009A2559 /* CPToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD132C212B590BC009A2559 /* CPToken.m */; };
-		8FD132C612B590CD009A2559 /* CPStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD132C512B590CD009A2559 /* CPStack.m */; };
+		8DD76F9F0486AA7600D96B5E /* TestParser.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* TestParser.1 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		266656BC12BA022D00BB5F08 /* PBXContainerItemProxy */ = {
+		262A8E9312BB7CAF00CFC561 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 266655CB12B9F50B00BB5F08;
+			remoteGlobalIDString = 262A8E8F12BB7C9F00CFC561 /* CMathExpressionParser */;
+			remoteInfo = CMathExpressionParser;
+		};
+		262A8EB812BB7D4900CFC561 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 262A8E8F12BB7C9F00CFC561 /* CMathExpressionParser */;
+			remoteInfo = CMathExpressionParser;
+		};
+		262A8EC412BB7D8500CFC561 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 266655CB12B9F50B00BB5F08 /* Tests */;
 			remoteInfo = Tests;
 		};
 /* End PBXContainerItemProxy section */
@@ -54,18 +70,19 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				8DD76F9F0486AA7600D96B5E /* CMathExpressionParser.1 in CopyFiles */,
+				8DD76F9F0486AA7600D96B5E /* TestParser.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		08FB7796FE84155DC02AAC07 /* CMathExpressionParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMathExpressionParser.m; sourceTree = "<group>"; };
+		08FB7796FE84155DC02AAC07 /* TestParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestParser.m; sourceTree = "<group>"; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		262A8D7912BB569800CFC561 /* Operators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Operators.h; sourceTree = "<group>"; };
 		262A8D7A12BB569800CFC561 /* Operators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Operators.m; sourceTree = "<group>"; };
 		262A8DBE12BB5F1300CFC561 /* TestOperators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestOperators.m; sourceTree = "<group>"; };
+		262A8E9012BB7C9F00CFC561 /* libCMathExpressionParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCMathExpressionParser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2666559F12B9F4CE00BB5F08 /* CParserCFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserCFunction.h; sourceTree = "<group>"; };
 		266655A012B9F4CE00BB5F08 /* CParserCFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserCFunction.m; sourceTree = "<group>"; };
 		266655A512B9F4CE00BB5F08 /* CParserFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserFunction.h; sourceTree = "<group>"; };
@@ -82,7 +99,7 @@
 		266655C312B9F4EE00BB5F08 /* TestTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTokenizer.m; sourceTree = "<group>"; };
 		266655CC12B9F50B00BB5F08 /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A70AAB03705E1F00C91783 /* CMathExpressionParser_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMathExpressionParser_Prefix.pch; sourceTree = "<group>"; };
-		8DD76FA10486AA7600D96B5E /* CMathExpressionParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CMathExpressionParser; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD76FA10486AA7600D96B5E /* TestParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestParser; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F51685C12B7376500891978 /* CPTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTokenizer.h; sourceTree = "<group>"; };
 		8F51685D12B7376500891978 /* CPTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTokenizer.m; sourceTree = "<group>"; };
 		8F51699712B7CB2A00891978 /* NSArray+reverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+reverse.h"; sourceTree = "<group>"; };
@@ -93,14 +110,22 @@
 		8FD132C212B590BC009A2559 /* CPToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPToken.m; sourceTree = "<group>"; };
 		8FD132C412B590CD009A2559 /* CPStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPStack.h; sourceTree = "<group>"; };
 		8FD132C512B590CD009A2559 /* CPStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPStack.m; sourceTree = "<group>"; };
-		C6859EA3029092ED04C91782 /* CMathExpressionParser.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CMathExpressionParser.1; sourceTree = "<group>"; };
+		C6859EA3029092ED04C91782 /* TestParser.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestParser.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		262A8E8E12BB7C9F00CFC561 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		266655C912B9F50B00BB5F08 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				262A8EBA12BB7D4D00CFC561 /* libCMathExpressionParser.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */,
+				262A8E9512BB7CB500CFC561 /* libCMathExpressionParser.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,8 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				08FB7795FE84155DC02AAC07 /* Source */,
-				266655BF12B9F4EE00BB5F08 /* Tests */,
-				C6859EA2029092E104C91782 /* Documentation */,
+				262A8EF212BB7EA000CFC561 /* Test Program */,
+				266655BF12B9F4EE00BB5F08 /* Unit Tests */,
 				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
@@ -136,7 +162,6 @@
 				8FD132C712B590D8009A2559 /* Stack */,
 				8FD132BF12B590A3009A2559 /* Token */,
 				32A70AAB03705E1F00C91783 /* CMathExpressionParser_Prefix.pch */,
-				08FB7796FE84155DC02AAC07 /* CMathExpressionParser.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -152,13 +177,23 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DD76FA10486AA7600D96B5E /* CMathExpressionParser */,
+				8DD76FA10486AA7600D96B5E /* TestParser */,
 				266655CC12B9F50B00BB5F08 /* Tests.octest */,
+				262A8E9012BB7C9F00CFC561 /* libCMathExpressionParser.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		266655BF12B9F4EE00BB5F08 /* Tests */ = {
+		262A8EF212BB7EA000CFC561 /* Test Program */ = {
+			isa = PBXGroup;
+			children = (
+				C6859EA2029092E104C91782 /* Documentation */,
+				08FB7796FE84155DC02AAC07 /* TestParser.m */,
+			);
+			name = "Test Program";
+			sourceTree = "<group>";
+		};
+		266655BF12B9F4EE00BB5F08 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
 				266655C112B9F4EE00BB5F08 /* TestNSArray+reverse.m */,
@@ -166,6 +201,7 @@
 				266655C312B9F4EE00BB5F08 /* TestTokenizer.m */,
 				262A8DBE12BB5F1300CFC561 /* TestOperators.m */,
 			);
+			name = "Unit Tests";
 			path = Tests;
 			sourceTree = "<group>";
 		};
@@ -238,14 +274,52 @@
 		C6859EA2029092E104C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				C6859EA3029092ED04C91782 /* CMathExpressionParser.1 */,
+				C6859EA3029092ED04C91782 /* TestParser.1 */,
 			);
 			name = Documentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		262A8E8C12BB7C9F00CFC561 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				262A8F2412BB80BB00CFC561 /* CPEvaluator.h in Headers */,
+				262A8F2512BB80BB00CFC561 /* CParserCFunction.h in Headers */,
+				262A8F2612BB80BB00CFC561 /* CParserMath.h in Headers */,
+				262A8F2812BB80BB00CFC561 /* CPTokenizer.h in Headers */,
+				262A8F2912BB80BB00CFC561 /* CPStack.h in Headers */,
+				262A8F2A12BB80BB00CFC561 /* Operators.h in Headers */,
+				262A8F2B12BB80BB00CFC561 /* CParserMacroFunction.h in Headers */,
+				262A8F2C12BB80BB00CFC561 /* CPToken.h in Headers */,
+				262A8F2D12BB80BB00CFC561 /* CParserVariable.h in Headers */,
+				262A8F2E12BB80BB00CFC561 /* CParserGlobal.h in Headers */,
+				262A8F2F12BB80BB00CFC561 /* CParserFunction.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		262A8E8F12BB7C9F00CFC561 /* CMathExpressionParser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 262A8ED912BB7DB700CFC561 /* Build configuration list for PBXNativeTarget "CMathExpressionParser" */;
+			buildPhases = (
+				262A8E8C12BB7C9F00CFC561 /* Headers */,
+				262A8E8D12BB7C9F00CFC561 /* Sources */,
+				262A8E8E12BB7C9F00CFC561 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CMathExpressionParser;
+			productName = CMathExpressionParser;
+			productReference = 262A8E9012BB7C9F00CFC561 /* libCMathExpressionParser.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		266655CB12B9F50B00BB5F08 /* Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 266655D012B9F50B00BB5F08 /* Build configuration list for PBXNativeTarget "Tests" */;
@@ -258,15 +332,16 @@
 			buildRules = (
 			);
 			dependencies = (
+				262A8EB912BB7D4900CFC561 /* PBXTargetDependency */,
 			);
 			name = Tests;
 			productName = Tests;
 			productReference = 266655CC12B9F50B00BB5F08 /* Tests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
-		8DD76F960486AA7600D96B5E /* CMathExpressionParser */ = {
+		8DD76F960486AA7600D96B5E /* TestParser */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "CMathExpressionParser" */;
+			buildConfigurationList = 1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "TestParser" */;
 			buildPhases = (
 				8DD76F990486AA7600D96B5E /* Sources */,
 				8DD76F9B0486AA7600D96B5E /* Frameworks */,
@@ -275,12 +350,13 @@
 			buildRules = (
 			);
 			dependencies = (
-				266656BD12BA022D00BB5F08 /* PBXTargetDependency */,
+				262A8E9412BB7CAF00CFC561 /* PBXTargetDependency */,
+				262A8EC512BB7D8500CFC561 /* PBXTargetDependency */,
 			);
-			name = CMathExpressionParser;
+			name = TestParser;
 			productInstallPath = "$(HOME)/bin";
 			productName = CMathExpressionParser;
-			productReference = 8DD76FA10486AA7600D96B5E /* CMathExpressionParser */;
+			productReference = 8DD76FA10486AA7600D96B5E /* TestParser */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -295,8 +371,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8DD76F960486AA7600D96B5E /* CMathExpressionParser */,
+				8DD76F960486AA7600D96B5E /* TestParser */,
 				266655CB12B9F50B00BB5F08 /* Tests */,
+				262A8E8F12BB7C9F00CFC561 /* CMathExpressionParser */,
 			);
 		};
 /* End PBXProject section */
@@ -328,23 +405,30 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		262A8E8D12BB7C9F00CFC561 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				262A8E9812BB7CD100CFC561 /* CParserCFunction.m in Sources */,
+				262A8E9912BB7CD100CFC561 /* CParserFunction.m in Sources */,
+				262A8E9A12BB7CD100CFC561 /* CParserMacroFunction.m in Sources */,
+				262A8E9B12BB7CD100CFC561 /* CParserMath.c in Sources */,
+				262A8E9C12BB7CD100CFC561 /* CParserVariable.m in Sources */,
+				262A8E9D12BB7CD100CFC561 /* CPEvaluator.m in Sources */,
+				262A8E9E12BB7CD100CFC561 /* CPStack.m in Sources */,
+				262A8E9F12BB7CD100CFC561 /* CPToken.m in Sources */,
+				262A8EA012BB7CD100CFC561 /* CPTokenizer.m in Sources */,
+				262A8EA112BB7CD100CFC561 /* NSArray+reverse.m in Sources */,
+				262A8EA212BB7CD100CFC561 /* Operators.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		266655C812B9F50B00BB5F08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				266655E012B9F58800BB5F08 /* TestNSArray+reverse.m in Sources */,
 				266655E112B9F58900BB5F08 /* TestTokenizer.m in Sources */,
-				266655E312B9F59700BB5F08 /* CParserCFunction.m in Sources */,
-				266655E612B9F59D00BB5F08 /* CParserFunction.m in Sources */,
-				266655E812B9F59F00BB5F08 /* CParserMacroFunction.m in Sources */,
-				266655E912B9F5A200BB5F08 /* CParserMath.c in Sources */,
-				266655EC12B9F5A700BB5F08 /* CParserVariable.m in Sources */,
-				266655ED12B9F5A800BB5F08 /* CPEvaluator.m in Sources */,
-				266655EE12B9F5A800BB5F08 /* CPStack.m in Sources */,
-				266655EF12B9F5A900BB5F08 /* CPToken.m in Sources */,
-				266655F012B9F5AC00BB5F08 /* CPTokenizer.m in Sources */,
-				266655F112B9F5AD00BB5F08 /* NSArray+reverse.m in Sources */,
-				262A8D7C12BB569800CFC561 /* Operators.m in Sources */,
 				262A8DBF12BB5F1300CFC561 /* TestOperators.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,28 +437,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DD76F9A0486AA7600D96B5E /* CMathExpressionParser.m in Sources */,
-				8FD132C312B590BC009A2559 /* CPToken.m in Sources */,
-				8FD132C612B590CD009A2559 /* CPStack.m in Sources */,
-				8F51685E12B7376500891978 /* CPTokenizer.m in Sources */,
-				8F51699912B7CB2A00891978 /* NSArray+reverse.m in Sources */,
-				8F5169AE12B7CC4D00891978 /* CPEvaluator.m in Sources */,
-				266655B312B9F4CE00BB5F08 /* CParserCFunction.m in Sources */,
-				266655B612B9F4CE00BB5F08 /* CParserFunction.m in Sources */,
-				266655B812B9F4CE00BB5F08 /* CParserMacroFunction.m in Sources */,
-				266655B912B9F4CE00BB5F08 /* CParserMath.c in Sources */,
-				266655BC12B9F4CE00BB5F08 /* CParserVariable.m in Sources */,
-				262A8D7B12BB569800CFC561 /* Operators.m in Sources */,
+				8DD76F9A0486AA7600D96B5E /* TestParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		266656BD12BA022D00BB5F08 /* PBXTargetDependency */ = {
+		262A8E9412BB7CAF00CFC561 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 262A8E8F12BB7C9F00CFC561 /* CMathExpressionParser */;
+			targetProxy = 262A8E9312BB7CAF00CFC561 /* PBXContainerItemProxy */;
+		};
+		262A8EB912BB7D4900CFC561 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 262A8E8F12BB7C9F00CFC561 /* CMathExpressionParser */;
+			targetProxy = 262A8EB812BB7D4900CFC561 /* PBXContainerItemProxy */;
+		};
+		262A8EC512BB7D8500CFC561 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 266655CB12B9F50B00BB5F08 /* Tests */;
-			targetProxy = 266656BC12BA022D00BB5F08 /* PBXContainerItemProxy */;
+			targetProxy = 262A8EC412BB7D8500CFC561 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -391,7 +474,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CMathExpressionParser_Prefix.pch;
 				INSTALL_PATH = /usr/local/bin;
-				PRODUCT_NAME = CMathExpressionParser;
+				PRODUCT_NAME = TestParser;
 			};
 			name = Debug;
 		};
@@ -404,7 +487,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CMathExpressionParser_Prefix.pch;
 				INSTALL_PATH = /usr/local/bin;
-				PRODUCT_NAME = CMathExpressionParser;
+				PRODUCT_NAME = TestParser;
 			};
 			name = Release;
 		};
@@ -434,6 +517,52 @@
 			};
 			name = Release;
 		};
+		262A8E9112BB7CA000CFC561 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CMathExpressionParser_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CMathExpressionParser;
+			};
+			name = Debug;
+		};
+		262A8E9212BB7CA000CFC561 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CMathExpressionParser_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CMathExpressionParser;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		266655CE12B9F50B00BB5F08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -450,6 +579,8 @@
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
 					"-framework",
 					Cocoa,
 					"-framework",
@@ -476,6 +607,8 @@
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
 					"-framework",
 					Cocoa,
 					"-framework",
@@ -491,7 +624,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "CMathExpressionParser" */ = {
+		1DEB927408733DD40010E9CD /* Build configuration list for PBXNativeTarget "TestParser" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB927508733DD40010E9CD /* Debug */,
@@ -505,6 +638,15 @@
 			buildConfigurations = (
 				1DEB927908733DD40010E9CD /* Debug */,
 				1DEB927A08733DD40010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		262A8ED912BB7DB700CFC561 /* Build configuration list for PBXNativeTarget "CMathExpressionParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				262A8E9112BB7CA000CFC561 /* Debug */,
+				262A8E9212BB7CA000CFC561 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
