@@ -528,7 +528,9 @@
 					AppKit,
 				);
 				PREBINDING = NO;
+				PRIVATE_HEADERS_FOLDER_PATH = "$(PUBLIC_HEADERS_FOLDER_PATH)";
 				PRODUCT_NAME = CMathExpressionParser;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include/CMathExpressionParser;
 			};
 			name = Debug;
 		};
@@ -550,7 +552,9 @@
 					AppKit,
 				);
 				PREBINDING = NO;
+				PRIVATE_HEADERS_FOLDER_PATH = "$(PUBLIC_HEADERS_FOLDER_PATH)";
 				PRODUCT_NAME = CMathExpressionParser;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include/CMathExpressionParser;
 				ZERO_LINK = NO;
 			};
 			name = Release;
