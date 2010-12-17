@@ -39,6 +39,17 @@
 #pragma mark -
 #pragma mark scan and tokenize
 
+static void CopyOperatorsToOutput(CPStack *stack, NSMutableArray *output, CPOperator limit ) 
+{
+	CPOperator temp = [[stack pop] operatorValue];
+	
+	while (temp != limit) {
+		[output addObject:[CPToken tokenWithOperator:temp]];
+		temp = [[stack pop] operatorValue];
+	}
+	
+}
+
 - (NSArray *) convertExpressionFromInfixStringToPostfixArray:(NSString *)expression
 {	
 	CPStack * stack = [CPStack stack];
@@ -114,12 +125,7 @@
 						@throw exception;
 					}
 						
-					CPOperator temp = [[stack pop] operatorValue];
-						
-					while (temp != CPOperatorLBrace) {
-						[output addObject:[CPToken tokenWithOperator:temp]];
-						temp = [[stack pop] operatorValue];
-					}
+					CopyOperatorsToOutput( stack, output, CPOperatorLBrace );
 						
 					if ([stack position] != 0) {
 						CPToken * token = [stack pop];
@@ -168,12 +174,7 @@
 						@throw exception;
 					}
 						
-					CPOperator temp = [[stack pop] operatorValue];
-						
-					while (temp != CPOperatorLBrace) {
-						[output addObject:[CPToken tokenWithOperator:temp]];
-						temp = [[stack pop] operatorValue];
-					}
+					CopyOperatorsToOutput( stack, output, CPOperatorLBrace );
 						
 					if ([stack position] != 0) {
 						CPToken * token = [stack pop];
