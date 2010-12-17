@@ -19,7 +19,6 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self setOperatorSet:[NSCharacterSet characterSetWithCharactersInString:@"+-*/^!%<>=&|(),;?:"]];
 		[self setFunctionSet:[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890"]];
 		[self setVariableSet:[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890"]];
 	}
@@ -28,7 +27,6 @@
 
 - (void) dealloc
 {
-	[operatorSet release];
 	[functionSet release];
 	[variableSet release];
 	
@@ -88,28 +86,9 @@
 		}
 		
 		//operator
-		NSString * operatorValue;
-		if ([scanner scanCharactersFromSet:operatorSet intoString:&operatorValue]) {
-
-			NSInteger operatorLength = [operatorValue length];
-			NSString * _operator = [operatorValue substringWithRange:NSMakeRange(0, operatorLength)];
-			
+		CPOperator operator = [Operators scan: scanner];
+		if (operator != CPOperatorNull) {
 			operatorScanned = YES;
-			
-			if (operatorLength > 1) {
-				while (![self isOperator:_operator]) {
-					--operatorLength;
-					_operator = [operatorValue substringWithRange:NSMakeRange(0, operatorLength)];
-					//if ([self operatorForString:_operator] != CPOperatorMinus) {
-						multipleOperators = YES;
-					//}
-				}
-				[scanner setScanLocation:[scanner scanLocation]-([operatorValue length] - [_operator length])];
-			} else {
-				multipleOperators = NO;
-			}
-			
-			CPOperator operator = [self operatorForString:_operator];
 			
 			if (operator != CPOperatorLBrace && operator != CPOperatorRBrace && operator != CPOperatorComma && operator != CPOperatorSemicolon) {
 				if ([stack position] == 0) {
@@ -235,14 +214,6 @@
 #pragma mark -
 #pragma mark set characterset's
 
-- (void) setOperatorSet:(NSCharacterSet *)set
-{
-	if (operatorSet != set) {
-		[operatorSet release];
-		operatorSet = [set retain];
-	}
-}
-
 - (void) setFunctionSet:(NSCharacterSet *)set
 {
 	if (functionSet != set) {
@@ -264,117 +235,17 @@
 
 + (int) operatorPrecedence:(CPOperator)op
 {
-	switch (op) {
-		case CPOperatorNull:
-			return 0;
-			break;
-		case CPOperatorComma:
-			return 1;
-			break;
-		case CPOperatorAssign:
-			return 2;
-			break;
-		case CPOperatorAND:
-		case CPOperatorOR:
-			return 3;
-			break;
-		case CPOperatorEqual:
-		case CPOperatorNEqual:
-			return 4;
-			break;
-		case CPOperatorLT:
-		case CPOperatorLE:
-		case CPOperatorGT:
-		case CPOperatorGE:
-			return 5;
-			break;
-		case CPOperatorMinus:
-		case CPOperatorPlus:
-			return 6;
-			break;
-		case CPOperatorTimes:
-		case CPOperatorDiv:
-		case CPOperatorModulo:
-			return 7;
-			break;
-		case CPOperatorNeg:
-		case CPOperatorFactorial:
-			return 8;
-			break;
-		case CPOperatorPower:
-			return 9;
-			break;
-		default:
-			return 0;
-			break;
-	}
+	return [Operators priority: op];
 }
 
 + (BOOL) operatorAssociativity:(CPOperator)op
 {
-	switch (op) {
-		case CPOperatorNull:
-			return NO;
-			break;
-		case CPOperatorComma:
-		case CPOperatorAND:
-		case CPOperatorOR:
-		case CPOperatorEqual:
-		case CPOperatorNEqual:
-		case CPOperatorLT:
-		case CPOperatorLE:
-		case CPOperatorGT:
-		case CPOperatorGE:
-		case CPOperatorPlus:
-		case CPOperatorMinus:
-		case CPOperatorNeg:
-		case CPOperatorTimes:
-		case CPOperatorDiv:
-		case CPOperatorModulo:
-		case CPOperatorPower:
-			return YES; //left to right
-		case CPOperatorFactorial:
-		case CPOperatorAssign:
-			return NO; //right to left
-			break;
-		default:
-			return NO;
-			break;
-	}
+	return [Operators associativity: op] == CPOperatorAssocLeft;
 }
 
 + (int) operatorArgumentCount:(CPOperator)op
 {
-	switch (op) {
-		case CPOperatorNull:
-		case CPOperatorComma:
-			return 0;
-			break;
-		case CPOperatorFactorial:
-		case CPOperatorNeg:
-			return 1;
-			break;
-		case CPOperatorAND:
-		case CPOperatorOR:
-		case CPOperatorEqual:
-		case CPOperatorNEqual:
-		case CPOperatorLT:
-		case CPOperatorLE:
-		case CPOperatorGT:
-		case CPOperatorGE:
-		case CPOperatorPlus:
-		case CPOperatorMinus:
-		case CPOperatorTimes:
-		case CPOperatorDiv:
-		case CPOperatorModulo:
-		case CPOperatorPower:
-		case CPOperatorAssign:
-			return 2;
-			break;
-		default:
-			return 0;
-			break;
-	}
+	return [Operators argumentCount: op];
 }
 
 #pragma mark -
@@ -382,62 +253,13 @@
 
 - (CPOperator) operatorForString:(NSString *)string
 {
-	if([string isEqualToString:@"+"])
-		return CPOperatorPlus;
-	else if([string isEqualToString:@"-"])
-		return CPOperatorMinus;
-	else if([string isEqualToString:@"*"])
-		return CPOperatorTimes;
-	else if([string isEqualToString:@"/"])
-		return CPOperatorDiv;
-	else if([string isEqualToString:@"%"])
-		return CPOperatorModulo;
-	else if([string isEqualToString:@"="])
-		return CPOperatorAssign;
-	else if([string isEqualToString:@"("])
-		return CPOperatorLBrace;
-	else if([string isEqualToString:@")"])
-		return CPOperatorRBrace;
-	else if([string isEqualToString:@";"])
-		return CPOperatorSemicolon;
-	else if([string isEqualToString:@","])
-		return CPOperatorComma;
-	else if([string isEqualToString:@"^"])
-		return CPOperatorPower;
-	else if([string isEqualToString:@"<"])
-		return CPOperatorLT;
-	else if([string isEqualToString:@"<="])
-		return CPOperatorLE;
-	else if([string isEqualToString:@">"])
-		return CPOperatorGT;
-	else if([string isEqualToString:@">="])
-		return CPOperatorGE;
-	else if([string isEqualToString:@"!="])
-		return CPOperatorNEqual;
-	else if([string isEqualToString:@"=="])
-		return CPOperatorEqual;
-	else if([string isEqualToString:@"!"])
-		return CPOperatorFactorial;
-	else if([string isEqualToString:@"&&"])
-		return CPOperatorAND;
-	else if([string isEqualToString:@"||"])
-		return CPOperatorOR;
-	else 
-		return CPOperatorNull;
+	NSScanner *scanner = [NSScanner scannerWithString: string];
+	return [Operators scan: scanner];
 }
 
 - (BOOL) isOperator:(NSString *)string
 {
-	//bad code ;D
-	if([string isEqualToString:@"+"] || [string isEqualToString:@"-"] || [string isEqualToString:@"*"] ||
-	   [string isEqualToString:@"/"] || [string isEqualToString:@"!"] || [string isEqualToString:@"^"] ||
-	   [string isEqualToString:@"%"] || [string isEqualToString:@"="] || [string isEqualToString:@"<"] ||
-	   [string isEqualToString:@">"] || [string isEqualToString:@"=="] || [string isEqualToString:@"<="] ||
-	   [string isEqualToString:@">="] || [string isEqualToString:@"!="]|| [string isEqualToString:@"("]||
-	   [string isEqualToString:@")"] || [string isEqualToString:@","] || [string isEqualToString:@"||"] ||
-	   [string isEqualToString:@"&&"] || [string isEqualToString:@";"])
-		return YES;
-	return NO;
+	return [self operatorForString: string] != CPOperatorNull;
 }
 
 @end

@@ -109,8 +109,8 @@
 	CheckOperator( @"!=", CPOperatorNEqual );
 	CheckOperator( @"==", CPOperatorEqual );
 	CheckOperator( @"!", CPOperatorFactorial );
-	CheckOperator( @"&&", CPOperatorAND );
-	CheckOperator( @"||", CPOperatorOR );
+	CheckOperator( @"&&", CPOperatorAnd );
+	CheckOperator( @"||", CPOperatorOr );
 }
 
 /* TODO: new tests

@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "Operators.h"
 
 typedef enum _CPTokenType {
 	CPTokenNull,
@@ -17,31 +18,6 @@ typedef enum _CPTokenType {
 	CPTokenVariable,
 	CPTokenArgStop
 } CPTokenType;
-
-typedef enum _CPOperator {
-	CPOperatorNull,		//
-	CPOperatorPlus,		// +
-	CPOperatorMinus,	// -
-	CPOperatorNeg,		// (-)
-	CPOperatorTimes,	// *
-	CPOperatorDiv,		// /
-	CPOperatorModulo,	// %
-	CPOperatorAssign,	// =
-	CPOperatorLBrace,	// (
-	CPOperatorRBrace,	// )
-	CPOperatorSemicolon,// ;
-	CPOperatorComma,	// ,
-	CPOperatorPower,	// ^
-	CPOperatorLT,		// <
-	CPOperatorLE,		// <=
-	CPOperatorGT,		// >
-	CPOperatorGE,		// =>
-	CPOperatorNEqual,	// !=
-	CPOperatorEqual,	// ==
-	CPOperatorFactorial,// !
-	CPOperatorAND,		// &&
-	CPOperatorOR		// ||
-} CPOperator;
 
 typedef double CPNumber;
 

@@ -149,10 +149,10 @@
 							case CPOperatorEqual:
 								[newToken setNumberValue:operants[0] == operants[1]];
 								break;
-							case CPOperatorAND:
+							case CPOperatorAnd:
 								[newToken setNumberValue:operants[0] && operants[1]];
 								break;
-							case CPOperatorOR:
+							case CPOperatorOr:
 								[newToken setNumberValue:operants[0] || operants[1]];
 								break;
 							default:
