@@ -50,6 +50,11 @@ int main (int argc, const char * argv[]) {
 	CPTokenizer * conv = [[CPTokenizer alloc] init];
 	CPEvaluator * eval = [[CPEvaluator alloc] init];
 	
+	CParserMacroFunction *macro = [CParserMacroFunction macroWithExpression:@"ARG_1+ARG_2"];
+	macro.minArguments = 1;
+	macro.maxArguments = 2;
+	[eval setFunction:macro forKey:@"add"];
+	
 	for (int i = 1; i < argc; i++) {
 		NSString *expression = [[NSString stringWithUTF8String: argv[i]] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
 		evaluateExpressionString( expression, conv, eval );
