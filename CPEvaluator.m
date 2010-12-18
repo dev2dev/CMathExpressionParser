@@ -15,6 +15,8 @@
 
 #import "CParserFunction.h"
 
+#import "CPStack.h"
+
 
 @implementation CPEvaluator
 
@@ -52,7 +54,7 @@
 - (double) evaluatePostfixExpressionArray:(NSArray *)array
 {
 	
-	NSMutableArray *stack = [NSMutableArray array];
+	CPStack *stack = [CPStack stack];
 	
 	NSUInteger i, count = [array count];
 	for (i = 0; i < count; i++) {
@@ -74,7 +76,7 @@
 					double operants[2];
 					
 					if ([Operators argumentCount:operator] == 1) {
-						operants[0] = [[stack lastObject] numberValue];
+						operants[0] = [[stack pop] numberValue];
 						
 						switch (operator) {
 							case CPOperatorFactorial:
@@ -87,11 +89,12 @@
 								break;
 						}
 						
-						[stack removeLastObject];
 						
 					} else if ([Operators argumentCount:operator] == 2) {
-						operants[1] = [[stack lastObject] numberValue];
-						operants[0] = [[stack objectAtIndex:[stack count]-2] numberValue];
+						CPToken *second = [stack pop];
+						CPToken *first = [stack pop];
+						operants[1] = [second numberValue];
+						operants[0] = [first numberValue];
 						
 						switch (operator) {
 							case CPOperatorPlus:
@@ -116,8 +119,8 @@
 								[newToken setNumberValue:fmod(operants[0], operants[1])];
 								break;
 							case CPOperatorAssign:
-								if ([(CPToken *)[stack objectAtIndex:[stack count]-2] type] == CPTokenVariable) {
-									[self setVariable:[NSNumber numberWithDouble:operants[1]] forKey:[[stack objectAtIndex:[stack count]-2] stringValue]];
+								if ([first type] == CPTokenVariable) {
+									[self setVariable:[NSNumber numberWithDouble:operants[1]] forKey:[first stringValue]];
 								} else {
 									NSException *exception = [NSException exceptionWithName:@"Assignment Error"
 																					 reason:@"Left token is not a variable" 
@@ -159,8 +162,6 @@
 								break;
 						}
 						
-						[stack removeLastObject];
-						[stack removeLastObject];
 					}
 				}
 				
@@ -174,10 +175,10 @@
 				break;
 		}
 		
-		[stack addObject:newToken];
+		[stack push:newToken];
 	}
 	
-	return [[stack lastObject] numberValue];
+	return [[stack lastToken] numberValue];
 }
 
 #pragma mark -
