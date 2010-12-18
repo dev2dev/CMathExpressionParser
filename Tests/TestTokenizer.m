@@ -58,6 +58,9 @@
 				STAssertTrue( [token operatorValue] == operator, @"Wrong operator, expected %d got %d", operator, [token operatorValue] );
 				break;
 				
+			case CPTokenArgStop:
+				break;
+				
 			default:
 				STFail( @"Unexpected token type %d", type );
 		}
@@ -66,6 +69,7 @@
 		++index;
 	}
 	va_end( args );
+	STAssertEquals( index, count, @"Too many tokens in array" );
 	
 }
 
@@ -88,7 +92,7 @@
 {
 	Check( @"1", NUM( 1 ) );
 	Check( @"A", A );
-	Check( @"a", FUNC( @"a" ) );
+	Check( @"a", CPTokenArgStop, FUNC( @"a" ) );
 }
 
 #define CheckOperator( str, op ) Check( str, OP( op ) )
@@ -113,7 +117,6 @@
 	CheckOperator( @"||", CPOperatorOr );
 }
 
-/* TODO: new tests
 - (void) testOrdering;
 {
 	Check( @"A*B+C", A, B, MUL, C, ADD );
@@ -123,9 +126,9 @@
 
 - (void) testFunctions;
 {
-	Check( @"f(A)", A, FUNC( @"f" ) );
-	Check( @"f(A,B)", A, B, FUNC( @"f" ) );
-	Check( @"f(A,B,C)", A, B, C, FUNC( @"f" ) );
+	Check( @"f(A)", CPTokenArgStop, A, FUNC( @"f" ) );
+	Check( @"f(A,B)", CPTokenArgStop, A, B, FUNC( @"f" ) );
+	Check( @"f(A,B,C)", CPTokenArgStop, A, B, C, FUNC( @"f" ) );
 }
 
 - (void) testWhitespaceVariants;
@@ -136,5 +139,5 @@
 	Check( @"A*B ", A, B, MUL );
 	Check( @" A *\tB ", A, B, MUL );
 }
-*/
+
 @end
