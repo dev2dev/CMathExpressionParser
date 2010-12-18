@@ -178,8 +178,11 @@
 			return [NSString stringWithFormat:@"operator: %@", [Operators stringForOperator: operatorValue]];
 			break;
 		case CPTokenVariable:
+			return [NSString stringWithFormat:@"variable: %@", stringValue];
+			break;
+
 		case CPTokenFunction:
-			return [NSString stringWithFormat:@"string: %@", stringValue];
+			return [NSString stringWithFormat:@"function: %@", stringValue];
 			break;
 		case CPTokenArgStop:
 			return @"[arg stop]";
