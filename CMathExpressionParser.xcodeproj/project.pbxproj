@@ -466,6 +466,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CMathExpressionParser_Prefix.pch;
 				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = TestParser;
 			};
 			name = Debug;
@@ -479,6 +480,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CMathExpressionParser_Prefix.pch;
 				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = TestParser;
 			};
 			name = Release;
