@@ -10,6 +10,8 @@
 
 #import "CPToken.h"
 
+extern NSString * const CPSyntaxErrorException;
+
 @interface CPTokenizer : NSObject {
 	
 	NSCharacterSet * identifierSet;

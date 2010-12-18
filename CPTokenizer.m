@@ -12,6 +12,8 @@
 
 @implementation CPTokenizer
 
+NSString * const CPSyntaxErrorException = @"SyntaxError";
+
 #pragma mark -
 #pragma mark init / dealloc
 
@@ -69,7 +71,7 @@
 	NSArray *ops = [stack popUpToOperator: CPOperatorLBrace];
 	
 	if (nil == ops || [stack position] == 0 || [[stack lastToken] type] != CPTokenFunction) {
-		NSException *exception = [NSException exceptionWithName:@"SyntaxError"
+		NSException *exception = [NSException exceptionWithName:CPSyntaxErrorException
 														 reason:@"function missing" 
 													   userInfo:nil];
 		@throw exception;
@@ -83,7 +85,7 @@
 {
 	NSArray *ops = [stack popUpToOperator: CPOperatorLBrace];
 	if (nil == ops) {
-		[NSException raise: @"SyntaxError" format: @"Missing '('"];
+		[NSException raise: CPSyntaxErrorException format: @"Missing '('"];
 	}
 	
 	if ([stack position] != 0 && [[stack lastToken] type] == CPTokenFunction) {
@@ -153,7 +155,7 @@
 		CPToken *nextToken = [self readNextTokenFrom: scanner];
 		
 		if (nil == nextToken) {
-			NSException *exception = [NSException exceptionWithName:@"SyntaxError"
+			NSException *exception = [NSException exceptionWithName:CPSyntaxErrorException
 															 reason:[NSString stringWithFormat:@"unknown token on position %d", [scanner scanLocation]] 
 														   userInfo:nil];
 			@throw exception;
