@@ -19,14 +19,12 @@
 	self = [super init];
 	if (self != nil) {
 		stack = [[NSMutableArray alloc] init];
-		position = 0;
 	}
 	return self;
 }
 
 - (void) dealloc
 {
-	position = 0;
 	[stack release];
 	[super dealloc];
 }
@@ -44,12 +42,17 @@
 
 - (void) push:(CPToken *)token
 {
-	[stack insertObject:token atIndex:position++];
+	[stack addObject: token];
 }
 
 - (CPToken *) pop
 {
-	return (position > 0) ? [stack objectAtIndex:--position] : nil;
+	id result = nil;
+	if ([stack count] != 0) {
+		result = [stack lastObject];
+		[stack removeLastObject];
+	}
+	return result;
 }
 
 #pragma mark -
@@ -62,7 +65,7 @@
 
 - (CPToken *) tokenAtIndex:(NSInteger)index
 {
-	return [stack objectAtIndex:(index <= position) ? index : position ];
+	return [stack objectAtIndex: index];
 }
 
 #pragma mark -
@@ -75,7 +78,7 @@
 
 - (NSInteger) position
 {
-	return position;
+	return [stack count];
 }
 
 #pragma mark -

@@ -14,7 +14,6 @@
 @interface CPStack : NSObject {
 
 	NSMutableArray *stack;
-	NSInteger position;
 	
 }
 
