@@ -89,4 +89,32 @@
 	return [stack description];
 }
 
+- (NSArray *) popUpToOperator: (CPOperator) op;
+{
+	NSMutableArray *result = [[NSMutableArray alloc] init];
+	
+	bool found = false;
+	while (![self isEmpty]) {
+		CPToken *token = [self pop];
+		if ([token operatorValue] == op) {
+			found = true;
+			break;
+		} else {
+			[result addObject: token];
+		}
+	}
+	
+	if (!found) {
+		[result release];
+		result = nil;
+	}
+
+	return [result autorelease];
+}
+
+- (BOOL) isEmpty;
+{
+	return [stack count] == 0;
+}
+
 @end

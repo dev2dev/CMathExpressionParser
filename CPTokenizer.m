@@ -39,17 +39,6 @@
 #pragma mark -
 #pragma mark scan and tokenize
 
-static void CopyOperatorsToOutput(CPStack *stack, NSMutableArray *output, CPOperator limit ) 
-{
-	CPOperator temp = [[stack pop] operatorValue];
-	
-	while (temp != limit) {
-		[output addObject:[CPToken tokenWithOperator:temp]];
-		temp = [[stack pop] operatorValue];
-	}
-	
-}
-
 - (CPToken *) readNextTokenFrom: (NSScanner *) scanner;
 {
 	CPOperator operator = [Operators scan: scanner];
@@ -98,14 +87,16 @@ static void CopyOperatorsToOutput(CPStack *stack, NSMutableArray *output, CPOper
 		[stack push:token];
 	} else {
 		if (operator == CPOperatorComma) {
-			CopyOperatorsToOutput( stack, output, CPOperatorLBrace );
-			if ([stack position] == 0 || [[stack lastToken] type] != CPTokenFunction) {
+			NSArray *ops = [stack popUpToOperator: CPOperatorLBrace];
+			
+			if (nil == ops || [stack position] == 0 || [[stack lastToken] type] != CPTokenFunction) {
 				NSException *exception = [NSException exceptionWithName:@"SyntaxError"
 																 reason:@"function missing" 
 															   userInfo:nil];
 				@throw exception;
 			}
 			
+			[output addObjectsFromArray: ops];
 			[stack push:[CPToken tokenWithOperator:CPOperatorLBrace]];
 		}
 		
@@ -127,7 +118,12 @@ static void CopyOperatorsToOutput(CPStack *stack, NSMutableArray *output, CPOper
 			[stack push:token];
 		}
 		if (operator == CPOperatorRBrace) {
-			CopyOperatorsToOutput( stack, output, CPOperatorLBrace );
+			NSArray *ops = [stack popUpToOperator: CPOperatorLBrace];
+			if (nil == ops) {
+				[NSException raise: @"SyntaxError" format: @"Missing '('"];
+			}
+			
+			[output addObjectsFromArray: ops];
 			
 			if ([stack position] != 0 && [[stack lastToken] type] == CPTokenFunction) {
 				[output addObject:[stack pop]];

@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "Operators.h"
 
 @class CPToken;
 
@@ -27,5 +28,9 @@
 
 - (NSInteger) count;
 - (NSInteger) position;
+
+- (NSArray *) popUpToOperator: (CPOperator) op;
+
+@property (readonly, getter=isEmpty, nonatomic) BOOL empty;
 
 @end
