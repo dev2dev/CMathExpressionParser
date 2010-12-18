@@ -8,6 +8,7 @@
 
 #import "CPStack.h"
 #import "CPToken.h"
+#import "NSArray+reverse.h"
 
 @implementation CPStack
 
@@ -110,6 +111,13 @@
 	}
 
 	return [result autorelease];
+}
+
+- (NSArray *) popAll;
+{
+	NSArray *result = [stack reversedArray];
+	[stack removeAllObjects];
+	return result;
 }
 
 - (BOOL) isEmpty;

@@ -140,4 +140,10 @@
 	Check( @" A *\tB ", A, B, MUL );
 }
 
+- (void) testSemicolon;
+{
+	Check( @"A;B", A, B );
+	Check( @"A+B;C", A, B, ADD, C );
+}
+
 @end

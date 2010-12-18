@@ -30,6 +30,7 @@
 - (NSInteger) position;
 
 - (NSArray *) popUpToOperator: (CPOperator) op;
+- (NSArray *) popAll;
 
 @property (readonly, getter=isEmpty, nonatomic) BOOL empty;
 

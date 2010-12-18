@@ -102,17 +102,7 @@
 		
 		if (operator == CPOperatorSemicolon) {
 			
-			CPOperator temp = [[stack pop] operatorValue];
-			
-			while (!([stack position] == 0 || (temp == CPOperatorSemicolon))) {
-				[output addObject:[CPToken tokenWithOperator:temp]];
-				temp = [[stack pop] operatorValue];
-			}
-			
-			if ([stack position] != 0) {
-				[output addObject:[CPToken tokenWithOperator:temp]];
-			}
-			
+				[output addObjectsFromArray: [stack popAll]];
 		}
 		if (operator == CPOperatorLBrace) {
 			[stack push:token];
