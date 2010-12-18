@@ -14,7 +14,7 @@
 #import "CPTokenizer.h"
 
 #import "CParserFunction.h"
-
+#import "NSArray+reverse.h"
 #import "CPStack.h"
 
 
@@ -60,7 +60,7 @@
 	for (i = 0; i < count; i++) {
 		CPToken *token = [array objectAtIndex:i];
 		
-		CPToken *newToken = [CPToken token];
+		CPToken *newToken = [CPToken tokenWithNumber:0.0];
 		CPOperator operator = [token operatorValue];
 		
 		switch ([token type]) {
@@ -170,11 +170,43 @@
 				[newToken setStringValue:[token stringValue]]; //set var name
 				[newToken setType:CPTokenVariable]; //set type to var (for assignment)
 				[newToken setNumberValue:([variables objectForKey:[token stringValue]] != nil) ? ([[variables objectForKey:[token stringValue]] doubleValue]) : 0.0];
+				
+				break;
+			case CPTokenFunction:
+				; // ?
+				CParserFunction *function = [self functionForKey:[token stringValue]];
+				if ([stack count] >= [function minArguments]) {
+					NSMutableArray *args = [NSMutableArray array];
+					
+					while (([[stack lastToken] type] != CPTokenArgStop) && ([stack count] > 0))
+					{
+						[args addObject:[stack pop]];
+					}
+					[stack pop]; //remove arg stop
 
+					if ([args count] > [function maxArguments]) {
+						NSException *exception = [NSException exceptionWithName:@"Syntax Error"
+																		 reason:@"Function Argument Error (max)"
+																	   userInfo:nil];
+						@throw exception;
+					} else {
+						[newToken setNumberValue:[function evaluateWithArguments:[args reversedArray]]];
+					}
+				} else {
+					NSException *exception = [NSException exceptionWithName:@"Syntax Error"
+																	 reason:@"Function Argument Error (min)"
+																   userInfo:nil];
+					@throw exception;
+				}
+				
+				break;
+				
+			case CPTokenArgStop:
+				[newToken setType:CPTokenArgStop];
+				
 			default:
 				break;
 		}
-		
 		[stack push:newToken];
 	}
 	
