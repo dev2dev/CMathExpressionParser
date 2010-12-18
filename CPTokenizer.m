@@ -64,64 +64,81 @@
 	return nil;
 }
 
-- (NSArray *) processOperatorToken: (CPToken *)token stack: (CPStack *) stack
+- (NSArray *) processCommaOperatorStack: (CPStack *) stack;
+{
+	NSArray *ops = [stack popUpToOperator: CPOperatorLBrace];
+	
+	if (nil == ops || [stack position] == 0 || [[stack lastToken] type] != CPTokenFunction) {
+		NSException *exception = [NSException exceptionWithName:@"SyntaxError"
+														 reason:@"function missing" 
+													   userInfo:nil];
+		@throw exception;
+	}
+	
+	[stack push:[CPToken tokenWithOperator:CPOperatorLBrace]];
+	return ops;
+}	
+
+- (NSArray *) processRBraceOperatorStack: (CPStack *) stack;
+{
+	NSArray *ops = [stack popUpToOperator: CPOperatorLBrace];
+	if (nil == ops) {
+		[NSException raise: @"SyntaxError" format: @"Missing '('"];
+	}
+	
+	if ([stack position] != 0 && [[stack lastToken] type] == CPTokenFunction) {
+		ops = [ops arrayByAddingObject: [stack pop]];
+	}
+	
+	return ops;
+}
+
+- (NSArray *) processDefaultOperator: (CPToken *) token stack: (CPStack *) stack;
 {
 	NSMutableArray *output = [NSMutableArray array];
 	
 	CPOperator operator = [token operatorValue];
-	NSAssert( operator != CPOperatorNull, @"Unexpected NULL operator" );
-	
-	if (operator != CPOperatorLBrace && operator != CPOperatorRBrace && operator != CPOperatorComma && operator != CPOperatorSemicolon) {
-		while ([stack position] > 0) {
-			const bool leftAssoc = [Operators associativity: operator] == CPOperatorAssocLeft;
-			const unsigned priority = [Operators priority: operator];
-			const unsigned lastStackPriority = [Operators priority: [[stack lastToken] operatorValue]];
-			
-			if ((priority < lastStackPriority) || (leftAssoc && priority == lastStackPriority)) {
-				[output addObject:[stack pop]];
-			} else {
-				break;
-			}
-		}
+	while ([stack position] > 0) {
+		const bool leftAssoc = [Operators associativity: operator] == CPOperatorAssocLeft;
+		const unsigned priority = [Operators priority: operator];
+		const unsigned lastStackPriority = [Operators priority: [[stack lastToken] operatorValue]];
 		
-		[stack push:token];
-	} else {
-		if (operator == CPOperatorComma) {
-			NSArray *ops = [stack popUpToOperator: CPOperatorLBrace];
-			
-			if (nil == ops || [stack position] == 0 || [[stack lastToken] type] != CPTokenFunction) {
-				NSException *exception = [NSException exceptionWithName:@"SyntaxError"
-																 reason:@"function missing" 
-															   userInfo:nil];
-				@throw exception;
-			}
-			
-			[output addObjectsFromArray: ops];
-			[stack push:[CPToken tokenWithOperator:CPOperatorLBrace]];
-		}
-		
-		if (operator == CPOperatorSemicolon) {
-			
-				[output addObjectsFromArray: [stack popAll]];
-		}
-		if (operator == CPOperatorLBrace) {
-			[stack push:token];
-		}
-		if (operator == CPOperatorRBrace) {
-			NSArray *ops = [stack popUpToOperator: CPOperatorLBrace];
-			if (nil == ops) {
-				[NSException raise: @"SyntaxError" format: @"Missing '('"];
-			}
-			
-			[output addObjectsFromArray: ops];
-			
-			if ([stack position] != 0 && [[stack lastToken] type] == CPTokenFunction) {
-				[output addObject:[stack pop]];
-			}
+		if ((priority < lastStackPriority) || (leftAssoc && priority == lastStackPriority)) {
+			[output addObject:[stack pop]];
+		} else {
+			break;
 		}
 	}
 	
+	[stack push:token];
+	
 	return output;
+}
+
+- (NSArray *) processOperatorToken: (CPToken *)token stack: (CPStack *) stack
+{
+	NSParameterAssert( [token type] == CPTokenOperator );
+	
+	CPOperator operator = [token operatorValue];
+	NSAssert( operator != CPOperatorNull, @"Unexpected NULL operator" );
+	
+	switch (operator) {
+		default:
+			return [self processDefaultOperator: token stack: stack];
+			
+		case CPOperatorComma: 
+			return [self processCommaOperatorStack: stack];
+			
+		case CPOperatorSemicolon:
+			return [stack popAll];
+			
+		case CPOperatorLBrace:
+			[stack push:token];
+			return nil;
+			
+		case CPOperatorRBrace:
+			return [self processRBraceOperatorStack: stack];
+	};
 }
 
 - (NSArray *) convertExpressionFromInfixStringToPostfixArray:(NSString *)expression
@@ -157,12 +174,9 @@
 				[output addObjectsFromArray: [self processOperatorToken:nextToken stack:stack]];
 				break;
 		}
-		
 	}
 	
-	while ([stack position] != 0) {
-		[output addObject:[stack pop]];
-	}
+	[output addObjectsFromArray: [stack popAll]];
 	
 	return output;	
 }
