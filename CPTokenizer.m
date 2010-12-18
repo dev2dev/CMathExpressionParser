@@ -50,6 +50,94 @@ static void CopyOperatorsToOutput(CPStack *stack, NSMutableArray *output, CPOper
 	
 }
 
+- (CPToken *) readNextTokenFrom: (NSScanner *) scanner;
+{
+	CPOperator operator = [Operators scan: scanner];
+	if (CPOperatorNull != operator) {
+		return [CPToken tokenWithOperator: operator];
+	}
+
+	double numberValue;
+	if ([scanner scanDouble:&numberValue]) {
+		return [CPToken tokenWithNumber:numberValue];
+	}
+	
+	NSString * stringValue;
+	if ([scanner scanCharactersFromSet:identifierSet intoString:&stringValue]) {
+		unichar firstChar = [stringValue characterAtIndex:0];
+		if(firstChar >= 'a' && firstChar <= 'z') {
+			return [CPToken tokenWithFunction:stringValue];
+		} else {
+			return [CPToken tokenWithVariable:stringValue];
+		}
+	}
+		
+	return nil;
+}
+
+- (NSArray *) processOperatorToken: (CPToken *)token stack: (CPStack *) stack
+{
+	NSMutableArray *output = [NSMutableArray array];
+	
+	CPOperator operator = [token operatorValue];
+	NSAssert( operator != CPOperatorNull, @"Unexpected NULL operator" );
+	
+	if (operator != CPOperatorLBrace && operator != CPOperatorRBrace && operator != CPOperatorComma && operator != CPOperatorSemicolon) {
+		while ([stack position] > 0) {
+			const bool leftAssoc = [Operators associativity: operator] == CPOperatorAssocLeft;
+			const unsigned priority = [Operators priority: operator];
+			const unsigned lastStackPriority = [Operators priority: [[stack lastToken] operatorValue]];
+			
+			if ((priority < lastStackPriority) || (leftAssoc && priority == lastStackPriority)) {
+				[output addObject:[stack pop]];
+			} else {
+				break;
+			}
+		}
+		
+		[stack push:token];
+	} else {
+		if (operator == CPOperatorComma) {
+			CopyOperatorsToOutput( stack, output, CPOperatorLBrace );
+			if ([stack position] == 0 || [[stack lastToken] type] != CPTokenFunction) {
+				NSException *exception = [NSException exceptionWithName:@"SyntaxError"
+																 reason:@"function missing" 
+															   userInfo:nil];
+				@throw exception;
+			}
+			
+			[stack push:[CPToken tokenWithOperator:CPOperatorLBrace]];
+		}
+		
+		if (operator == CPOperatorSemicolon) {
+			
+			CPOperator temp = [[stack pop] operatorValue];
+			
+			while (!([stack position] == 0 || (temp == CPOperatorSemicolon))) {
+				[output addObject:[CPToken tokenWithOperator:temp]];
+				temp = [[stack pop] operatorValue];
+			}
+			
+			if ([stack position] != 0) {
+				[output addObject:[CPToken tokenWithOperator:temp]];
+			}
+			
+		}
+		if (operator == CPOperatorLBrace) {
+			[stack push:token];
+		}
+		if (operator == CPOperatorRBrace) {
+			CopyOperatorsToOutput( stack, output, CPOperatorLBrace );
+			
+			if ([stack position] != 0 && [[stack lastToken] type] == CPTokenFunction) {
+				[output addObject:[stack pop]];
+			}
+		}
+	}
+	
+	return output;
+}
+
 - (NSArray *) convertExpressionFromInfixStringToPostfixArray:(NSString *)expression
 {	
 	CPStack * stack = [CPStack stack];
@@ -57,150 +145,33 @@ static void CopyOperatorsToOutput(CPStack *stack, NSMutableArray *output, CPOper
 	
 	NSScanner * scanner = [NSScanner scannerWithString:expression];
 	
-	//****
-	int bracketOpen = 0;
-	int bracketClose = 0;
-	
-	BOOL numberScanned = NO;;
-	BOOL stringScanned = NO;
-	BOOL operatorScanned = NO;
-	BOOL multipleOperators = NO;
-	//****
-	
-	
-	//scan
 	while (![scanner isAtEnd]) {
 		
-		numberScanned = NO;
-		stringScanned = NO;
-		operatorScanned = NO;
+		CPToken *nextToken = [self readNextTokenFrom: scanner];
 		
-		//number
-		double numberValue;
-		if (!multipleOperators && [scanner scanDouble:&numberValue]) {
-			[output addObject:[CPToken tokenWithNumber:numberValue]];
-			numberScanned = YES;
-		}
-		
-		//string
-		NSString * stringValue;
-		if (!multipleOperators && [scanner scanCharactersFromSet:identifierSet intoString:&stringValue]) {
-			unichar firstChar = [stringValue characterAtIndex:0];
-			if(firstChar >= 'a' && firstChar <= 'z')
-				[stack push:[CPToken tokenWithFunction:stringValue]];
-			else
-				[output addObject:[CPToken tokenWithVariable:stringValue]];
-			
-			stringScanned = YES;
-		}
-		
-		//operator
-		CPOperator operator = [Operators scan: scanner];
-		if (operator != CPOperatorNull) {
-			operatorScanned = YES;
-			
-			if (operator != CPOperatorLBrace && operator != CPOperatorRBrace && operator != CPOperatorComma && operator != CPOperatorSemicolon) {
-				if ([stack position] == 0) {
-					[stack push:[CPToken tokenWithOperator:operator]];
-				} else {
-					while ([stack position] > 0) {
-						if (([Operators associativity: operator] && [Operators priority: operator] <= [Operators priority: [[stack lastToken] operatorValue]]) ||
-						(![Operators associativity: operator] && [Operators priority: operator] < [Operators priority: [[stack lastToken] operatorValue]])) {
-							
-							CPOperator temp = [[stack pop] operatorValue];
-							[output addObject:[CPToken tokenWithOperator:temp]];
-						} else {
-							break;
-						}
-					}
-						
-					[stack push:[CPToken tokenWithOperator:operator]];
-				}
-			} else {
-				if (operator == CPOperatorComma) {
-					if (bracketOpen <= bracketClose) {
-						NSException *exception = [NSException exceptionWithName:@"SyntaxError"
-																		 reason:@"( missing" 
-																	   userInfo:nil];
-						@throw exception;
-					}
-						
-					CopyOperatorsToOutput( stack, output, CPOperatorLBrace );
-						
-					if ([stack position] != 0) {
-						CPToken * token = [stack pop];
-							
-						if ([token type] == CPTokenFunction) {
-							[stack push:token];
-						} else {
-							NSException *exception = [NSException exceptionWithName:@"SyntaxError"
-																			 reason:@"function missing" 
-																		   userInfo:nil];
-							@throw exception;
-						}
-					} else {
-						NSException *exception = [NSException exceptionWithName:@"SyntaxError"
-																		 reason:@"function missing" 
-																	   userInfo:nil];
-						@throw exception;
-					}
-						
-					[stack push:[CPToken tokenWithOperator:CPOperatorLBrace]];
-				}
-				if (operator == CPOperatorSemicolon) {
-
-					CPOperator temp = [[stack pop] operatorValue];
-					
-					while (!([stack position] == 0 || (temp == CPOperatorSemicolon))) {
-						[output addObject:[CPToken tokenWithOperator:temp]];
-						temp = [[stack pop] operatorValue];
-					}
-					
-					if ([stack position] != 0) {
-						[output addObject:[CPToken tokenWithOperator:temp]];
-					}
-					
-				}
-				if (operator == CPOperatorLBrace) {
-					bracketOpen++;
-					[stack push:[CPToken tokenWithOperator:operator]];
-				}
-				if (operator == CPOperatorRBrace) {
-					bracketClose++;
-					if (bracketOpen < bracketClose) {
-						NSException *exception = [NSException exceptionWithName:@"SyntaxError"
-																		 reason:@"( missing" 
-																	   userInfo:nil];
-						@throw exception;
-					}
-						
-					CopyOperatorsToOutput( stack, output, CPOperatorLBrace );
-						
-					if ([stack position] != 0) {
-						CPToken * token = [stack pop];
-							
-						if ([token type] == CPTokenFunction) {
-							[output addObject:token];
-							[output addObject:[CPToken tokenWithType:CPTokenArgStop]];
-						} else {
-							[stack push:token];
-						}
-					}
-				}
-			}
-		}
-		
-		//error unknown symbol
-		if (!(numberScanned || stringScanned || operatorScanned)/* && !multipleOperators*/) {
+		if (nil == nextToken) {
 			NSException *exception = [NSException exceptionWithName:@"SyntaxError"
 															 reason:[NSString stringWithFormat:@"unknown token on position %d", [scanner scanLocation]] 
 														   userInfo:nil];
 			@throw exception;
+		}			
+		
+		switch ( [nextToken type] ) {
+			case CPTokenNumber:
+			case CPTokenVariable:
+				[output addObject: nextToken];
+				break;
+				
+			case CPTokenFunction:
+				[output addObject:[CPToken tokenWithType:CPTokenArgStop]];
+				[stack push: nextToken];
+				break;
+				
+			case CPTokenOperator:
+				[output addObjectsFromArray: [self processOperatorToken:nextToken stack:stack]];
+				break;
 		}
-	}
-	
-	if (bracketOpen != bracketClose) {
-		NSLog(@"() errror");
+		
 	}
 	
 	while ([stack position] != 0) {
