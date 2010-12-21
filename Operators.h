@@ -12,7 +12,7 @@
 	def(	RBrace,		@")",	None,			0,			0			) \
 	def(	Semicolon,	@";",	None,			0,			0			) \
 	def(	Comma,		@",",	Left,			1,			0			) \
-	def(	Power,		@"^",	Left,			9,			2			) \
+	def(	Power,		@"^",	Right,			9,			2			) \
 	def(	LE,			@"<=",	Left,			5,			2			) \
 	def(	LT,			@"<",	Left,			5,			2			) \
 	def(	GE,			@">=",	Left,			5,			2			) \
