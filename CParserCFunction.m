@@ -26,6 +26,20 @@
 	return [[[CParserCFunction alloc] initWithMinArguments:args] autorelease];
 }
 
++ (CParserFunction *) unaryFunction: (function_1) ptr;
+{
+	CParserCFunction *func = [self functionWithMinArguments: 1];
+	[func setFunction1: ptr];
+	return func;
+}
+
++ (CParserFunction *) binaryFunction: (function_2) ptr;
+{
+	CParserCFunction *func = [self functionWithMinArguments: 2];
+	[func setFunction2: ptr];
+	return func;
+}
+
 - (id) initWithMinArguments:(int)args
 {
 	self = [super init];

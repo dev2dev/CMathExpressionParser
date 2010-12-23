@@ -31,6 +31,9 @@
 + (CParserCFunction *) function;
 + (CParserCFunction *) functionWithMinArguments:(int)args;
 
++ (CParserFunction *) unaryFunction: (function_1) ptr;
++ (CParserFunction *) binaryFunction: (function_2) ptr;
+
 - (id) initWithMinArguments:(int)args;
 
 @property (readwrite, assign, nonatomic) function_0 function0;
