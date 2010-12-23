@@ -29,6 +29,7 @@
 - (NSInteger) count;
 - (NSInteger) position;
 
+- (NSArray *) popUpToToken: (CPToken *) search;
 - (NSArray *) popUpToOperator: (CPOperator) op;
 - (NSArray *) popAll;
 

@@ -92,12 +92,17 @@
 
 - (NSArray *) popUpToOperator: (CPOperator) op;
 {
+	return [self popUpToToken: [CPToken tokenWithOperator: op]];
+}
+
+- (NSArray *) popUpToToken: (CPToken *) search;
+{
 	NSMutableArray *result = [[NSMutableArray alloc] init];
 	
 	bool found = false;
 	while (![self isEmpty]) {
 		CPToken *token = [self pop];
-		if ([token operatorValue] == op) {
+		if ([token isEqual: search]) {
 			found = true;
 			break;
 		} else {
@@ -109,7 +114,7 @@
 		[result release];
 		result = nil;
 	}
-
+	
 	return [result autorelease];
 }
 
