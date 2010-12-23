@@ -14,9 +14,13 @@
 #import "CPTokenizer.h"
 
 #import "CParserFunction.h"
+#import "CParserCFunction.h"
 #import "NSArray+reverse.h"
 #import "CPStack.h"
 
+@interface CPEvaluator ()
+- (void) registerStandardFunctions;
+@end
 
 @implementation CPEvaluator
 
@@ -27,8 +31,7 @@
 {
 	self = [super init];
 	if (self != nil) {
-		[self setVariables:nil];
-		[self setFunctions:nil];
+		[self registerStandardFunctions];
 	}
 	return self;
 }
@@ -247,7 +250,7 @@
 
 - (void) setFunction:(CParserFunction *)var forKey:(NSString *)key
 {
-	if (variables == nil) {
+	if (functions == nil) {
 		[self setFunctions:[NSMutableDictionary dictionary]];
 	}
 	
@@ -257,6 +260,27 @@
 - (CParserFunction *) functionForKey:(NSString *)key
 {
 	return [functions objectForKey:key];
+}
+
+- (void) registerStandardFunctions;
+{
+	[self setFunction: [CParserCFunction unaryFunction: sin] forKey: @"sin"];
+	[self setFunction: [CParserCFunction unaryFunction: cos] forKey: @"cos"];
+	[self setFunction: [CParserCFunction unaryFunction: tan] forKey: @"tan"];
+	[self setFunction: [CParserCFunction unaryFunction: asin] forKey: @"asin"];
+	[self setFunction: [CParserCFunction unaryFunction: acos] forKey: @"acos"];
+	[self setFunction: [CParserCFunction unaryFunction: atan] forKey: @"atan"];
+	[self setFunction: [CParserCFunction unaryFunction: sinh] forKey: @"sinh"];
+	[self setFunction: [CParserCFunction unaryFunction: cosh] forKey: @"cosh"];
+	[self setFunction: [CParserCFunction unaryFunction: tanh] forKey: @"tanh"];
+	[self setFunction: [CParserCFunction unaryFunction: asinh] forKey: @"asinh"];
+	[self setFunction: [CParserCFunction unaryFunction: acosh] forKey: @"acohs"];
+	[self setFunction: [CParserCFunction unaryFunction: atanh] forKey: @"atanh"];
+	[self setFunction: [CParserCFunction unaryFunction: exp] forKey: @"exp"];
+	[self setFunction: [CParserCFunction unaryFunction: log] forKey: @"ln"];
+	[self setFunction: [CParserCFunction unaryFunction: log10] forKey: @"log"];
+	[self setFunction: [CParserCFunction unaryFunction: fabs] forKey: @"abs"];
+	[self setFunction: [CParserCFunction binaryFunction: pow] forKey: @"pow"];
 }
 
 @end
