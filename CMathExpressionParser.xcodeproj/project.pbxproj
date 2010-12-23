@@ -35,7 +35,6 @@
 		266655E112B9F58900BB5F08 /* TestTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655C312B9F4EE00BB5F08 /* TestTokenizer.m */; };
 		8DD76F9A0486AA7600D96B5E /* TestParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* TestParser.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
-		8DD76F9F0486AA7600D96B5E /* TestParser.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859EA3029092ED04C91782 /* TestParser.1 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +68,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				8DD76F9F0486AA7600D96B5E /* TestParser.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -108,7 +106,6 @@
 		8FD132C212B590BC009A2559 /* CPToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPToken.m; sourceTree = "<group>"; };
 		8FD132C412B590CD009A2559 /* CPStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPStack.h; sourceTree = "<group>"; };
 		8FD132C512B590CD009A2559 /* CPStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPStack.m; sourceTree = "<group>"; };
-		C6859EA3029092ED04C91782 /* TestParser.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = TestParser.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,7 +182,6 @@
 		262A8EF212BB7EA000CFC561 /* Test Program */ = {
 			isa = PBXGroup;
 			children = (
-				C6859EA2029092E104C91782 /* Documentation */,
 				08FB7796FE84155DC02AAC07 /* TestParser.m */,
 			);
 			name = "Test Program";
@@ -266,14 +262,6 @@
 				8FD132C512B590CD009A2559 /* CPStack.m */,
 			);
 			name = Stack;
-			sourceTree = "<group>";
-		};
-		C6859EA2029092E104C91782 /* Documentation */ = {
-			isa = PBXGroup;
-			children = (
-				C6859EA3029092ED04C91782 /* TestParser.1 */,
-			);
-			name = Documentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
