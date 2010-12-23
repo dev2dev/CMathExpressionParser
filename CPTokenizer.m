@@ -21,7 +21,10 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 {
 	self = [super init];
 	if (self != nil) {
-		[self setIdentifierSet:[NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_1234567890"]];
+		NSMutableCharacterSet *set = [NSMutableCharacterSet alphanumericCharacterSet];
+		[set addCharactersInString: @"_"];
+		
+		[self setIdentifierSet:set];
 	}
 	return self;
 }
@@ -190,7 +193,7 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 {
 	if (identifierSet != set) {
 		[identifierSet release];
-		identifierSet = [set retain];
+		identifierSet = [set copy];
 	}
 }
 
