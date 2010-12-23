@@ -70,7 +70,7 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 {
 	NSArray *ops = [stack popUpToOperator: CPOperatorLBrace];
 	
-	if (nil == ops || [stack position] == 0 || [[stack lastToken] type] != CPTokenFunction) {
+	if (nil == ops || [stack isEmpty] || [[stack lastToken] type] != CPTokenFunction) {
 		NSException *exception = [NSException exceptionWithName:CPSyntaxErrorException
 														 reason:@"function missing" 
 													   userInfo:nil];
@@ -88,7 +88,7 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 		[NSException raise: CPSyntaxErrorException format: @"Missing '('"];
 	}
 	
-	if ([stack position] != 0 && [[stack lastToken] type] == CPTokenFunction) {
+	if (![stack isEmpty] && [[stack lastToken] type] == CPTokenFunction) {
 		ops = [ops arrayByAddingObject: [stack pop]];
 	}
 	
@@ -100,7 +100,7 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 	NSMutableArray *output = [NSMutableArray array];
 	
 	CPOperator operator = [token operatorValue];
-	while ([stack position] > 0) {
+	while (![stack isEmpty]) {
 		const bool leftAssoc = [Operators associativity: operator] == CPOperatorAssocLeft;
 		const unsigned priority = [Operators priority: operator];
 		const unsigned lastStackPriority = [Operators priority: [[stack lastToken] operatorValue]];

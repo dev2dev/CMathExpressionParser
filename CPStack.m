@@ -70,14 +70,9 @@
 }
 
 #pragma mark -
-#pragma mark count / position
+#pragma mark count
 
 - (NSInteger) count
-{
-	return [stack count];
-}
-
-- (NSInteger) position
 {
 	return [stack count];
 }

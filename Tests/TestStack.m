@@ -23,7 +23,6 @@
 	
 	STAssertTrue( [stack isEmpty], @"Should be empty" );
 	STAssertTrue( [stack count] == 0, @"Should be empty" );
-	STAssertTrue( [stack position] == 0, @"Should be empty" );
 	
 	STAssertNil( [stack pop], @"Should be empty" );
 	STAssertNil( [stack lastToken], @"Should be empty" );
