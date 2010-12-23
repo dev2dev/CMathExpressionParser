@@ -30,6 +30,7 @@
 		262A8F2C12BB80BB00CFC561 /* CPToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FD132C112B590BC009A2559 /* CPToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		262A8F2E12BB80BB00CFC561 /* CParserGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655A712B9F4CE00BB5F08 /* CParserGlobal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		262A8F2F12BB80BB00CFC561 /* CParserFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655A512B9F4CE00BB5F08 /* CParserFunction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		262AF7AF12C3373E00B1380E /* TestStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AF7AE12C3373E00B1380E /* TestStack.m */; };
 		266655E012B9F58800BB5F08 /* TestNSArray+reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655C112B9F4EE00BB5F08 /* TestNSArray+reverse.m */; };
 		266655E112B9F58900BB5F08 /* TestTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655C312B9F4EE00BB5F08 /* TestTokenizer.m */; };
 		8DD76F9A0486AA7600D96B5E /* TestParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* TestParser.m */; settings = {ATTRIBUTES = (); }; };
@@ -81,6 +82,7 @@
 		262A8D7A12BB569800CFC561 /* Operators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Operators.m; sourceTree = "<group>"; };
 		262A8DBE12BB5F1300CFC561 /* TestOperators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestOperators.m; sourceTree = "<group>"; };
 		262A8E9012BB7C9F00CFC561 /* libCMathExpressionParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCMathExpressionParser.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		262AF7AE12C3373E00B1380E /* TestStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestStack.m; sourceTree = "<group>"; };
 		2666559F12B9F4CE00BB5F08 /* CParserCFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserCFunction.h; sourceTree = "<group>"; };
 		266655A012B9F4CE00BB5F08 /* CParserCFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserCFunction.m; sourceTree = "<group>"; };
 		266655A512B9F4CE00BB5F08 /* CParserFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserFunction.h; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				266655C212B9F4EE00BB5F08 /* Tests-Info.plist */,
 				266655C312B9F4EE00BB5F08 /* TestTokenizer.m */,
 				262A8DBE12BB5F1300CFC561 /* TestOperators.m */,
+				262AF7AE12C3373E00B1380E /* TestStack.m */,
 			);
 			name = "Unit Tests";
 			path = Tests;
@@ -422,6 +425,7 @@
 				266655E012B9F58800BB5F08 /* TestNSArray+reverse.m in Sources */,
 				266655E112B9F58900BB5F08 /* TestTokenizer.m in Sources */,
 				262A8DBF12BB5F1300CFC561 /* TestOperators.m in Sources */,
+				262AF7AF12C3373E00B1380E /* TestStack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
