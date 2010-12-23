@@ -122,7 +122,7 @@
 								break;
 							case CPOperatorAssign:
 								if ([first type] == CPTokenVariable) {
-									[self setVariable:[NSNumber numberWithDouble:operants[1]] forKey:[first stringValue]];
+									[self setValue:operants[1] forVariable:[first stringValue]];
 								} else {
 									NSException *exception = [NSException exceptionWithName:@"Assignment Error"
 																					 reason:@"Left token is not a variable" 
@@ -171,7 +171,7 @@
 			case CPTokenVariable:
 				[newToken setStringValue:[token stringValue]]; //set var name
 				[newToken setType:CPTokenVariable]; //set type to var (for assignment)
-				[newToken setNumberValue:([variables objectForKey:[token stringValue]] != nil) ? ([[variables objectForKey:[token stringValue]] doubleValue]) : 0.0];
+				[newToken setNumberValue: [self valueForVariable: [token stringValue]]];
 				break;
 				
 			case CPTokenFunction: {
@@ -236,18 +236,18 @@
 #pragma mark -
 #pragma mark add/get variable/functions
 
-- (void) setVariable:(NSNumber *)var forKey:(NSString *)key
+- (void) setValue:(double)var forVariable:(NSString *)key
 {
 	if (variables == nil) {
 		[self setVariables:[NSMutableDictionary dictionary]];
 	}
 	
-	[variables setObject:var forKey:key];
+	[variables setObject:[NSNumber numberWithDouble: var] forKey:key];
 }
 
-- (NSNumber *) variableForKey:(NSString *)key
+- (double) valueForVariable:(NSString *)key
 {
-	return [variables objectForKey:key];
+	return [[variables objectForKey:key] doubleValue];
 }
 
 - (void) setFunction:(CParserFunction *)var forKey:(NSString *)key
@@ -290,9 +290,9 @@
 
 - (void) registerConstants;
 {
-	[self setVariable: [NSNumber numberWithDouble: M_PI] forKey: @"PI"];
-	[self setVariable: [NSNumber numberWithDouble: M_PI] forKey: @"π"];
-	[self setVariable: [NSNumber numberWithDouble: M_E] forKey: @"E"];
+	[self setValue: M_PI forVariable: @"PI"];
+	[self setValue: M_PI forVariable: @"π"];
+	[self setValue: M_E forVariable: @"E"];
 }
 
 @end

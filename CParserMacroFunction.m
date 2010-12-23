@@ -97,10 +97,10 @@
 	NSUInteger i, count = [arguments count];
 	for (i = 0; i < count; i++) {
 		CPToken * token = [arguments objectAtIndex:i];
-		[evaluator setVariable:[NSNumber numberWithDouble:[token numberValue]] forKey:[NSString stringWithFormat:@"ARG_%i", i+1]];
+		[evaluator setValue:[token numberValue] forVariable:[NSString stringWithFormat:@"ARG_%i", i+1]];
 	}
 	
-	[evaluator setVariable:[NSNumber numberWithUnsignedInteger:count] forKey:[NSString stringWithString:@"ARG_COUNT"]];
+	[evaluator setValue:count forVariable:[NSString stringWithString:@"ARG_COUNT"]];
 	
 	@try {
 		result = [evaluator evaluatePostfixExpressionArray: [self postfixExpression]];
