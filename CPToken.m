@@ -193,4 +193,47 @@
 	}
 }
 
+- (BOOL) isEqual: (id)object;
+{
+	if (self == object) return YES;
+	if ([self class] != [object class]) return NO;
+	if (type != [(CPToken *)object type]) return NO;
+	
+	switch (type) {
+		case CPTokenNumber: 
+			return numberValue == [(CPToken *)object numberValue];
+			
+		case CPTokenOperator: 
+			return operatorValue == [(CPToken *)object operatorValue];
+
+		case CPTokenVariable:
+		case CPTokenFunction:
+			return [stringValue isEqual: [(CPToken *)object stringValue]];
+			
+		default:
+			return YES;
+	}
+}
+
+- (NSUInteger) hash;
+{
+	NSUInteger hash = type;
+	switch (type) {
+		case CPTokenOperator:
+			hash += (NSUInteger)operatorValue >> 3;
+			break;
+			
+		case CPTokenVariable:
+		case CPTokenFunction:
+			hash += [stringValue hash] >> 3;
+			break;
+			
+		case CPTokenNumber:
+			hash += (NSUInteger)numberValue >> 3;
+			break;
+	}
+	
+	return hash;
+}
+
 @end
