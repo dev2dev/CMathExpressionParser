@@ -176,6 +176,9 @@
 				
 			case CPTokenFunction: {
 				CParserFunction *function = [self functionForKey:[token stringValue]];
+				if (nil == function) {
+					[NSException raise: CPSyntaxErrorException format: @"Trying to call unknown function '%@'", [token stringValue]];
+				}
 				NSArray *args = [stack popUpToToken: [CPToken tokenWithType: CPTokenArgStop]];
 				if ([args count] < [function minArguments] || [args count] > [function maxArguments]) {
 					NSException *exception = [NSException exceptionWithName:CPSyntaxErrorException
