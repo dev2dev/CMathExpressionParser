@@ -77,7 +77,7 @@
 		args[i] = [token numberValue];
 	}
 	
-	switch (minArguments) {
+	switch (count) {
 		case 0:
 			result = functionPtr0();
 			break;
