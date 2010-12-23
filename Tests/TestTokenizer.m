@@ -92,7 +92,8 @@
 {
 	Check( @"1", NUM( 1 ) );
 	Check( @"A", A );
-	Check( @"a", CPTokenArgStop, FUNC( @"a" ) );
+	Check( @"A()", CPTokenArgStop, FUNC( @"A" ) );
+	Check( @"a()", CPTokenArgStop, FUNC( @"a" ) );
 }
 
 #define CheckOperator( str, op ) Check( str, OP( op ) )

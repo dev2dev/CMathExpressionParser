@@ -9,6 +9,7 @@
 #import "CPTokenizer.h"
 #import "CPStack.h"
 
+#import "NSScanner+Lookahead.h"
 
 @implementation CPTokenizer
 
@@ -58,8 +59,7 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 	
 	NSString * stringValue;
 	if ([scanner scanCharactersFromSet:identifierSet intoString:&stringValue]) {
-		unichar firstChar = [stringValue characterAtIndex:0];
-		if(firstChar >= 'a' && firstChar <= 'z') {
+		if ([scanner lookaheadString: @"(" intoString: NULL]) {
 			return [CPToken tokenWithFunction:stringValue];
 		} else {
 			return [CPToken tokenWithVariable:stringValue];
