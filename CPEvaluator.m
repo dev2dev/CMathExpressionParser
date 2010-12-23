@@ -59,10 +59,7 @@
 	
 	CPStack *stack = [CPStack stack];
 	
-	NSUInteger i, count = [array count];
-	for (i = 0; i < count; i++) {
-		CPToken *token = [array objectAtIndex:i];
-		
+	for (CPToken *token in array) {
 		CPToken *newToken = [CPToken tokenWithNumber:0.0];
 		CPOperator operator = [token operatorValue];
 		
