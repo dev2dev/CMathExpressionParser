@@ -20,6 +20,7 @@
 
 @interface CPEvaluator ()
 - (void) registerStandardFunctions;
+- (void) registerConstants;
 @end
 
 @implementation CPEvaluator
@@ -32,6 +33,7 @@
 	self = [super init];
 	if (self != nil) {
 		[self registerStandardFunctions];
+		[self registerConstants];
 	}
 	return self;
 }
@@ -278,6 +280,14 @@
 	[self setFunction: [CParserCFunction unaryFunction: log10] forKey: @"log"];
 	[self setFunction: [CParserCFunction unaryFunction: fabs] forKey: @"abs"];
 	[self setFunction: [CParserCFunction binaryFunction: pow] forKey: @"pow"];
+}
+
+
+- (void) registerConstants;
+{
+	[self setVariable: [NSNumber numberWithDouble: M_PI] forKey: @"PI"];
+	[self setVariable: [NSNumber numberWithDouble: M_PI] forKey: @"π"];
+	[self setVariable: [NSNumber numberWithDouble: M_E] forKey: @"E"];
 }
 
 @end
