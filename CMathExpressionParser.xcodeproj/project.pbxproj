@@ -31,6 +31,8 @@
 		262A8F2E12BB80BB00CFC561 /* CParserGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655A712B9F4CE00BB5F08 /* CParserGlobal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		262A8F2F12BB80BB00CFC561 /* CParserFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 266655A512B9F4CE00BB5F08 /* CParserFunction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		262AF7AF12C3373E00B1380E /* TestStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AF7AE12C3373E00B1380E /* TestStack.m */; };
+		262AF91312C362A600B1380E /* NSScanner+Lookahead.h in Headers */ = {isa = PBXBuildFile; fileRef = 262AF91112C362A600B1380E /* NSScanner+Lookahead.h */; };
+		262AF91412C362A600B1380E /* NSScanner+Lookahead.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AF91212C362A600B1380E /* NSScanner+Lookahead.m */; };
 		266655E012B9F58800BB5F08 /* TestNSArray+reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655C112B9F4EE00BB5F08 /* TestNSArray+reverse.m */; };
 		266655E112B9F58900BB5F08 /* TestTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 266655C312B9F4EE00BB5F08 /* TestTokenizer.m */; };
 		8DD76F9A0486AA7600D96B5E /* TestParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* TestParser.m */; settings = {ATTRIBUTES = (); }; };
@@ -81,6 +83,8 @@
 		262A8DBE12BB5F1300CFC561 /* TestOperators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestOperators.m; sourceTree = "<group>"; };
 		262A8E9012BB7C9F00CFC561 /* libCMathExpressionParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCMathExpressionParser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		262AF7AE12C3373E00B1380E /* TestStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestStack.m; sourceTree = "<group>"; };
+		262AF91112C362A600B1380E /* NSScanner+Lookahead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+Lookahead.h"; sourceTree = "<group>"; };
+		262AF91212C362A600B1380E /* NSScanner+Lookahead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+Lookahead.m"; sourceTree = "<group>"; };
 		2666559F12B9F4CE00BB5F08 /* CParserCFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserCFunction.h; sourceTree = "<group>"; };
 		266655A012B9F4CE00BB5F08 /* CParserCFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParserCFunction.m; sourceTree = "<group>"; };
 		266655A512B9F4CE00BB5F08 /* CParserFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParserFunction.h; sourceTree = "<group>"; };
@@ -151,7 +155,7 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				8F51699312B7CB1A00891978 /* NSArray +reverse */,
+				8F51699312B7CB1A00891978 /* Categories */,
 				8F51698F12B7BCA100891978 /* Evaluator */,
 				8F51685A12B7372600891978 /* Tokenizer */,
 				8FD132C712B590D8009A2559 /* Stack */,
@@ -237,13 +241,15 @@
 			name = Evaluator;
 			sourceTree = "<group>";
 		};
-		8F51699312B7CB1A00891978 /* NSArray +reverse */ = {
+		8F51699312B7CB1A00891978 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
 				8F51699712B7CB2A00891978 /* NSArray+reverse.h */,
 				8F51699812B7CB2A00891978 /* NSArray+reverse.m */,
+				262AF91112C362A600B1380E /* NSScanner+Lookahead.h */,
+				262AF91212C362A600B1380E /* NSScanner+Lookahead.m */,
 			);
-			name = "NSArray +reverse";
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		8FD132BF12B590A3009A2559 /* Token */ = {
@@ -281,6 +287,7 @@
 				262A8F2C12BB80BB00CFC561 /* CPToken.h in Headers */,
 				262A8F2E12BB80BB00CFC561 /* CParserGlobal.h in Headers */,
 				262A8F2F12BB80BB00CFC561 /* CParserFunction.h in Headers */,
+				262AF91312C362A600B1380E /* NSScanner+Lookahead.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +410,7 @@
 				262A8EA012BB7CD100CFC561 /* CPTokenizer.m in Sources */,
 				262A8EA112BB7CD100CFC561 /* NSArray+reverse.m in Sources */,
 				262A8EA212BB7CD100CFC561 /* Operators.m in Sources */,
+				262AF91412C362A600B1380E /* NSScanner+Lookahead.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
