@@ -57,4 +57,23 @@
 	STAssertTrue( [stack isEmpty], @"Stack should be empty after popAll" );
 }
 
+- (void) testPopToToken;
+{
+	CPStack *stack = [CPStack stack];
+	CPToken *token0 = [CPToken tokenWithNumber: 42.0]; 
+	CPToken *token1 = [CPToken tokenWithOperator: CPOperatorPlus];
+	CPToken *token2 = [CPToken tokenWithVariable: @"X"];
+	
+	[stack push: token0];
+	[stack push: token1];
+	[stack push: token2];
+	[stack push: token0];
+	
+	NSArray *expectedTokens = [NSArray arrayWithObjects: token0, token2, nil];
+	STAssertEqualObjects( [stack popUpToToken: token1], expectedTokens, @"popUpToToken: returned wrong tokens" );
+	STAssertFalse( [stack isEmpty], @"Should not be empty" );
+	STAssertTrue( [stack count] == 1, @"One token should remind" );
+	STAssertEqualObjects( [stack pop], token0, @"Wrong token reminded" );
+}
+
 @end
