@@ -279,6 +279,8 @@
 	[self setFunction: [CParserCFunction unaryFunction: log] forKey: @"ln"];
 	[self setFunction: [CParserCFunction unaryFunction: log10] forKey: @"log"];
 	[self setFunction: [CParserCFunction unaryFunction: fabs] forKey: @"abs"];
+	[self setFunction: [CParserCFunction unaryFunction: sqrt] forKey: @"sqrt"];
+
 	[self setFunction: [CParserCFunction binaryFunction: pow] forKey: @"pow"];
 }
 
