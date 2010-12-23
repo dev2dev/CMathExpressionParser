@@ -170,36 +170,22 @@
 				[newToken setStringValue:[token stringValue]]; //set var name
 				[newToken setType:CPTokenVariable]; //set type to var (for assignment)
 				[newToken setNumberValue:([variables objectForKey:[token stringValue]] != nil) ? ([[variables objectForKey:[token stringValue]] doubleValue]) : 0.0];
-				
 				break;
-			case CPTokenFunction:
-				; // ?
+				
+			case CPTokenFunction: {
 				CParserFunction *function = [self functionForKey:[token stringValue]];
-				if ([stack count] >= [function minArguments]) {
-					NSMutableArray *args = [NSMutableArray array];
-					
-					while (([[stack lastToken] type] != CPTokenArgStop) && ([stack count] > 0))
-					{
-						[args addObject:[stack pop]];
-					}
-					[stack pop]; //remove arg stop
-
-					if ([args count] > [function maxArguments]) {
-						NSException *exception = [NSException exceptionWithName:@"Syntax Error"
-																		 reason:@"Function Argument Error (max)"
-																	   userInfo:nil];
-						@throw exception;
-					} else {
-						[newToken setNumberValue:[function evaluateWithArguments:[args reversedArray]]];
-					}
-				} else {
-					NSException *exception = [NSException exceptionWithName:@"Syntax Error"
-																	 reason:@"Function Argument Error (min)"
+				NSArray *args = [stack popUpToToken: [CPToken tokenWithType: CPTokenArgStop]];
+				if ([args count] < [function minArguments] || [args count] > [function maxArguments]) {
+					NSException *exception = [NSException exceptionWithName:CPSyntaxErrorException
+																	 reason:@"Function Argument Error"
 																   userInfo:nil];
 					@throw exception;
+				} else {
+					[newToken setNumberValue:[function evaluateWithArguments:[args reversedArray]]];
 				}
-				
 				break;
+			}
+				
 				
 			case CPTokenArgStop:
 				[newToken setType:CPTokenArgStop];
