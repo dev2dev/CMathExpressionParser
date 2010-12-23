@@ -83,7 +83,7 @@
 								[newToken setNumberValue:factorial(operants[0])];
 								break;
 							case CPOperatorNeg:
-								[newToken setNumberValue:0.0]; // ?
+								[newToken setNumberValue: -operants[0]];
 								break;
 							default:
 								break;
