@@ -44,21 +44,21 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 262A8E8F12BB7C9F00CFC561 /* CMathExpressionParser */;
+			remoteGlobalIDString = 262A8E8F12BB7C9F00CFC561;
 			remoteInfo = CMathExpressionParser;
 		};
 		262A8EB812BB7D4900CFC561 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 262A8E8F12BB7C9F00CFC561 /* CMathExpressionParser */;
+			remoteGlobalIDString = 262A8E8F12BB7C9F00CFC561;
 			remoteInfo = CMathExpressionParser;
 		};
 		262A8EC412BB7D8500CFC561 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 266655CB12B9F50B00BB5F08 /* Tests */;
+			remoteGlobalIDString = 266655CB12B9F50B00BB5F08;
 			remoteInfo = Tests;
 		};
 /* End PBXContainerItemProxy section */
@@ -100,6 +100,7 @@
 		266655CC12B9F50B00BB5F08 /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A70AAB03705E1F00C91783 /* CMathExpressionParser_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMathExpressionParser_Prefix.pch; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* TestParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestParser; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F4A41E212C9607D00D68343 /* ASCI art.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ASCI art.txt"; sourceTree = "<group>"; };
 		8F51685C12B7376500891978 /* CPTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTokenizer.h; sourceTree = "<group>"; };
 		8F51685D12B7376500891978 /* CPTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTokenizer.m; sourceTree = "<group>"; };
 		8F51699712B7CB2A00891978 /* NSArray+reverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+reverse.h"; sourceTree = "<group>"; };
@@ -143,6 +144,7 @@
 		08FB7794FE84155DC02AAC07 /* CMathExpressionParser */ = {
 			isa = PBXGroup;
 			children = (
+				8F4A41E112C9606400D68343 /* Other */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				262A8EF212BB7EA000CFC561 /* Test Program */,
 				266655BF12B9F4EE00BB5F08 /* Unit Tests */,
@@ -215,6 +217,14 @@
 				266655AA12B9F4CE00BB5F08 /* CParserMacroFunction.m */,
 			);
 			name = Functions;
+			sourceTree = "<group>";
+		};
+		8F4A41E112C9606400D68343 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				8F4A41E212C9607D00D68343 /* ASCI art.txt */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		8F51685A12B7372600891978 /* Tokenizer */ = {
