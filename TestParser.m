@@ -24,6 +24,7 @@
 #import "CParserCFunction.h"
 #import "CParserMacroFunction.h"
 
+
 static const int BufferSize = 1024;
 
 static NSString *readLine()
@@ -51,11 +52,11 @@ int main (int argc, const char * argv[]) {
 
 	CPTokenizer * conv = [[CPTokenizer alloc] init];
 	CPEvaluator * eval = [[CPEvaluator alloc] init];
-	
-	CParserMacroFunction *macro = [CParserMacroFunction macroWithExpression:@"ARG_1+ARG_2"];
-	macro.minArguments = 1;
-	macro.maxArguments = 2;
-	[eval setFunction:macro forKey:@"add"];
+
+	CParserMacroFunction *nsqrt_macro = [CParserMacroFunction macroWithExpression:@"(ARG_1+ARG_2+ARG_3+ARG_4+ARG_5+ARG_6+ARG_7+ARG_8+ARG_9)/ARG_COUNT"];
+	nsqrt_macro.minArguments = 1;
+	nsqrt_macro.maxArguments = 9;
+	[eval setFunction:nsqrt_macro forKey:@"Ø"];
 	
 	for (int i = 1; i < argc; i++) {
 		NSString *expression = [[NSString stringWithUTF8String: argv[i]] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
