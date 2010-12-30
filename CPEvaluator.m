@@ -242,12 +242,12 @@
 		[self setVariables:[NSMutableDictionary dictionary]];
 	}
 	
-	[variables setObject:[NSNumber numberWithDouble: var] forKey:key];
+	[variables setObject:[NSNumber numberWithDouble: var] forKey:[key lowercaseString]];
 }
 
 - (double) valueForVariable:(NSString *)key
 {
-	return [[variables objectForKey:key] doubleValue];
+	return [[variables objectForKey:[key lowercaseString]] doubleValue];
 }
 
 - (void) setFunction:(CParserFunction *)var forKey:(NSString *)key
@@ -256,12 +256,12 @@
 		[self setFunctions:[NSMutableDictionary dictionary]];
 	}
 	
-	[functions setObject:var forKey:key];
+	[functions setObject:var forKey:[key lowercaseString]];
 }
 
 - (CParserFunction *) functionForKey:(NSString *)key
 {
-	return [functions objectForKey:key];
+	return [functions objectForKey:[key lowercaseString]];
 }
 
 - (void) registerStandardFunctions;
