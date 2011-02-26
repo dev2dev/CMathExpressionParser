@@ -1,3 +1,5 @@
+
+
 //
 //  CPTokenizer.m
 //  CMathParser
@@ -54,6 +56,7 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 
 	double numberValue;
 	if ([scanner scanDouble:&numberValue]) {
+		operatorScanned = NO;
 		return [CPToken tokenWithNumber:numberValue];
 	}
 	
@@ -103,6 +106,15 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 	NSMutableArray *output = [NSMutableArray array];
 	
 	CPOperator operator = [token operatorValue];
+	
+	/* NEG */
+	if (operator == CPOperatorMinus && operatorScanned) {
+		operator = CPOperatorNeg;
+		[token setOperatorValue:operator];
+	}
+	operatorScanned = YES;
+	/* NEG */
+	
 	while (![stack isEmpty]) {
 		const bool leftAssoc = [Operators associativity: operator] == CPOperatorAssocLeft;
 		const unsigned priority = [Operators priority: operator];

@@ -15,6 +15,8 @@ extern NSString * const CPSyntaxErrorException;
 @interface CPTokenizer : NSObject {
 	
 	NSCharacterSet * identifierSet;
+	
+	BOOL operatorScanned;
 }
 
 + (CPTokenizer *) tokenizer;
