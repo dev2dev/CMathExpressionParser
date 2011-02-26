@@ -63,8 +63,10 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 	NSString * stringValue;
 	if ([scanner scanCharactersFromSet:identifierSet intoString:&stringValue]) {
 		if ([scanner lookaheadString: @"(" intoString: NULL]) {
+			operatorScanned = YES;
 			return [CPToken tokenWithFunction:stringValue];
 		} else {
+			operatorScanned = NO;
 			return [CPToken tokenWithVariable:stringValue];
 		}
 	}
@@ -75,6 +77,9 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 - (NSArray *) processCommaOperatorStack: (CPStack *) stack;
 {
 	NSArray *ops = [stack popUpToOperator: CPOperatorLBrace];
+	
+	//NEG
+	operatorScanned = YES;
 	
 	if (nil == ops || [stack isEmpty] || [[stack lastToken] type] != CPTokenFunction) {
 		NSException *exception = [NSException exceptionWithName:CPSyntaxErrorException
@@ -89,6 +94,9 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 
 - (NSArray *) processRBraceOperatorStack: (CPStack *) stack;
 {
+	//NEG
+	operatorScanned = NO;
+	
 	NSArray *ops = [stack popUpToOperator: CPOperatorLBrace];
 	if (nil == ops) {
 		[NSException raise: CPSyntaxErrorException format: @"Missing '('"];
@@ -111,8 +119,8 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 	if (operator == CPOperatorMinus && operatorScanned) {
 		operator = CPOperatorNeg;
 		[token setOperatorValue:operator];
-	}
-	operatorScanned = YES;
+	} else 
+		operatorScanned = YES;
 	/* NEG */
 	
 	while (![stack isEmpty]) {
@@ -164,6 +172,8 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 	NSMutableArray * output = [NSMutableArray array];
 	
 	NSScanner * scanner = [NSScanner scannerWithString:expression];
+	
+	operatorScanned = YES;
 	
 	while (![scanner isAtEnd]) {
 		
