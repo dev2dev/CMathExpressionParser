@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -226,8 +226,8 @@
 			children = (
 				266655F712B9F62200BB5F08 /* Functions */,
 				266655A712B9F4CE00BB5F08 /* CParserGlobal.h */,
-				266655AB12B9F4CE00BB5F08 /* CParserMath.c */,
 				266655AC12B9F4CE00BB5F08 /* CParserMath.h */,
+				266655AB12B9F4CE00BB5F08 /* CParserMath.c */,
 				8F5169AC12B7CC4D00891978 /* CPEvaluator.h */,
 				8F5169AD12B7CC4D00891978 /* CPEvaluator.m */,
 			);
@@ -347,8 +347,11 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0410;
+			};
 			buildConfigurationList = 1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "CMathExpressionParser" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -459,7 +462,7 @@
 				INSTALL_PATH = /usr/local/bin;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = TestParser;
-				SDKROOT = "";
+				SDKROOT = macosx10.7;
 			};
 			name = Debug;
 		};
@@ -475,7 +478,7 @@
 				INSTALL_PATH = /usr/local/bin;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = TestParser;
-				SDKROOT = "";
+				SDKROOT = macosx10.7;
 			};
 			name = Release;
 		};
@@ -487,6 +490,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
@@ -500,6 +504,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 			};
