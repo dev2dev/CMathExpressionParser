@@ -44,6 +44,7 @@
 	self = [super init];
 	if (self != nil) {
 		[self setExpression:expression];
+		[self setMacroEvaluator:nil];
 	}
 	return self;
 }
@@ -53,6 +54,7 @@
 
 @synthesize expression = macroExpression;
 @synthesize postfixExpression = macroPostfixExpression;
+@synthesize macroEvaluator;
 
 - (NSArray *) postfixExpression;
 {
@@ -82,7 +84,7 @@
 		[self setPostfixExpression:[converter convertExpressionFromInfixStringToPostfixArray:macroExpression]];
 	}
 	@catch (NSException * e) {
-		NSLog(@"ERROR: %@", [e reason]);
+		NSLog(@"Macro: %@", [e reason]);
 	}
 }
 
@@ -92,26 +94,27 @@
 - (double) evaluateWithArguments:(NSArray *)arguments
 {
 	double result = 0.0;
-	CPEvaluator * evaluator = [CPEvaluator evaluator];
+	CPEvaluator * evaluator = (self.macroEvaluator!=nil) ? self.macroEvaluator : [CPEvaluator evaluator];
 	
 	NSUInteger i, count = [arguments count];
 	for (i = 0; i < count; i++) {
 		CPToken * token = [arguments objectAtIndex:i];
-		[evaluator setValue:[token numberValue] forVariable:[NSString stringWithFormat:@"ARG_%i", i+1]];
+		[evaluator setTempValue:[token numberValue] forVariable:[NSString stringWithFormat:@"ARG_%i", i+1]];
 	}
 	
-	[evaluator setValue:count forVariable:[NSString stringWithString:@"ARG_COUNT"]];
+	[evaluator setTempValue:count forVariable:[NSString stringWithString:@"ARG_COUNT"]];
 	
 	@try {
 		result = [evaluator evaluatePostfixExpressionArray: [self postfixExpression]];
 	}
 	@catch (NSException * e) {
-		NSLog(@"ERROR: %@", [e reason]);
+		NSLog(@"Macro: %@", [e reason]);
 	}
 	@finally {
+		[evaluator clearTempVariables];
+		
 		return result;
 	}
-		
 	return result;
 }
 	

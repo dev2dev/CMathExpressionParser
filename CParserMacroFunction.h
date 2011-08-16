@@ -12,10 +12,12 @@
 
 #define CParserMacroMaxArguments 32
 
+@class CPEvaluator;
 @interface CParserMacroFunction : CParserFunction {
 	
 	NSString * macroExpression;
 	NSArray * macroPostfixExpression;
+	CPEvaluator *macroEvaluator;
 	
 }
 
@@ -26,5 +28,6 @@
 
 @property (readwrite, copy, nonatomic) NSString *expression;
 @property (readwrite, copy, nonatomic) NSArray *postfixExpression;
+@property (assign) CPEvaluator *macroEvaluator;
 
 @end

@@ -231,6 +231,8 @@
 		case CPTokenNumber:
 			hash += (NSUInteger)numberValue >> 3;
 			break;
+		default:
+			break;
 	}
 	
 	return hash;

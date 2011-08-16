@@ -13,14 +13,18 @@
 @interface CPEvaluator : NSObject {
 	
 	NSMutableDictionary *variables;
+	NSMutableDictionary *tempVariables;
 	NSMutableDictionary *functions;
 
 }
+@property (assign) NSUInteger recursionDepth;
 
 + (CPEvaluator *) evaluator;
 
 - (void) setVariables:(NSMutableDictionary *)dict;
 - (NSDictionary *) variables;
+- (void) setTempVariables:(NSMutableDictionary *)dict;
+- (NSDictionary *) tempVariables;
 - (void) setFunctions:(NSMutableDictionary *)dict;
 - (NSDictionary *) functions;
 
@@ -29,6 +33,8 @@
 //var + func
 
 - (void) setValue:(double)value forVariable:(NSString *)key;
+- (void) setTempValue:(double)value forVariable:(NSString *)key;
+- (void)clearTempVariables;
 - (double) valueForVariable:(NSString *)key;
 - (void) setFunction:(CParserFunction *)func forKey:(NSString *)key;
 - (CParserFunction *) functionForKey:(NSString *)key;

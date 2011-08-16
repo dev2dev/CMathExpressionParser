@@ -41,10 +41,9 @@ static NSString *readLine()
 void evaluateExpressionString( NSString *expression, CPTokenizer *conv, CPEvaluator *eval ) 
 {
 	NSArray *postfixArray = [conv convertExpressionFromInfixStringToPostfixArray: expression];
-	NSLog( @"postfix: %@", postfixArray );
 	
 	double result = [eval evaluatePostfixExpressionArray: postfixArray];
-	NSLog( @"%@ --> %f", expression, result );
+	printf("\t\t= %f\n", result );
 }
 
 int main (int argc, const char * argv[]) {
@@ -53,10 +52,10 @@ int main (int argc, const char * argv[]) {
 	CPTokenizer * conv = [[CPTokenizer alloc] init];
 	CPEvaluator * eval = [[CPEvaluator alloc] init];
 
-	CParserMacroFunction *nsqrt_macro = [CParserMacroFunction macroWithExpression:@"(ARG_1+ARG_2+ARG_3+ARG_4+ARG_5+ARG_6+ARG_7+ARG_8+ARG_9)/ARG_COUNT"];
-	nsqrt_macro.minArguments = 1;
-	nsqrt_macro.maxArguments = 9;
-	[eval setFunction:nsqrt_macro forKey:@"Ø"];
+	CParserMacroFunction *factorial_macro = [CParserMacroFunction macroWithExpression:@"if(ARG_1<=1){1} ifnot(ARG_1<=1){ ARG_1*fact( ARG_1-1 ) }"];
+	factorial_macro.minArguments = 1;
+	factorial_macro.maxArguments = 1;
+	[eval setFunction:factorial_macro forKey:@"fact"];
 	
 	for (int i = 1; i < argc; i++) {
 		NSString *expression = [[NSString stringWithUTF8String: argv[i]] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -76,7 +75,6 @@ int main (int argc, const char * argv[]) {
 		
 		[loopPool release];
 	}
-
 	
 	[eval release];
 	[conv release];

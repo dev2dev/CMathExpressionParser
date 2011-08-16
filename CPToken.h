@@ -16,7 +16,9 @@ typedef enum _CPTokenType {
 	CPTokenOperator,
 	CPTokenFunction,
 	CPTokenVariable,
-	CPTokenArgStop
+	CPTokenArgStop,
+	CPTokenBlockStop,
+	CPTokenBlockStart
 } CPTokenType;
 
 typedef double CPNumber;
@@ -28,7 +30,7 @@ typedef double CPNumber;
 	CPNumber numberValue;
 	CPOperator operatorValue;
 	NSString *stringValue;
-	
+	BOOL useSuper;
 }
 
 + (CPToken *) token;
@@ -40,6 +42,7 @@ typedef double CPNumber;
 
 - (id) initWithNumber:(CPNumber)value;
 - (id) initWithOperator:(CPOperator)value;
+- (id) initWithString:(NSString *)value;
 
 - (void) setNumberValue:(CPNumber)value;
 - (CPNumber) numberValue;

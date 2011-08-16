@@ -6,8 +6,6 @@
 //  Copyright 2010 beanage. All rights reserved.
 //
 
-#include "CParserMath.h"
-
 #import "CPEvaluator.h"
 
 #import "CPToken.h"
@@ -15,8 +13,18 @@
 
 #import "CParserFunction.h"
 #import "CParserCFunction.h"
+#import "CParserMacroFunction.h"
 #import "NSArray+reverse.h"
 #import "CPStack.h"
+
+#include "CParserMath.h"
+
+#define CPMAXRECCOUNT 4096
+
+enum _mode {
+	CPModeRead,
+	CPModeSkip
+};
 
 @interface CPEvaluator ()
 - (void) registerStandardFunctions;
@@ -24,6 +32,7 @@
 @end
 
 @implementation CPEvaluator
+@synthesize recursionDepth;
 
 #pragma mark -
 #pragma mark init / dealloc
@@ -34,6 +43,7 @@
 	if (self != nil) {
 		[self registerStandardFunctions];
 		[self registerConstants];
+		[self setRecursionDepth:0];
 	}
 	return self;
 }
@@ -58,8 +68,15 @@
 
 - (double) evaluatePostfixExpressionArray:(NSArray *)array
 {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
-	CPStack *stack = [CPStack stack];
+	//if mode = CPModeSkip nothing will be added to the stack until mode = CPModeRead
+	NSUInteger mode = CPModeRead; //little hack to impliment blocks
+	CPStack *stack = [[CPStack alloc] init];
+	
+	//rekursionstiefe +1 max: CPMAXRECCOUNT if higher the parser crashes
+	recursionDepth +=1 ;
+	NSAssert(recursionDepth < CPMAXRECCOUNT, @"Max recursion-count %d reached", CPMAXRECCOUNT);
 	
 	for (CPToken *token in array) {
 		CPToken *newToken = [CPToken tokenWithNumber:0.0];
@@ -169,20 +186,30 @@
 				
 				break;
 			case CPTokenVariable:
+				if (mode==CPModeSkip)
+					break;
+				
 				[newToken setStringValue:[token stringValue]]; //set var name
 				[newToken setType:CPTokenVariable]; //set type to var (for assignment)
 				[newToken setNumberValue: [self valueForVariable: [token stringValue]]];
 				break;
 				
 			case CPTokenFunction: {
+				if (mode==CPModeSkip) //skip, to prevent from fail exceptions
+					break;
+				
 				CParserFunction *function = [self functionForKey:[token stringValue]];
+				
 				if (nil == function) {
 					[NSException raise: CPSyntaxErrorException format: @"Trying to call unknown function '%@'", [token stringValue]];
 				}
+				if ([function isKindOfClass:[CParserMacroFunction class]])
+					[(CParserMacroFunction *)function setMacroEvaluator:self];
+				
 				NSArray *args = [stack popUpToToken: [CPToken tokenWithType: CPTokenArgStop]];
 				if ([args count] < [function minArguments] || [args count] > [function maxArguments]) {
 					NSException *exception = [NSException exceptionWithName:CPSyntaxErrorException
-																	 reason:@"Function Argument Error"
+																	 reason:[NSString stringWithFormat:@"Function Argument Error (%d)", [args count]]
 																   userInfo:nil];
 					@throw exception;
 				} else {
@@ -191,17 +218,50 @@
 				break;
 			}
 				
+			case CPTokenBlockStart: {
+				CPToken *last = [stack pop];
+				if ([last numberValue]!=0.0) {
+					mode = CPModeRead;
+				} else {
+					mode = CPModeSkip;
+				}
+				[newToken setType:CPTokenNull];
+				break;
+			}
 				
 			case CPTokenArgStop:
-				[newToken setType:CPTokenArgStop];
+				[newToken setType:CPTokenArgStop]; //dont push to stack, we dont need it anymore
+				break;
+				
+			case CPTokenBlockStop: {
+				if (mode==CPModeSkip) {
+					mode = CPModeRead;
+				}
+				[newToken setType:CPTokenNull]; //dont push to stack, we dont need it anymore
+				break;
+			}
 				
 			default:
 				break;
 		}
-		[stack push:newToken];
+		
+		//add the result to stack if in readmode and 
+		if (mode==CPModeRead && [newToken type]!=CPTokenNull)
+			[stack push:newToken];
+		
 	}
 	
-	return [[stack lastToken] numberValue];
+	//ergebnis als double
+	double absRet = [[stack lastToken] numberValue];
+	
+	//rekursiontiefe -1
+	recursionDepth -=1 ;
+	
+	//speicher aufraeumen
+	[stack release];
+	[pool drain];
+	
+	return absRet;
 }
 
 #pragma mark -
@@ -218,6 +278,19 @@
 - (NSDictionary *) variables
 {
 	return variables;
+}
+
+- (void) setTempVariables:(NSMutableDictionary *)dict
+{
+	if (dict != tempVariables) {
+		[tempVariables release];
+		tempVariables = [dict retain];
+	}
+}
+
+- (NSDictionary *) tempVariables
+{
+	return tempVariables;
 }
 
 - (void) setFunctions:(NSMutableDictionary *)dict
@@ -245,9 +318,26 @@
 	[variables setObject:[NSNumber numberWithDouble: var] forKey:[key lowercaseString]];
 }
 
+- (void) setTempValue:(double)value forVariable:(NSString *)key
+{
+	if (tempVariables == nil) {
+		[self setTempVariables:[NSMutableDictionary dictionary]];
+	}
+	
+	[tempVariables setObject:[NSNumber numberWithDouble:value] forKey:[key lowercaseString]];
+}
+
+- (void)clearTempVariables
+{
+	if (tempVariables != nil)
+		[tempVariables removeAllObjects];
+}
+
 - (double) valueForVariable:(NSString *)key
 {
-	return [[variables objectForKey:[key lowercaseString]] doubleValue];
+	//1. temp, if not then "normal"
+	NSString *_key = [key lowercaseString];
+	return ([tempVariables objectForKey:_key]!=nil) ? [[tempVariables objectForKey:_key] doubleValue] : [[variables objectForKey:_key] doubleValue];
 }
 
 - (void) setFunction:(CParserFunction *)var forKey:(NSString *)key
@@ -283,10 +373,13 @@
 	[self setFunction: [CParserCFunction unaryFunction: log10] forKey: @"log"];
 	[self setFunction: [CParserCFunction unaryFunction: fabs] forKey: @"abs"];
 	[self setFunction: [CParserCFunction unaryFunction: sqrt] forKey: @"sqrt"];
-
 	[self setFunction: [CParserCFunction binaryFunction: pow] forKey: @"pow"];
+	
+	[self setFunction: [CParserCFunction unaryFunction: IF] forKey: @"if"];
+	[self setFunction: [CParserCFunction unaryFunction: IFNOT] forKey: @"ifnot"];
+	
+	[self setFunction: [CParserCFunction unaryFunction: debugLog] forKey: @"debuglog"];
 }
-
 
 - (void) registerConstants;
 {

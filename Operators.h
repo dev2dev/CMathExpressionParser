@@ -20,7 +20,9 @@
 	def(	NEqual,		@"!=",	Left,			4,			2			) \
 	def(	Factorial,	@"!",	Right,			8,			1			) \
 	def(	And,		@"&&",	Left,			3,			2			) \
-	def(	Or,			@"||",	Left,			3,			2			)
+	def(	Or,			@"||",	Left,			3,			2			) \
+	def(	LBlock,		@"{",	None,			0,			0			) \
+	def(	RBlock,		@"}",	None,			0,			0			)
 
 
 typedef enum CPOperator CPOperator;

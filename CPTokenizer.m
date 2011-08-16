@@ -62,7 +62,7 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 	
 	NSString * stringValue;
 	if ([scanner scanCharactersFromSet:identifierSet intoString:&stringValue]) {
-		if ([scanner lookaheadString: @"(" intoString: NULL]) {
+		if ([scanner lookaheadString:@"(" intoString: NULL]) {
 			operatorScanned = YES;
 			return [CPToken tokenWithFunction:stringValue];
 		} else {
@@ -109,6 +109,21 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 	return ops;
 }
 
+- (NSArray *) processRBlockOperatorStack: (CPStack *) stack;
+{
+	//NEG
+	operatorScanned = NO;
+
+	NSArray *ops = [NSArray arrayWithArray:[stack popUpToOperator:CPOperatorLBlock]];
+	if (nil == ops) {
+		[NSException raise: CPSyntaxErrorException format: @"Missing '{'"];
+	}
+	
+	ops = [ops arrayByAddingObject:[CPToken tokenWithType:CPTokenBlockStop]];
+	
+	return ops;
+}
+
 - (NSArray *) processDefaultOperator: (CPToken *) token stack: (CPStack *) stack;
 {
 	NSMutableArray *output = [NSMutableArray array];
@@ -149,10 +164,10 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 	
 	switch (operator) {
 		default:
-			return [self processDefaultOperator: token stack: stack];
+			return [self processDefaultOperator:token stack:stack];
 			
 		case CPOperatorComma: 
-			return [self processCommaOperatorStack: stack];
+			return [self processCommaOperatorStack:stack];
 			
 		case CPOperatorSemicolon:
 			return [stack popAll];
@@ -162,7 +177,17 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 			return nil;
 			
 		case CPOperatorRBrace:
-			return [self processRBraceOperatorStack: stack];
+			return [self processRBraceOperatorStack:stack];
+			
+		/*** Block Addition ***/
+			
+		case CPOperatorLBlock:
+			[stack push:token];
+			return nil;
+			
+		case CPOperatorRBlock: {
+			return [self processRBlockOperatorStack:stack];
+		}
 	};
 }
 
@@ -197,9 +222,15 @@ NSString * const CPSyntaxErrorException = @"SyntaxError";
 				[stack push: nextToken];
 				break;
 				
-			case CPTokenOperator:
+			case CPTokenOperator: {
+				if ([nextToken operatorValue] == CPOperatorLBlock)
+					[output addObject:[CPToken tokenWithType:CPTokenBlockStart]];
 				[output addObjectsFromArray: [self processOperatorToken:nextToken stack:stack]];
 				break;
+			}
+				
+			default:
+				NSLog(@"Error. Scanned NULL token");
 		}
 	}
 	
