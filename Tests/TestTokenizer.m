@@ -17,7 +17,8 @@
 
 - (void) tearDown;
 {
-	[tokenizer release]; tokenizer = nil;
+	[tokenizer release];
+	tokenizer = nil;
 }
 
 - (void) runTokenizer: (NSString *)expr expectedResults: (CPTokenType) type, ...;
@@ -59,6 +60,8 @@
 				break;
 				
 			case CPTokenArgStop:
+			case CPTokenBlockStart:
+			case CPTokenBlockStop:
 				break;
 				
 			default:
@@ -91,6 +94,7 @@
 - (void) testValues;
 {
 	Check( @"1", NUM( 1 ) );
+	Check( @"0.25", NUM( 0.25 ) );
 	Check( @"A", A );
 	Check( @"A()", CPTokenArgStop, FUNC( @"A" ) );
 	Check( @"a()", CPTokenArgStop, FUNC( @"a" ) );
@@ -101,7 +105,8 @@
 - (void) testSingleOperators;
 {
 	CheckOperator( @"+", CPOperatorPlus );
-	CheckOperator( @"-", CPOperatorMinus );
+	CheckOperator( @"-", CPOperatorNeg );
+	//CheckOperator( @"-", CPOperatorMinus ); if no number is scanned '-' is parsed as CPOperatorNeg, so we cant test '-'
 	CheckOperator( @"*", CPOperatorTimes );
 	CheckOperator( @"/", CPOperatorDiv );
 	CheckOperator( @"%", CPOperatorModulo );
@@ -118,21 +123,21 @@
 	CheckOperator( @"||", CPOperatorOr );
 }
 
-- (void) testOrdering;
+- (void) testOrdering
 {
 	Check( @"A*B+C", A, B, MUL, C, ADD );
 	Check( @"A+B*C", A, B, C, MUL, ADD );
 	Check( @"(A+B)*C", A, B, ADD, C, MUL );
 }
 
-- (void) testFunctions;
+- (void) testFunctions
 {
 	Check( @"f(A)", CPTokenArgStop, A, FUNC( @"f" ) );
 	Check( @"f(A,B)", CPTokenArgStop, A, B, FUNC( @"f" ) );
 	Check( @"f(A,B,C)", CPTokenArgStop, A, B, C, FUNC( @"f" ) );
 }
 
-- (void) testWhitespaceVariants;
+- (void) testWhitespaceVariants
 {
 	Check( @"A*B", A, B, MUL );
 	Check( @" A*B", A, B, MUL );
@@ -141,10 +146,16 @@
 	Check( @" A *\tB ", A, B, MUL );
 }
 
-- (void) testSemicolon;
+- (void) testSemicolon
 {
 	Check( @"A;B", A, B );
 	Check( @"A+B;C", A, B, ADD, C );
+}
+
+-(void) testBlocks
+{
+	Check( @"A{B}", A, CPTokenBlockStart, B, CPTokenBlockStop );
+	Check( @"A{B{C}}", A, CPTokenBlockStart, B, CPTokenBlockStart, C, CPTokenBlockStop, CPTokenBlockStop );
 }
 
 @end
